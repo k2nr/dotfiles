@@ -62,6 +62,44 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
+"---------------------------------------
+" Vundle
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/ 
+call vundle#rc() 
+
+" original repos on github 
+Bundle 'Shougo/vimfiler'
+Bundle 'Shougo/neocomplcache' 
+Bundle 'ujihisa/neco-ghc'
+Bundle 'Shougo/unite.vim' 
+Bundle 'h1mesuke/unite-outline'
+Bundle 'tsukkee/unite-tag'
+Bundle 'Shougo/vimproc' 
+Bundle 'Raimondi/delimitMate'
+Bundle 'majutsushi/tagbar'
+Bundle 'tpope/vim-fugitive'
+Bundle 'altercation/vim-colors-solarized'
+
+" vim-scripts repos 
+"Bundle 'ZenCoding.vim' 
+Bundle 'vundle' 
+Bundle 'gtags.vim' 
+Bundle 'JavaScript-syntax'
+Bundle 'Javascript-Indentation'
+Bundle 'IndentAnything'
+Bundle 'vcscommand.vim'
+
+" non github repos 
+Bundle 'git://git.wincent.com/command-t.git' 
+
+filetype on
+filetype plugin on
+filetype plugin indent on
+syntax on
+
+
 "---------------------------------------------------------------------------
 " Search
 set ignorecase
@@ -122,7 +160,6 @@ set visualbell
 set vb t_vb=
 
 " theme (solarized setting)
-syntax enable
 set background=dark
 colorscheme solarized
 
@@ -218,42 +255,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "---------------------------------------------------------------------------
 " Plugin Setting
 "---------------------------------------------------------------------------
-
-"---------------------------------------
-" Vundle
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/ 
-call vundle#rc() 
-
-" original repos on github 
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/neocomplcache' 
-Bundle 'ujihisa/neco-ghc'
-Bundle 'Shougo/unite.vim' 
-Bundle 'h1mesuke/unite-outline'
-Bundle 'tsukkee/unite-tag'
-Bundle 'Shougo/vimproc' 
-Bundle 'Raimondi/delimitMate'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive'
-
-" vim-scripts repos 
-"Bundle 'ZenCoding.vim' 
-Bundle 'vundle' 
-Bundle 'gtags.vim' 
-Bundle 'JavaScript-syntax'
-Bundle 'Javascript-Indentation'
-Bundle 'IndentAnything'
-Bundle 'vcscommand.vim'
-
-" non github repos 
-Bundle 'git://git.wincent.com/command-t.git' 
-
-filetype on
-filetype plugin on
-filetype plugin indent on
-syntax on
 
 "---------------------------------------
 " GNU GLOBAL (gtags.vim)
