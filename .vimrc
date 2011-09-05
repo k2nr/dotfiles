@@ -93,9 +93,6 @@ Bundle 'IndentAnything'
 Bundle 'vcscommand.vim'
 Bundle 'DirDiff.vim'
 
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-
 filetype on
 filetype plugin on
 filetype plugin indent on
@@ -176,7 +173,7 @@ set foldenable
 " set foldmethod=expr
 set foldmethod=marker
 " Show folding level
-set foldcolumn=3
+set foldcolumn=2
 " }}}
 
 "---------------------------------------------------------------------------
@@ -398,7 +395,7 @@ nnoremap <silent>;o :<C-u>Unite outline<CR>
 nnoremap <silent>;r :<C-u>Unite register<CR>
 nnoremap <silent>;l :<C-u>Unite line<CR>
 nnoremap <silent>;t :<C-u>UniteWithCursorWord -buffer-name=tag tag<CR>
-nmap     <silent>;; ;l
+nnoremap <silent>;; :<C-u>Unite file_rec/async<CR>
 
 " Overwrite settings.
 au FileType unite call s:unite_my_settings()
