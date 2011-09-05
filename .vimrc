@@ -198,12 +198,6 @@ nnoremap gl $
 nnoremap gp o<ESC>p
 nnoremap Y y$
 
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
 nnoremap [c [czz
 nnoremap ]c ]czz
 
