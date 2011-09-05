@@ -1,5 +1,5 @@
 "---------------------------------------------------------------------------
-" Encoding
+" Encoding {{{
 "set enc=utf-8
 "set fenc=utf-8
 "set fencs=iso-2022-jp,utf-8,euc-jp,cp932
@@ -61,56 +61,60 @@ set fileformats=unix,dos,mac
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
+" }}}
 
 "---------------------------------------
-" Vundle
+" Vundle {{{
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/ 
-call vundle#rc() 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-" original repos on github 
+" original repos on github
 Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/neocomplcache' 
+Bundle 'Shougo/neocomplcache'
 Bundle 'ujihisa/neco-ghc'
-Bundle 'Shougo/unite.vim' 
+Bundle 'Shougo/unite.vim'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'tsukkee/unite-tag'
-Bundle 'Shougo/vimproc' 
+Bundle 'Shougo/vimproc'
 Bundle 'Raimondi/delimitMate'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
 
-" vim-scripts repos 
-"Bundle 'ZenCoding.vim' 
-Bundle 'vundle' 
-Bundle 'gtags.vim' 
+" vim-scripts repos
+"Bundle 'ZenCoding.vim'
+Bundle 'vundle'
+Bundle 'gtags.vim'
 Bundle 'JavaScript-syntax'
 Bundle 'Javascript-Indentation'
 Bundle 'IndentAnything'
 Bundle 'vcscommand.vim'
 Bundle 'DirDiff.vim'
 
-" non github repos 
-Bundle 'git://git.wincent.com/command-t.git' 
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
 
 filetype on
 filetype plugin on
 filetype plugin indent on
 syntax on
-
+"}}}
 
 "---------------------------------------------------------------------------
-" Search
+" Search {{{
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 set wrapscan
 
+set grepprg=grep\ -nH
+" }}}
+
 "---------------------------------------------------------------------------
-" Edit Setting
+" Edit Setting {{{
 set expandtab
 set smarttab
 set tabstop=4
@@ -135,9 +139,10 @@ endif
 
 set clipboard+=unnamed
 set matchpairs=(:),{:},[:]
+" }}}
 
 "---------------------------------------------------------------------------
-" Visual
+" Visual {{{
 set number
 set ruler
 " show TAB/CRLF
@@ -154,7 +159,7 @@ set title
 
 " show encoding and cr/lf type on status line
 " see: http://vimwiki.net/?plugin=related&page=%27statusline%27
-set statusline=%<%f\ %m%R%H%W%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P 
+set statusline=%<%f\ %m%R%H%W%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
 " no beep
 set visualbell
@@ -163,17 +168,28 @@ set vb t_vb=
 " theme (solarized setting)
 set background=dark
 colorscheme solarized
+" }}}
 
 "---------------------------------------------------------------------------
-" File Manipulation
+" Fold {{{
+set foldenable
+" set foldmethod=expr
+set foldmethod=marker
+" Show folding level
+set foldcolumn=3
+" }}}
+
+"---------------------------------------------------------------------------
+" File Manipulation {{{
 set nobackup
 set nowritebackup
 set noswapfile
 set tags+=./tags;
 set autochdir
+" }}}
 
 "---------------------------------------------------------------------------
-" Key Mapping
+" Key Mapping {{{
 let mapleader=","
 
 " use <Space> for plugin launcher prefix
@@ -194,8 +210,8 @@ nnoremap g# g#zz
 nnoremap [c [czz
 nnoremap ]c ]czz
 
-nnoremap <C-n> :cn<CR>
-nnoremap <C-p> :cp<CR>
+nnoremap <C-n> :<C-u>cn<CR>
+nnoremap <C-p> :<C-u>cp<CR>
 
 nnoremap <C-H> <C-W>h
 nnoremap <C-J> <C-W>j
@@ -231,16 +247,18 @@ vnoremap ) t)
 vnoremap ( t(
 
 " shortcuts to change settings
-nnoremap @tr :set ruler!<cr>
-nnoremap @tn :set number!<cr>
-nnoremap @tet :set expandtab!<cr>
-nnoremap @i2 :set tabstop=2 shiftwidth=2<cr>
-nnoremap @i4 :set tabstop=4 shiftwidth=4<cr>
-nnoremap @i8 :set tabstop=8 shiftwidth=8<cr>
+nnoremap @tr  :<C-u>set ruler!<cr>
+nnoremap @tn  :<C-u>set number!<cr>
+nnoremap @tet :<C-u>set expandtab!<cr>
+nnoremap @i2  :<C-u>set tabstop=2 shiftwidth=2<cr>
+nnoremap @i4  :<C-u>set tabstop=4 shiftwidth=4<cr>
+nnoremap @i8  :<C-u>set tabstop=8 shiftwidth=8<cr>
 
+call togglebg#map("@tbg")
+" }}}
 
 "---------------------------------------------------------------------------
-" autocmd
+" autocmd {{{
 
 " Enable omni completion.
 "autocmd FileType ada setlocal omnifunc=adacomplete#Complete
@@ -254,31 +272,34 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 "autocmd FileType sql setlocal omnifunc=sqlcomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" }}}
 
 "---------------------------------------------------------------------------
-" Plugin Setting
+" Plugin Setting {{{
 "---------------------------------------------------------------------------
 
 "---------------------------------------
-" GNU GLOBAL (gtags.vim)
-nnoremap <Leader>gd :Gtags 
-nnoremap <Leader>gc :GtagsCursor<CR>
-nnoremap <Leader>gr :Gtags -r 
-nnoremap <Leader>gf :Gtags -P 
-nnoremap <Leader>gg :Gtags -g 
+" GNU GLOBAL (gtags.vim) {{{
+nnoremap <Leader>gd :<C-u>Gtags 
+nnoremap <Leader>gc :<C-u>GtagsCursor<CR>
+nnoremap <Leader>gr :<C-u>Gtags -r 
+nnoremap <Leader>gf :<C-u>Gtags -P 
+nnoremap <Leader>gg :<C-u>Gtags -g 
+" }}}
 
 "---------------------------------------
-" TagBar
-nnoremap <Space>t :TagbarToggle<cr>
+" TagBar {{{
+nnoremap <Space>t :<C-u>TagbarToggle<cr>
 let g:tagbar_sort      = 0
 let g:tagbar_foldlevel = 2
+" }}}
 
 "---------------------------------------
 " delimitMate
 let delimitMate_expand_space = 1
 
 "---------------------------------------
-" enable to use as binary editor for *.bin
+" enable to use as binary editor for *.bin {{{
 augroup Binary
   au!
   au BufReadPre  *.bin let &bin=1
@@ -289,17 +310,32 @@ augroup Binary
   au BufWritePost *.bin if &bin | %!xxd
   au BufWritePost *.bin set nomod | endif
 augroup END
-
+" }}}
 
 "---------------------------------------
-" Haskell Mode
+" Haskell Mode {{{
 
 " use ghc functionality for haskell files
 au Bufenter *.hs compiler ghc
 let g:haddock_browser = "open"
+" }}}
 
 "---------------------------------------
-" QFixGrep
+" Fugitive {{{
+nnoremap <Space>gd :Gdiff<CR>
+nnoremap <Space>gs :Gstatus<CR>
+nnoremap <Space>gl :Glog<CR>
+nnoremap <Space>ga :Gwrite<CR>
+nnoremap <Space>gc :Gcommit<CR>
+nnoremap <Space>gC :Git commit --amend<CR>
+nnoremap <Space>gb :Gblame<CR>
+
+" quit vimdiff
+nnoremap <Space>gD :diffoff<CR><C-w>l<C-w>o
+" }}}
+
+"---------------------------------------
+" QFixGrep {{{
 if has('win32')
   let Grep_Path       = 'C:\tools\gnu\bin\grep.exe'
   let Fgrep_Path      = 'C:\tools\gnu\bin\fgrep.exe'
@@ -324,20 +360,22 @@ let MyGrepcmd_useropt    = 'nH'
 let MyGrep_Key  = 'g'
 " second key to launch Grep
 let MyGrep_KeyB = ','
+" }}}
 
 "---------------------------------------
-" vimfiler
-nnoremap <silent><Space>f   :VimFiler `=<SID>GetBufferDirectory()`<CR>
+" vimfiler {{{
+nnoremap <silent><Space>f   :<C-u>VimFiler `=<SID>GetBufferDirectory()`<CR>
 
 call vimfiler#set_execute_file('vim', 'vim')
 call vimfiler#set_execute_file('txt', 'vim')
 
 let g:vimfiler_enable_clipboard     = 0
 let g:vimfiler_safe_mode_by_default = 1
+" }}}
 
 
 "---------------------------------------
-" neocomplcache
+" neocomplcache {{{
 let g:neocomplcache_enable_at_startup          = 1
 let g:neocomplcache_enable_auto_select         = 1
 let g:neocomplcache_enable_smart_case          = 1
@@ -348,17 +386,18 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
 inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-g> neocomplcache#undo_completion()
 imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?  "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" }}}
 
 "---------------------------------------
-" Unite.vim
-nnoremap <silent>;b :Unite buffer<CR>
-nnoremap <silent>;f :UniteWithBufferDir -buffer-name=file file<CR>
-nnoremap <silent>;m :Unite file_mru<CR>
-nnoremap <silent>;g :Unite grep<CR>
-nnoremap <silent>;o :Unite outline<CR>
-nnoremap <silent>;r :Unite register<CR>
-nnoremap <silent>;l :Unite line<CR>
-nnoremap <silent>;t :UniteWithCursorWord -buffer-name=tag tag<CR>
+" Unite.vim {{{
+nnoremap <silent>;b :<C-u>Unite buffer<CR>
+nnoremap <silent>;f :<C-u>UniteWithBufferDir -buffer-name=file file<CR>
+nnoremap <silent>;m :<C-u>Unite file_mru<CR>
+nnoremap <silent>;g :<C-u>Unite grep<CR>
+nnoremap <silent>;o :<C-u>Unite outline<CR>
+nnoremap <silent>;r :<C-u>Unite register<CR>
+nnoremap <silent>;l :<C-u>Unite line<CR>
+nnoremap <silent>;t :<C-u>UniteWithCursorWord -buffer-name=tag tag<CR>
 nmap     <silent>;; ;l
 
 " Overwrite settings.
@@ -383,4 +422,6 @@ let g:unite_source_file_mru_limit = 300
 let g:unite_source_directory_mru_limit = 300
 " start on insert mode
 let g:unite_enable_start_insert=1
+" }}}
+" }}}
 
