@@ -90,6 +90,7 @@ Bundle 'JavaScript-syntax'
 Bundle 'Javascript-Indentation'
 Bundle 'IndentAnything'
 Bundle 'vcscommand.vim'
+Bundle 'DirDiff.vim'
 
 " non github repos 
 Bundle 'git://git.wincent.com/command-t.git' 
@@ -184,26 +185,28 @@ nnoremap gl $
 nnoremap gp o<ESC>p
 nnoremap Y y$
 
-nnoremap n nzz 
-nnoremap N Nzz 
-nnoremap * *zz 
-nnoremap # #zz 
-nnoremap g* g*zz 
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
 nnoremap g# g#zz
+nnoremap [c [czz
+nnoremap ]c ]czz
 
 nnoremap <C-n> :cn<CR>
 nnoremap <C-p> :cp<CR>
 
-nnoremap <C-H> <C-W>h 
-nnoremap <C-J> <C-W>j 
-nnoremap <C-K> <C-W>k 
-nnoremap <C-L> <C-W>l 
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
 
 " same action as 'o' but keep normal mode
 nnoremap <C-o> :<C-u>call append(expand('.'), '')<Cr>j
 
 " double ESC to cancel search highlighting
-nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 
 " insert TAB char regardless expandtab setting
 inoremap <C-t>  <C-v><TAB>
@@ -228,12 +231,12 @@ vnoremap ) t)
 vnoremap ( t(
 
 " shortcuts to change settings
-nnoremap qtr :set ruler!<cr>
-nnoremap qtn :set number!<cr>
-nnoremap qtet :set expandtab!<cr>
-nnoremap qi2 :set tabstop=2 shiftwidth=2<cr>
-nnoremap qi4 :set tabstop=4 shiftwidth=4<cr>
-nnoremap qi8 :set tabstop=8 shiftwidth=8<cr>
+nnoremap @tr :set ruler!<cr>
+nnoremap @tn :set number!<cr>
+nnoremap @tet :set expandtab!<cr>
+nnoremap @i2 :set tabstop=2 shiftwidth=2<cr>
+nnoremap @i4 :set tabstop=4 shiftwidth=4<cr>
+nnoremap @i8 :set tabstop=8 shiftwidth=8<cr>
 
 
 "---------------------------------------------------------------------------
@@ -267,6 +270,8 @@ nnoremap <Leader>gg :Gtags -g
 "---------------------------------------
 " TagBar
 nnoremap <Space>t :TagbarToggle<cr>
+let g:tagbar_sort      = 0
+let g:tagbar_foldlevel = 2
 
 "---------------------------------------
 " delimitMate
@@ -305,18 +310,20 @@ endif
 
 " excluded files
 let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$'
+" pick the word on the cursor (Yes/No)
+let MyGrep_DefaultSearchWord   = 1"
+" use filetype highlighting for preview
+let QFix_PreviewFtypeHighlight = 1
 " grep command to use
-let mygrepprg = 'grep'
+let mygrepprg            = 'grep'
 " encoding for grep command
 let MyGrep_ShellEncoding = 'utf8'
 " additional options
-let MyGrepcmd_useropt = ''
+let MyGrepcmd_useropt    = 'nH'
 " first key to launch Grep
 let MyGrep_Key  = 'g'
 " second key to launch Grep
 let MyGrep_KeyB = ','
-" pick the word on the cursor (Yes/No)
-let MyGrep_DefaultSearchWord = 1"
 
 "---------------------------------------
 " vimfiler
@@ -325,16 +332,15 @@ nnoremap <silent><Space>f   :VimFiler `=<SID>GetBufferDirectory()`<CR>
 call vimfiler#set_execute_file('vim', 'vim')
 call vimfiler#set_execute_file('txt', 'vim')
 
-let g:vimfiler_enable_clipboard = 0
+let g:vimfiler_enable_clipboard     = 0
 let g:vimfiler_safe_mode_by_default = 1
-let g:vimshell_cd_command = 'cd'
 
 
 "---------------------------------------
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_at_startup          = 1
+let g:neocomplcache_enable_auto_select         = 1
+let g:neocomplcache_enable_smart_case          = 1
 let g:neocomplcache_enable_underbar_completion = 1
 
 " see: http://vim-users.jp/2010/11/hack185/
@@ -360,6 +366,8 @@ au FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
   nmap <silent><buffer> <ESC><ESC> q
   imap <silent><buffer> <ESC><ESC> <ESC>q
+  imap <buffer> <TAB>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 
   " shortcuts
   call unite#set_substitute_pattern('file', '\$\w\+', '\=eval(submatch(0))', 200)
