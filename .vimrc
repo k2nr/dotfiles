@@ -73,25 +73,22 @@ call vundle#rc()
 " original repos on github
 Bundle 'Shougo/vimfiler'
 Bundle 'Shougo/neocomplcache'
-Bundle 'ujihisa/neco-ghc'
+Bundle 'Shougo/vimproc'
 Bundle 'Shougo/unite.vim'
+Bundle 'ujihisa/neco-ghc'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'tsukkee/unite-tag'
-Bundle 'Shougo/vimproc'
-Bundle 'Raimondi/delimitMate'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'hallettj/jslint.vim'
 
 " vim-scripts repos
-"Bundle 'ZenCoding.vim'
 Bundle 'vundle'
 Bundle 'gtags.vim'
 Bundle 'JavaScript-syntax'
-Bundle 'Javascript-Indentation'
-Bundle 'IndentAnything'
+Bundle 'JavaScript-Indent'
 Bundle 'vcscommand.vim'
-Bundle 'DirDiff.vim'
 
 filetype on
 filetype plugin on
@@ -156,7 +153,7 @@ set title
 
 " show encoding and cr/lf type on status line
 " see: http://vimwiki.net/?plugin=related&page=%27statusline%27
-set statusline=%<%f\ %m%R%H%W%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+set statusline=%<%F\ %m%R%H%W%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l/%L,%c%V%8P
 
 " no beep
 set visualbell
@@ -214,6 +211,7 @@ nnoremap <C-o> :<C-u>call append(expand('.'), '')<Cr>j
 
 " double ESC to cancel search highlighting
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
+vnoremap <ESC> <ESC>
 
 " insert TAB char regardless expandtab setting
 inoremap <C-t>  <C-v><TAB>
@@ -244,6 +242,8 @@ nnoremap @tet :<C-u>set expandtab!<cr>
 nnoremap @i2  :<C-u>set tabstop=2 shiftwidth=2<cr>
 nnoremap @i4  :<C-u>set tabstop=4 shiftwidth=4<cr>
 nnoremap @i8  :<C-u>set tabstop=8 shiftwidth=8<cr>
+
+nnoremap <Space>e mmT(i<Space><ESC>h%i<Space><ESC>`ml
 
 call togglebg#map("@tbg")
 " }}}
@@ -288,6 +288,7 @@ let g:tagbar_foldlevel = 2
 "---------------------------------------
 " delimitMate
 let delimitMate_expand_space = 1
+let delimitMate_autoclose    = 0
 
 "---------------------------------------
 " enable to use as binary editor for *.bin {{{
@@ -354,6 +355,11 @@ let MyGrep_KeyB = ','
 " }}}
 
 "---------------------------------------
+" QFixGrep {{{
+let $JS_CMD='node'
+" }}}
+
+"---------------------------------------
 " vimfiler {{{
 nnoremap <silent><Space>f   :<C-u>VimFiler `=<SID>GetBufferDirectory()`<CR>
 
@@ -369,7 +375,7 @@ let g:vimfiler_safe_mode_by_default = 1
 " neocomplcache {{{
 let g:neocomplcache_enable_at_startup          = 1
 let g:neocomplcache_enable_auto_select         = 1
-let g:neocomplcache_enable_smart_case          = 1
+"let g:neocomplcache_enable_smart_case          = 1
 let g:neocomplcache_enable_underbar_completion = 1
 
 " see: http://vim-users.jp/2010/11/hack185/
