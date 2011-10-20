@@ -82,6 +82,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'hallettj/jslint.vim'
+Bundle 'kchmck/vim-coffee-script'
 
 " vim-scripts repos
 Bundle 'vundle'
@@ -283,6 +284,11 @@ nnoremap <Leader>gg :<C-u>Gtags -g
 nnoremap <Space>t :<C-u>TagbarToggle<cr>
 let g:tagbar_sort      = 0
 let g:tagbar_foldlevel = 2
+" }}}
+
+"---------------------------------------
+" coffee-script-vim {{{
+au BufNewFile,BufReadPost *.coffee setl expandtab
 " }}}
 
 "---------------------------------------

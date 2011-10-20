@@ -3,8 +3,7 @@
 "
 if has('win32')
   " Windows用
-  set guifont=MS_Gothic:h10:cSHIFTJIS
-  "set guifont=MS_Mincho:h12:cSHIFTJIS
+  set guifont=Ricty:h14:cSHIFTJIS
   " 行間隔の設定
   set linespace=1
   " 一部のUCS文字の幅を自動計測して決める
@@ -12,10 +11,9 @@ if has('win32')
     set ambiwidth=auto
   endif
 elseif has('mac')
-  set guifont=Osaka－等幅:h14
+  set guifont=Ricty:h14
 elseif has('xfontset')
-  " UNIX用 (xfontsetを使用)
-  set guifontset=a14,r14,k14
+  set guifont=Ricty:h14
 endif
 
 "---------------------------------------------------------------------------
@@ -66,9 +64,8 @@ endif
 
 "MacVim固有設定
 if has('gui_macvim')
-    set showtabline=2   " タブを常に表示
+    set showtabline=1   " only if there at least two tab pages
     set antialias
-    set guifont=Monaco:h12
 endif
 
 syntax enable
