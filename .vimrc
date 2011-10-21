@@ -134,6 +134,8 @@ endif
 
 set clipboard+=unnamed
 set matchpairs=(:),{:},[:]
+
+:let java_highlight_functions=1
 " }}}
 
 "---------------------------------------------------------------------------
@@ -180,7 +182,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set tags+=./tags;
-set autochdir
+"set autochdir
 " }}}
 
 "---------------------------------------------------------------------------
@@ -425,6 +427,7 @@ let g:unite_source_file_mru_limit = 300
 let g:unite_source_directory_mru_limit = 300
 " start on insert mode
 let g:unite_enable_start_insert=1
+let g:unite_source_file_rec_ignore_pattern = '\%(^\|/\)\.$\|\~$\|\.\%(o\|so\|class\|a\|exe\|dll\|bak\|sw[po]\)$\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'
 " }}}
 " }}}
 
