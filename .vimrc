@@ -6,61 +6,61 @@
 
 " see: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
 " 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
+"if &encoding !=# 'utf-8'
+"  set encoding=japan
+"  set fileencoding=japan
+"endif
+"if has('iconv')
+"  let s:enc_euc = 'euc-jp'
+"  let s:enc_jis = 'iso-2022-jp'
+"  " iconvがeucJP-msに対応しているかをチェック
+"  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+"    let s:enc_euc = 'eucjp-ms'
+"    let s:enc_jis = 'iso-2022-jp-3'
+"  " iconvがJISX0213に対応しているかをチェック
+"  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+"    let s:enc_euc = 'euc-jisx0213'
+"    let s:enc_jis = 'iso-2022-jp-3'
+"  endif
+"  " fileencodingsを構築
+"  if &encoding ==# 'utf-8'
+"    let s:fileencodings_default = &fileencodings
+"    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+"    let &fileencodings = &fileencodings .','. s:fileencodings_default
+"    unlet s:fileencodings_default
+"  else
+"    let &fileencodings = &fileencodings .','. s:enc_jis
+"    set fileencodings+=utf-8,ucs-2le,ucs-2
+"    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+"      set fileencodings+=cp932
+"      set fileencodings-=euc-jp
+"      set fileencodings-=euc-jisx0213
+"      set fileencodings-=eucjp-ms
+"      let &encoding = s:enc_euc
+"      let &fileencoding = s:enc_euc
+"    else
+"      let &fileencodings = &fileencodings .','. s:enc_euc
+"    endif
+"  endif
+"  " 定数を処分
+"  unlet s:enc_euc
+"  unlet s:enc_jis
+"endif
+"" 日本語を含まない場合は fileencoding に encoding を使うようにする
+"if has('autocmd')
+"  function! AU_ReCheck_FENC()
+"    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+"      let &fileencoding=&encoding
+"    endif
+"  endfunction
+"  autocmd BufReadPost * call AU_ReCheck_FENC()
+"endif
+"" 改行コードの自動認識
+"set fileformats=unix,dos,mac
+"" □とか○の文字があってもカーソル位置がずれないようにする
+"if exists('&ambiwidth')
+"  set ambiwidth=double
+"endif
 " }}}
 
 "---------------------------------------
@@ -83,6 +83,11 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'hallettj/jslint.vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle "mrtazz/simplenote.vim"
+"Bundle 'mattn/webapi-vim'
+"Bundle 'mattn/vimplenote-vim'
+"Bundle 'kana/vim-metarw'
+"Bundle 'mattn/vim-metarw-simplenote'
 
 " vim-scripts repos
 Bundle 'vundle'
@@ -385,7 +390,7 @@ let g:neocomplcache_enable_at_startup          = 1
 let g:neocomplcache_enable_auto_select         = 1
 "let g:neocomplcache_enable_smart_case          = 1
 let g:neocomplcache_enable_underbar_completion = 1
-
+let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 " see: http://vim-users.jp/2010/11/hack185/
 inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
 inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
@@ -427,7 +432,10 @@ let g:unite_source_file_mru_limit = 300
 let g:unite_source_directory_mru_limit = 300
 " start on insert mode
 let g:unite_enable_start_insert=1
-let g:unite_source_file_rec_ignore_pattern = '\%(^\|/\)\.$\|\~$\|\.\%(o\|so\|class\|a\|exe\|dll\|bak\|sw[po]\)$\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'
+"let g:unite_source_file_rec_ignore_pattern = '\%(^\|/\)\.$\|\~$\|\.\%(o\|so\|class\|a\|exe\|dll\|bak\|sw[po]\)$\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\|neocon\|android\|rvm\|gem\)\%($\|/\)'
+let g:unite_source_file_rec_min_cache_files=10000
 " }}}
 " }}}
 
+inoremap jj <ESC>
+source ~/.simplenoterc

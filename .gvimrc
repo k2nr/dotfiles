@@ -44,6 +44,11 @@ endif
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 
 "---------------------------------------------------------------------------
+" Menu Setting
+"
+set guioptions=gei
+
+"---------------------------------------------------------------------------
 " Mouse Setting
 "
 " どのモードでもマウスを使えるようにする
@@ -55,12 +60,6 @@ set mousehide
 " ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
 "set guioptions+=a
 
-"---------------------------------------------------------------------------
-" Menu Setting
-"
-if &guioptions =~# 'M'
-  let &guioptions = substitute(&guioptions, '[mT]', '', 'g')
-endif
 
 "MacVim固有設定
 if has('gui_macvim')
@@ -71,3 +70,7 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized
+
+let &transparency = 10
+let g:transparency = &transparency
+nnoremap <Esc><Esc> :<C-u>let &transparency = g:transparency<Cr><C-l>

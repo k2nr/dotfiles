@@ -1,5 +1,6 @@
 alias e="open -a /Applications/Emacs.app"
 alias rmr="rm -rf"
+alias vi="mvim -v"
 alias viconf="vi ~/.vimrc"
 alias zshconf="vi ~/.zshrc.mine"
 alias less="less -N -M"
@@ -10,11 +11,13 @@ alias -g G="|grep"
 alias -g XG="|xargs grep -Hn"
 alias -g XG0="|xargs -0 grep -Hn"
 
+export EDITOR="mvim -v"
+
 function grepr() {
    echo "find . -name \"$2\" | xargs grep $1"
 }
 
-path=(. $HOME/bin /usr/local/Cellar/android-ndk/r6b/ /usr/local/Cellar/android-sdk/r13/tools/ usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games /usr/X11R6/bin $HOME/bin/depot_tools)
+path=(. $HOME/bin $HOME/.cabal/bin /usr/local/Cellar/android-ndk/r6b/ /usr/local/Cellar/android-sdk/r14/tools/ usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games /usr/X11R6/bin $HOME/bin/depot_tools)
 
 # ignore case for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
