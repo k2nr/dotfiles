@@ -71,30 +71,24 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " original repos on github
-Bundle 'Shougo/vimfiler'
+"Bundle 'Shougo/vimfiler'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/unite.vim'
 Bundle 'ujihisa/neco-ghc'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'tsukkee/unite-tag'
-Bundle 'majutsushi/tagbar'
+"Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'hallettj/jslint.vim'
+"Bundle 'hallettj/jslint.vim'
 Bundle 'kchmck/vim-coffee-script'
-Bundle "mrtazz/simplenote.vim"
-"Bundle 'mattn/webapi-vim'
-"Bundle 'mattn/vimplenote-vim'
-"Bundle 'kana/vim-metarw'
-"Bundle 'mattn/vim-metarw-simplenote'
+Bundle 'thinca/vim-quickrun'
 
 " vim-scripts repos
 Bundle 'vundle'
 Bundle 'gtags.vim'
-Bundle 'JavaScript-syntax'
-Bundle 'JavaScript-Indent'
-Bundle 'vcscommand.vim'
+Bundle 'Command-T'
 
 filetype on
 filetype plugin on
@@ -214,6 +208,9 @@ nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 
+nnoremap < <C-W>4<
+nnoremap > <C-W>4>
+
 " same action as 'o' but keep normal mode
 nnoremap <C-o> :<C-u>call append(expand('.'), '')<Cr>j
 
@@ -288,20 +285,15 @@ nnoremap <Leader>gg :<C-u>Gtags -g
 
 "---------------------------------------
 " TagBar {{{
-nnoremap <Space>t :<C-u>TagbarToggle<cr>
-let g:tagbar_sort      = 0
-let g:tagbar_foldlevel = 2
+"nnoremap <Space>t :<C-u>TagbarToggle<cr>
+"let g:tagbar_sort      = 0
+"let g:tagbar_foldlevel = 2
 " }}}
 
 "---------------------------------------
 " coffee-script-vim {{{
 au BufNewFile,BufReadPost *.coffee setl expandtab
 " }}}
-
-"---------------------------------------
-" delimitMate
-let delimitMate_expand_space = 1
-let delimitMate_autoclose    = 0
 
 "---------------------------------------
 " enable to use as binary editor for *.bin {{{
@@ -374,13 +366,13 @@ let $JS_CMD='node'
 
 "---------------------------------------
 " vimfiler {{{
-nnoremap <silent><Space>f   :<C-u>VimFiler `=<SID>GetBufferDirectory()`<CR>
-
-call vimfiler#set_execute_file('vim', 'vim')
-call vimfiler#set_execute_file('txt', 'vim')
-
-let g:vimfiler_enable_clipboard     = 0
-let g:vimfiler_safe_mode_by_default = 1
+"nnoremap <silent><Space>f   :<C-u>VimFiler `=<SID>GetBufferDirectory()`<CR>
+"
+"call vimfiler#set_execute_file('vim', 'vim')
+"call vimfiler#set_execute_file('txt', 'vim')
+"
+"let g:vimfiler_enable_clipboard     = 0
+"let g:vimfiler_safe_mode_by_default = 1
 " }}}
 
 
@@ -433,9 +425,12 @@ let g:unite_source_directory_mru_limit = 300
 " start on insert mode
 let g:unite_enable_start_insert=1
 "let g:unite_source_file_rec_ignore_pattern = '\%(^\|/\)\.$\|\~$\|\.\%(o\|so\|class\|a\|exe\|dll\|bak\|sw[po]\)$\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\|neocon\|android\|rvm\|gem\)\%($\|/\)'
-let g:unite_source_file_rec_min_cache_files=10000
+let g:unite_source_file_rec_min_cache_files=1000
 " }}}
+
+nnoremap <silent>t  :<C-u>CommandT<Return>
+let g:CommandTCancelMap=['<ESC>','<C-c>']
+let g:CommandTMaxFiles=10000
 " }}}
 
 inoremap jj <ESC>
-source ~/.simplenoterc
