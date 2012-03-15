@@ -84,6 +84,8 @@ Bundle 'altercation/vim-colors-solarized'
 "Bundle 'hallettj/jslint.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'thinca/vim-quickrun'
+Bundle 'jondistad/vimclojure'
+Bundle 'kana/vim-fakeclip'
 
 " vim-scripts repos
 Bundle 'vundle'
@@ -207,6 +209,7 @@ nnoremap <C-H> <C-W>h
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
+nnoremap <C-W><C-W> <C-w>c
 
 nnoremap < <C-W>4<
 nnoremap > <C-W>4>
@@ -387,7 +390,7 @@ let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
 inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-g> neocomplcache#undo_completion()
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?  "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?  "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}
 
 "---------------------------------------
@@ -434,3 +437,9 @@ let g:CommandTMaxFiles=10000
 " }}}
 
 inoremap jj <ESC>
+let vimclojure#HighlightBuiltins=1
+let vimclojure#HighlightContrib=1
+let vimclojure#DynamicHighlighting=1
+"let vimclojure#ParenRainbow=1
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = "/usr/local/bin/ng"
