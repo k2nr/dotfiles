@@ -1,96 +1,100 @@
 "---------------------------------------------------------------------------
 " Encoding {{{
-"set enc=utf-8
-"set fenc=utf-8
-"set fencs=iso-2022-jp,utf-8,euc-jp,cp932
+set enc=utf-8
+set fenc=utf-8
+set fencs=iso-2022-jp,utf-8,euc-jp,cp932
 
 " see: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
 " 文字コードの自動認識
-"if &encoding !=# 'utf-8'
-"  set encoding=japan
-"  set fileencoding=japan
-"endif
-"if has('iconv')
-"  let s:enc_euc = 'euc-jp'
-"  let s:enc_jis = 'iso-2022-jp'
-"  " iconvがeucJP-msに対応しているかをチェック
-"  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-"    let s:enc_euc = 'eucjp-ms'
-"    let s:enc_jis = 'iso-2022-jp-3'
-"  " iconvがJISX0213に対応しているかをチェック
-"  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-"    let s:enc_euc = 'euc-jisx0213'
-"    let s:enc_jis = 'iso-2022-jp-3'
-"  endif
-"  " fileencodingsを構築
-"  if &encoding ==# 'utf-8'
-"    let s:fileencodings_default = &fileencodings
-"    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-"    let &fileencodings = &fileencodings .','. s:fileencodings_default
-"    unlet s:fileencodings_default
-"  else
-"    let &fileencodings = &fileencodings .','. s:enc_jis
-"    set fileencodings+=utf-8,ucs-2le,ucs-2
-"    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-"      set fileencodings+=cp932
-"      set fileencodings-=euc-jp
-"      set fileencodings-=euc-jisx0213
-"      set fileencodings-=eucjp-ms
-"      let &encoding = s:enc_euc
-"      let &fileencoding = s:enc_euc
-"    else
-"      let &fileencodings = &fileencodings .','. s:enc_euc
-"    endif
-"  endif
-"  " 定数を処分
-"  unlet s:enc_euc
-"  unlet s:enc_jis
-"endif
-"" 日本語を含まない場合は fileencoding に encoding を使うようにする
-"if has('autocmd')
-"  function! AU_ReCheck_FENC()
-"    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-"      let &fileencoding=&encoding
-"    endif
-"  endfunction
-"  autocmd BufReadPost * call AU_ReCheck_FENC()
-"endif
-"" 改行コードの自動認識
-"set fileformats=unix,dos,mac
-"" □とか○の文字があってもカーソル位置がずれないようにする
-"if exists('&ambiwidth')
-"  set ambiwidth=double
-"endif
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " iconvがeucJP-msに対応しているかをチェック
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  " iconvがJISX0213に対応しているかをチェック
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " fileencodingsを構築
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " 定数を処分
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" 日本語を含まない場合は fileencoding に encoding を使うようにする
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
+" □とか○の文字があってもカーソル位置がずれないようにする
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
 " }}}
 
 "---------------------------------------
-" Vundle {{{
+" NeoBundle {{{
+set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  filetype off
+  call neobundle#rc(expand('~/.vim/bundle'))
+endif
 
 " original repos on github
-"Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/unite.vim'
-Bundle 'ujihisa/neco-ghc'
-Bundle 'h1mesuke/unite-outline'
-Bundle 'tsukkee/unite-tag'
-"Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive'
-Bundle 'altercation/vim-colors-solarized'
-"Bundle 'hallettj/jslint.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'thinca/vim-quickrun'
-Bundle 'jondistad/vimclojure'
-Bundle 'kana/vim-fakeclip'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/neco-ghc'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'tsukkee/unite-tag'
+"NeoBundle 'majutsushi/tagbar'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'altercation/vim-colors-solarized'
+"NeoBundle 'hallettj/jslint.vim'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'kana/vim-fakeclip'
 
 " vim-scripts repos
-Bundle 'vundle'
-Bundle 'gtags.vim'
-Bundle 'Command-T'
+NeoBundle 'gtags.vim'
+NeoBundle 'Command-T'
+"NeoBundle 'VimClojure'
+NeoBundle 'https://bitbucket.org/kotarak/vimclojure', {'rtp' : 'vim'}
 
 filetype on
 filetype plugin on
@@ -189,6 +193,7 @@ set tags+=./tags;
 "---------------------------------------------------------------------------
 " Key Mapping {{{
 let mapleader=","
+let maplocalleader ="\\"
 
 " use <Space> for plugin launcher prefix
 nnoremap <Space> <Nop>
@@ -440,6 +445,12 @@ inoremap jj <ESC>
 let vimclojure#HighlightBuiltins=1
 let vimclojure#HighlightContrib=1
 let vimclojure#DynamicHighlighting=1
-"let vimclojure#ParenRainbow=1
+let vimclojure#ParenRainbow=1
 let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = "/usr/local/bin/ng"
+let vimclojure#NailgunClient = "ng"
+let vimclojure#SplitSize = 10
+let vimclojure#NailgunServer = "127.0.0.1"
+let vimclojure#NailgunPort = "2113"
+
+let g:quickrun_config = { '*': { 'split': '%{winwidth(0) * 2 < winheight(0) * 5 ? "rightbelow" : "vertical rightbelow"}' } }
+
