@@ -1,67 +1,67 @@
 "---------------------------------------------------------------------------
 " Encoding {{{
-set enc=utf-8
-set fenc=utf-8
-set fencs=iso-2022-jp,utf-8,euc-jp,cp932
-
-" see: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
-" 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
-" }}}
+"set enc=utf-8
+"set fenc=utf-8
+"set fencs=iso-2022-jp,utf-8,euc-jp,cp932
+"
+"" see: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
+"" 文字コードの自動認識
+"if &encoding !=# 'utf-8'
+"  set encoding=japan
+"  set fileencoding=japan
+"endif
+"if has('iconv')
+"  let s:enc_euc = 'euc-jp'
+"  let s:enc_jis = 'iso-2022-jp'
+"  " iconvがeucJP-msに対応しているかをチェック
+"  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+"    let s:enc_euc = 'eucjp-ms'
+"    let s:enc_jis = 'iso-2022-jp-3'
+"  " iconvがJISX0213に対応しているかをチェック
+"  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+"    let s:enc_euc = 'euc-jisx0213'
+"    let s:enc_jis = 'iso-2022-jp-3'
+"  endif
+"  " fileencodingsを構築
+"  if &encoding ==# 'utf-8'
+"    let s:fileencodings_default = &fileencodings
+"    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+"    let &fileencodings = &fileencodings .','. s:fileencodings_default
+"    unlet s:fileencodings_default
+"  else
+"    let &fileencodings = &fileencodings .','. s:enc_jis
+"    set fileencodings+=utf-8,ucs-2le,ucs-2
+"    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+"      set fileencodings+=cp932
+"      set fileencodings-=euc-jp
+"      set fileencodings-=euc-jisx0213
+"      set fileencodings-=eucjp-ms
+"      let &encoding = s:enc_euc
+"      let &fileencoding = s:enc_euc
+"    else
+"      let &fileencodings = &fileencodings .','. s:enc_euc
+"    endif
+"  endif
+"  " 定数を処分
+"  unlet s:enc_euc
+"  unlet s:enc_jis
+"endif
+"" 日本語を含まない場合は fileencoding に encoding を使うようにする
+"if has('autocmd')
+"  function! AU_ReCheck_FENC()
+"    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+"      let &fileencoding=&encoding
+"    endif
+"  endfunction
+"  autocmd BufReadPost * call AU_ReCheck_FENC()
+"endif
+"" 改行コードの自動認識
+"set fileformats=unix,dos,mac
+"" □とか○の文字があってもカーソル位置がずれないようにする
+"if exists('&ambiwidth')
+"  set ambiwidth=double
+"endif
+"" }}}
 
 "---------------------------------------
 " NeoBundle {{{
@@ -76,25 +76,29 @@ endif
 
 " original repos on github
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/neco-ghc'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-tag'
-"NeoBundle 'majutsushi/tagbar'
+NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'altercation/vim-colors-solarized'
-"NeoBundle 'hallettj/jslint.vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kana/vim-fakeclip'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'wincent/Command-T'
 
 " vim-scripts repos
 NeoBundle 'gtags.vim'
-NeoBundle 'Command-T'
-"NeoBundle 'VimClojure'
+NeoBundle 'ack.vim'
+NeoBundle 'slimv.vim'
 NeoBundle 'https://bitbucket.org/kotarak/vimclojure', {'rtp' : 'vim'}
+
 
 filetype on
 filetype plugin on
@@ -188,12 +192,14 @@ set nowritebackup
 set noswapfile
 set tags+=./tags;
 "set autochdir
+
+set wildignore+=*.o,*.obj,.git,*.pyc,*.jar,*.a,*.lib,*~
 " }}}
 
 "---------------------------------------------------------------------------
 " Key Mapping {{{
 let mapleader=","
-let maplocalleader ="\\"
+"let maplocalleader ="\\"
 
 " use <Space> for plugin launcher prefix
 nnoremap <Space> <Nop>
@@ -241,6 +247,7 @@ inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
+inoremap jj <ESC>
 
 " see: http://vim-users.jp/2011/04/hack214/
 onoremap ) t)
@@ -293,17 +300,15 @@ nnoremap <Leader>gg :<C-u>Gtags -g
 
 "---------------------------------------
 " TagBar {{{
-"nnoremap <Space>t :<C-u>TagbarToggle<cr>
-"let g:tagbar_sort      = 0
-"let g:tagbar_foldlevel = 2
+nnoremap <Space>t :<C-u>TagbarToggle<cr>
+let g:tagbar_sort      = 0
+let g:tagbar_foldlevel = 2
 " }}}
 
-"---------------------------------------
 " coffee-script-vim {{{
 au BufNewFile,BufReadPost *.coffee setl expandtab
 " }}}
 
-"---------------------------------------
 " enable to use as binary editor for *.bin {{{
 augroup Binary
   au!
@@ -317,7 +322,6 @@ augroup Binary
 augroup END
 " }}}
 
-"---------------------------------------
 " Haskell Mode {{{
 
 " use ghc functionality for haskell files
@@ -325,7 +329,6 @@ au Bufenter *.hs compiler ghc
 let g:haddock_browser = "open"
 " }}}
 
-"---------------------------------------
 " Fugitive {{{
 nnoremap <Space>gd :Gdiff<CR>
 nnoremap <Space>gs :Gstatus<CR>
@@ -339,7 +342,6 @@ nnoremap <Space>gb :Gblame<CR>
 nnoremap <Space>gD :diffoff<CR><C-w>l<C-w>o
 " }}}
 
-"---------------------------------------
 " QFixGrep {{{
 if has('win32')
   let Grep_Path       = 'C:\tools\gnu\bin\grep.exe'
@@ -367,38 +369,20 @@ let MyGrep_Key  = 'g'
 let MyGrep_KeyB = ','
 " }}}
 
-"---------------------------------------
-" QFixGrep {{{
-let $JS_CMD='node'
-" }}}
-
-"---------------------------------------
-" vimfiler {{{
-"nnoremap <silent><Space>f   :<C-u>VimFiler `=<SID>GetBufferDirectory()`<CR>
-"
-"call vimfiler#set_execute_file('vim', 'vim')
-"call vimfiler#set_execute_file('txt', 'vim')
-"
-"let g:vimfiler_enable_clipboard     = 0
-"let g:vimfiler_safe_mode_by_default = 1
-" }}}
-
-
-"---------------------------------------
 " neocomplcache {{{
 let g:neocomplcache_enable_at_startup          = 1
-let g:neocomplcache_enable_auto_select         = 1
-"let g:neocomplcache_enable_smart_case          = 1
+"let g:neocomplcache_enable_auto_select         = 1
+let g:neocomplcache_enable_smart_case          = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 " see: http://vim-users.jp/2010/11/hack185/
 inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
 inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-g> neocomplcache#undo_completion()
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?  "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?
+ \ "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}
 
-"---------------------------------------
 " Unite.vim {{{
 nnoremap <silent>;b :<C-u>Unite buffer<CR>
 nnoremap <silent>;f :<C-u>UniteWithBufferDir -buffer-name=file file<CR>
@@ -436,21 +420,41 @@ let g:unite_enable_start_insert=1
 let g:unite_source_file_rec_min_cache_files=1000
 " }}}
 
+" vim-quickrun {{{
+let g:quickrun_config = { '*': { 'split': '%{winwidth(0) * 2 < winheight(0) * 5 ? "rightbelow" : "vertical rightbelow"}' } }
+" }}}
+
+" VimClojure {{{
+
+let vimclojure#HighlightBuiltins=1
+"let vimclojure#DynamicHighlighting=1
+let vimclojure#ParenRainbow=1
+let vimclojure#FuzzyIndent=1
+let vimclojure#WantNailgun = 0
+let vimclojure#SetupKeyMap = 0
+"let vimclojure#NailgunClient = "ng"
+"let vimclojure#SplitSize = 10
+"let vimclojure#NailgunServer = "127.0.0.1"
+"let vimclojure#NailgunPort = "2113"
+
+" }}}
+
+" vim-slime {{{
+let g:slime_target = "tmux"
+" }}}
+
+" Command-T {{{
 nnoremap <silent>t  :<C-u>CommandT<Return>
 let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTMaxFiles=10000
 " }}}
 
-inoremap jj <ESC>
-let vimclojure#HighlightBuiltins=1
-let vimclojure#HighlightContrib=1
-let vimclojure#DynamicHighlighting=1
-let vimclojure#ParenRainbow=1
-let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = "ng"
-let vimclojure#SplitSize = 10
-let vimclojure#NailgunServer = "127.0.0.1"
-let vimclojure#NailgunPort = "2113"
+" slimv.vim {{{
+let g:slimv_swank_cmd = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"sbcl --load ~/.vim/bundle/slimv.vim/slime/start-swank.lisp\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
+let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
 
-let g:quickrun_config = { '*': { 'split': '%{winwidth(0) * 2 < winheight(0) * 5 ? "rightbelow" : "vertical rightbelow"}' } }
+let g:slimv_leader=','
+let g:slimv_repl_split = 4 "vertical split right
+" }}}
+" }}}
 
