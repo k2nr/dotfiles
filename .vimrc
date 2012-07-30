@@ -393,6 +393,7 @@ nnoremap <silent>;r :<C-u>Unite register<CR>
 nnoremap <silent>;l :<C-u>Unite line<CR>
 nnoremap <silent>;t :<C-u>UniteWithCursorWord -buffer-name=tag tag<CR>
 nnoremap <silent>;; :<C-u>Unite file_rec/async<CR>
+nnoremap <silent>;y :<C-u>Unite history/yank<CR>
 
 " Overwrite settings.
 au FileType unite call s:unite_my_settings()
@@ -418,6 +419,8 @@ let g:unite_source_directory_mru_limit = 300
 let g:unite_enable_start_insert=1
 "let g:unite_source_file_rec_ignore_pattern = '\%(^\|/\)\.$\|\~$\|\.\%(o\|so\|class\|a\|exe\|dll\|bak\|sw[po]\)$\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\|neocon\|android\|rvm\|gem\)\%($\|/\)'
 let g:unite_source_file_rec_min_cache_files=1000
+let g:unite_source_history_yank_enable=1
+let g:unite_source_history_yank_limit=1000
 " }}}
 
 " vim-quickrun {{{
@@ -445,6 +448,7 @@ let g:slime_target = "tmux"
 
 " Command-T {{{
 nnoremap <silent>t  :<C-u>CommandT<Return>
+nnoremap <silent>T  :<C-u>CommandTTag<Return>
 let g:CommandTCancelMap=['<ESC>','<C-c>']
 let g:CommandTMaxFiles=10000
 " }}}

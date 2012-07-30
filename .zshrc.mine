@@ -30,7 +30,7 @@ function grepr() {
    echo "find . -name \"$2\" | xargs grep $1"
 }
 
-path=(. /usr/local/lib/node_modules $HOME/bin $HOME/.cabal/bin usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools /usr/local/Cellar/android-sdk/r16/tools/ /usr/local/Cellar/android-sdk/r16/platform-tools )
+path=(. /usr/local/lib/node_modules $HOME/bin $HOME/.cabal/bin usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools /usr/local/Cellar/android-sdk/r16/tools /usr/local/Cellar/android-sdk/r16/platform-tools )
 
 # ignore case for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
