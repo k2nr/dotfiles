@@ -92,7 +92,10 @@ NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'wincent/Command-T'
-
+NeoBundle 'IndentAnything'
+NeoBundle 'JavaScript-syntax'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'smartchr'
 " vim-scripts repos
 NeoBundle 'gtags.vim'
 NeoBundle 'ack.vim'
@@ -269,7 +272,7 @@ call togglebg#map("@tbg")
 " }}}
 
 "---------------------------------------------------------------------------
-" autocmd {{{
+" omnifunc {{{
 
 " Enable omni completion.
 "autocmd FileType ada setlocal omnifunc=adacomplete#Complete
@@ -385,7 +388,7 @@ imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?
 
 " Unite.vim {{{
 nnoremap <silent>;b :<C-u>Unite buffer<CR>
-nnoremap <silent>;f :<C-u>UniteWithBufferDir -buffer-name=file file<CR>
+nnoremap <silent>;f :<C-u>UniteWithBufferDir -buffer-name=file file file_mru file/new<CR>
 nnoremap <silent>;m :<C-u>Unite file_mru<CR>
 nnoremap <silent>;g :<C-u>Unite grep<CR>
 nnoremap <silent>;o :<C-u>Unite outline<CR>
@@ -460,5 +463,10 @@ let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the fir
 let g:slimv_leader=','
 let g:slimv_repl_split = 4 "vertical split right
 " }}}
+
+" smartchr {{{
+autocmd FileType javascript inoremap <buffer> <expr> \  smartchr#one_of('function(', '\')
+" }}}
+
 " }}}
 

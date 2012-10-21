@@ -20,14 +20,20 @@
 (setq whitespace-space-regexp "\\(\u3000+\\)")
 (global-whitespace-mode 1)
 
-
+;; yasnippet
+(require 'yasnippet)
+(require 'dropdown-list)
+(setq yas-trigger-key "C-.")
+(yas-global-mode 1)
+(yas-load-directory "~/.emacs.d/snippets")
+(setq yas/prompt-functions '(yas-dropdown-prompt
+                             yas-ido-prompt
+                             yas-completing-prompt))
 ;; auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-(setq-default ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(setq-default ac-sources (append '(ac-source-yasnippet) ac-sources))
+(setq ac-auto-show-menu 0.2)
 
 ;; flymake
 (require 'flymake)
@@ -35,11 +41,22 @@
 (setq flymake-gui-warnings-enabled nil)
 (add-hook 'find-file-hook 'flymake-find-file-hook)
 
+;; projectile
+(require 'projectile)
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-project-root-files '("project.clj" ".git" ".hg" ".bzr" "_darcs" ".projectile" "Makefile"))
+(setq projectile-ignored-files '("TAGS" ".DS_Store"))
+(setq projectile-ignored-file-extensions '("class" "o" "so" "elc" "jar" "a" "lib"))
+(setq projectile-ignored-directories '(".idea" ".git" "Music" "Movies" "Documents" "Desktop" "Pictures"))
+
 ;; helm
 (require 'helm-config)
 (require 'helm-gtags)
 (require 'helm-c-yasnippet)
+(require 'helm-projectile)
 (setq helm-c-yas-space-match-any-greedy t)
+(setq recentf-max-saved-items 1000)
 ;(require 'helm-git)
 ;(require 'helm-c-moccur)
 
@@ -55,7 +72,10 @@
   '(progn
      (setq inferior-lisp-program "ccl64 -K utf-8")
      (setq slime-net-coding-system 'utf-8-unix)
-     (slime-setup '(slime-fancy))))
+     (slime-setup '(slime-fancy slime-asdf slime-banner))
+     (setq slime-complete-symbol*-fancy t)
+     (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+(add-hook 'slime-repl-mode-hook 'turn-on-paredit)
 
 ;;ac-slime
 (require 'ac-slime)
@@ -85,15 +105,40 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
-;; yasnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets")
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
 ;; popwin.el
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
 
+;; windows.el
+(setq win:switch-prefix "\C-z")
+(define-key global-map win:switch-prefix nil)
+(define-key global-map (kbd "C-z 1") 'win-switch-to-window)
+(require 'windows)
+(setq win:use-frame nil)
+(win:startup-with-window)
+(define-key ctl-x-map "C" 'see-you-again)
+(define-key win:switch-map "\C-m" 'win-menu)
+(define-key win:switch-map ";" 'win-switch-menu)
 
+;; magit
+(require 'magit)
+
+;; zencoding
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
+(add-hook 'html-mode-hook 'zencoding-mode)
+
+;; jade-mode
+(require 'jade-mode)
+(require 'sws-mode)
+(add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
+(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; markdown-mode
+(require 'markdown-mode)
+(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
 (provide 'init-global-plugins)

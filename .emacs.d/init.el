@@ -6,6 +6,12 @@
 (require 'init-coding-system)
 (require 'init-global-plugins)
 (require 'init-visual)
+(require 'init-view-mode)
+;; language settings
+(require 'init-lisps)
+(require 'init-js)
+;; Keys
+(require 'global-keys)
 
 ;; y or p instead of yes or no
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -28,15 +34,12 @@
 ;; C-k to kill whole line
 (setq kill-whole-line t)
 
+;; no beep
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
+
 ;; default indent settings
 (setq-default indent-tabs-mode nil)
-(custom-set-variables '(tab-width 4))
 
 ;; start server
 (if window-system (server-start))
-
-;; language settings
-(require 'init-lisps)
-
-;; Keys
-(require 'global-keys)

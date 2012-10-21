@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: req
+# key: req
+# binding: direct-keybinding
+# --
+var ${1:name} = require('$1');

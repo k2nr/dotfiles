@@ -1,0 +1,21 @@
+snippet req
+abbr require(...)
+    ${1} = require('${2}')${3}
+
+snippet desc
+abbr describe('...', function() { ... }
+    describe('${1}', function() {
+        ${2}
+    });
+
+snippet it
+abbr it(...) {...}
+    it('${1}', function(${2:done}) {
+        ${3}
+    });
+
+snippet bf
+abbr before(function(){...}
+    before(function(${1:done}) {
+        ${2}
+    });

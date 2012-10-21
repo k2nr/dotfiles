@@ -1,3 +1,5 @@
+(require 'shared-funs)
+
 ;; \C-a to move to head of the line skipping indent charcters
 (defun beginning-of-indented-line (current-point)
   (interactive "d")
@@ -10,22 +12,30 @@
       (beginning-of-line)
     (back-to-indentation)))
 
+(add-hook 'isearch-mode-hook
+ (lambda ()
+   "Activate my customized Isearch word yank command."
+   (substitute-key-definition 'isearch-yank-word-or-char
+                              'my-isearch-yank-word-or-char-from-beginning
+                              isearch-mode-map)))
+
 (global-set-key "\C-a" 'beginning-of-indented-line)
 (global-set-key "\M-g" 'goto-line)
 (global-set-key "\C-h" 'delete-backward-char)
-(global-set-key "\C-u" 'undo)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key "\C-j" 'join-line)
 (global-set-key "\C-t" 'other-window)
-(global-set-key (kbd "C-, t") 'toggle-truncate-lines)
+(global-set-key (kbd "M-f") 'forward-symbol)
+(global-set-key (kbd "M-b") 'backward-symbol)
+(global-set-key (kbd "M-o") 'insert-empty-line)
+(global-set-key (kbd "C-, o") 'open-with-buffer-file)
+(global-set-key (kbd "C-, l") 'toggle-truncate-lines)
 (global-set-key (kbd "C-, f") 'ns-toggle-fullscreen)
 (global-set-key (kbd "C-, d") 'dired-at-point)
-
+(global-set-key (kbd "C-, t") 'twit)
+(global-set-key (kbd "C-, g") 'projectile-grep)
 ;; multi-term
 (global-set-key (kbd "C-, z") 'multi-term)
-
-;; undo-tree
-(global-set-key (kbd "C-S-u") 'undo-tree-redo)
 
 ;; helm
 (global-set-key (kbd "C-; C-;") 'helm-mini)
@@ -35,6 +45,12 @@
 (global-set-key (kbd "C-; C-l") 'helm-locate)
 (global-set-key (kbd "C-; C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-; C-k") 'helm-show-kill-ring)
+(global-set-key (kbd "C-; C-p") 'helm-projectile)
+(global-set-key (kbd "C-; C-i") 'helm-imenu)
+
+;; use shift + arrow keys to switch between visible buffers
+(require 'windmove)
+(windmove-default-keybindings)
 
 (when (eq system-type 'darwin)
   ;; Alternate Mac's command key and Alt key

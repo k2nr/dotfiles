@@ -1,9 +1,11 @@
 ### aliases
-alias e="open -a /Applications/Emacs.app"
+alias emacs="emacsclient -n"
+alias e="emacs"
 alias o="open"
 alias rmr="rm -rf"
 alias vi="mvim -v"
 alias tmux="TERM=screen-256color-bce tmux"
+alias t="tmux"
 #alias vi="vim"
 alias viconf="vi ~/.vimrc"
 alias zshconf="vi ~/.zshrc.mine"
