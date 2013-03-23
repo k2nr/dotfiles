@@ -1,8 +1,8 @@
 # -*- coding: utf-8; mode: snippet -*-
-# key: fn
-# name: fun
+# key: f
+# name: f
 # contributor: David Miller <david@deadpansincerity.com>
 # --
-function ${2:my_function}(${3:args}) {
+function (${3:args}) {
   $0
 }

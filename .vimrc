@@ -66,42 +66,87 @@
 "---------------------------------------
 " NeoBundle {{{
 set nocompatible
-filetype off
 
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  filetype off
-  call neobundle#rc(expand('~/.vim/bundle'))
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" original repos on github
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/neobundle.vim'
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
+au BufRead,BufNewFile,BufReadPre *.clj    set filetype=clojure
+
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundleLazy 'taichouchou2/vim-endwise.git', {'autoload': {'insert' : 1}}
+NeoBundleLazy 'Shougo/neocomplcache', {'autoload': {'insert' : 1}}
+NeoBundleLazy 'Shougo/neosnippet', {'autoload' : {'insert' : 1}}
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/neco-ghc'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'majutsushi/tagbar'
+NeoBundleLazy 'Shougo/neocomplcache-rsense', {
+      \ 'depends': 'Shougo/neocomplcache',
+      \ 'autoload': { 'filetypes': 'ruby' }}
+NeoBundleLazy 'taichouchou2/rsense-0.3', {
+      \ 'build' : {
+      \    'mac': 'ruby etc/config.rb > ~/.rsense',
+      \    'unix': 'ruby etc/config.rb > ~/.rsense',
+      \ } }
+NeoBundle 'tpope/vim-rails'
+NeoBundleLazy 'ujihisa/unite-rake', {'depends': 'Shougo/unite.vim'}
+NeoBundleLazy 'basyura/unite-rails', {'depends' : 'Shjkougo/unite.vim'}
+NeoBundleLazy 'taichouchou2/unite-rails_best_practices', {
+      \ 'depends' : 'Shougo/unite.vim',
+      \ 'build' : {
+      \    'mac': 'gem install rails_best_practices',
+      \    'unix': 'gem install rails_best_practices',
+      \   }
+      \ }
+NeoBundleLazy 'taichouchou2/unite-reek', {
+      \ 'build' : {
+      \    'mac': 'gem install reek',
+      \    'unix': 'gem install reek',
+      \ },
+      \ 'autoload': { 'filetypes': ['ruby', 'eruby', 'haml'] },
+      \ 'depends' : 'Shougo/unite.vim' }
+NeoBundleLazy 'skwp/vim-rspec', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
+NeoBundleLazy 'ruby-matchit', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundleLazy 'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
+NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
+"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'kchmck/vim-coffee-script'
+NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'mattn/zencoding-vim'
-NeoBundle 'wincent/Command-T'
+NeoBundleLazy 'mattn/zencoding-vim', {'autoload': {'filetypes': ['html', 'erb', 'haml']}}
 NeoBundle 'IndentAnything'
-NeoBundle 'JavaScript-syntax'
-NeoBundle 'pangloss/vim-javascript'
+NeoBundleLazy 'JavaScript-syntax', {'autoload': {'filetypes': 'javascript'}}
+NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': 'javascript'}}
 NeoBundle 'smartchr'
-" vim-scripts repos
+
 NeoBundle 'gtags.vim'
 NeoBundle 'ack.vim'
-NeoBundle 'slimv.vim'
-NeoBundle 'https://bitbucket.org/kotarak/vimclojure', {'rtp' : 'vim'}
+NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['clojure', 'lisp']}}
+NeoBundleLazy 'https://bitbucket.org/kotarak/vimclojure', {
+    \ 'rtp' : 'vim',
+    \ 'autoload' : {'filetypes': 'clojure'}}
 
+let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake alpaca_complete'
+function! s:bundleLoadDepends(bundle_names) "{{{
+  execute 'NeoBundleSource '.a:bundle_names
+  au! RailsLazyPlugins
+endfunction"}}}
+aug RailsLazyPlugins
+  au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
+aug END
 
 filetype on
 filetype plugin on
@@ -124,8 +169,8 @@ set grepprg=grep\ -nH
 " Edit Setting {{{
 set expandtab
 set smarttab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set softtabstop=0
 
 set autoindent
@@ -292,7 +337,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Plugin Setting {{{
 "---------------------------------------------------------------------------
 
-"---------------------------------------
 " GNU GLOBAL (gtags.vim) {{{
 nnoremap <Leader>gd :<C-u>Gtags 
 nnoremap <Leader>gc :<C-u>GtagsCursor<CR>
@@ -301,7 +345,6 @@ nnoremap <Leader>gf :<C-u>Gtags -P
 nnoremap <Leader>gg :<C-u>Gtags -g 
 " }}}
 
-"---------------------------------------
 " TagBar {{{
 nnoremap <Space>t :<C-u>TagbarToggle<cr>
 let g:tagbar_sort      = 0
@@ -376,14 +419,22 @@ let MyGrep_KeyB = ','
 let g:neocomplcache_enable_at_startup          = 1
 "let g:neocomplcache_enable_auto_select         = 1
 let g:neocomplcache_enable_smart_case          = 1
-let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_snippets_dir = '~/.vim/snippets'
-" see: http://vim-users.jp/2010/11/hack185/
-inoremap <expr><C-h> neocomplcache#smart_close_popup().”\<C-h>”
-inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-g> neocomplcache#undo_completion()
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ?
- \ "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"inoremap <expr><CR>  neocomplcache#smart_close_popup()."\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+set completeopt-=preview
 " }}}
 
 " Unite.vim {{{
@@ -468,5 +519,8 @@ let g:slimv_repl_split = 4 "vertical split right
 autocmd FileType javascript inoremap <buffer> <expr> \  smartchr#one_of('function(', '\')
 " }}}
 
+" endwise.vim {{{
+let g:endwise_no_mappings=1
+" }}}
 " }}}
 

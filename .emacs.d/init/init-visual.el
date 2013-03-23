@@ -16,8 +16,8 @@
 
 ;; GUI settings
 (when (eq window-system 'ns)
-  (set-frame-parameter (selected-frame) 'alpha '(0.95))
-  (set-frame-size (selected-frame) 90 46)
+  ;(set-frame-parameter (selected-frame) 'alpha '(0.95))
+  (set-frame-size (selected-frame) 120 60)
   (tool-bar-mode 0)
   (scroll-bar-mode 0))
 
@@ -33,7 +33,7 @@
 ;(set-face-background 'hl-line "oldlace")
 
 ;; Theme
-;(load-theme 'solarized-light t)
-(load-theme 'zenburn t)
+(load-theme 'solarized-light t)
+;(load-theme 'zenburn t)
 
 (provide 'init-visual)

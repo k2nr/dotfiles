@@ -1,4 +1,17 @@
+## antigen
+source ~/antigen/antigen.zsh
+
+# Bundles from the default repo
+antigen-bundle dircycle
+antigen-bundle git
+antigen-bundle git-flow
+antigen-bundle lein
+antigen-bundle npm
+antigen-bundle nyan
+antigen-bundle osx
+
 ### aliases
+alias lla="ls -la"
 alias emacs="emacsclient -n"
 alias e="emacs"
 alias o="open"
@@ -10,7 +23,9 @@ alias t="tmux"
 alias viconf="vi ~/.vimrc"
 alias zshconf="vi ~/.zshrc.mine"
 alias less="less -N -M"
+alias ack="ack --nogroup"
 alias src="source ~/.zshrc"
+alias bu="brew update && brew upgrade"
 
 # global aliases
 alias -g L="|less"
@@ -28,11 +43,7 @@ export EDITOR="vi"
 # to use japanese on swank
 export JAVA_OPTS="-Dswank.encoding=utf-8-unix"
 
-function grepr() {
-   echo "find . -name \"$2\" | xargs grep $1"
-}
-
-path=(. /usr/local/lib/node_modules $HOME/bin $HOME/.cabal/bin usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools /usr/local/Cellar/android-sdk/r16/tools /usr/local/Cellar/android-sdk/r16/platform-tools )
+path=(. $HOME/bin $HOME/.cabal/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools )
 
 # ignore case for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -64,14 +75,12 @@ precmd_functions=($precmd_functions update_prompt)
 # android
 export NDK="/usr/local/Cellar/android-ndk/r6b/"
 
-# rvm
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then
-    source $HOME/.rvm/scripts/rvm ;
-fi
+# rbenv
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
-## autojump
-fpath=(/usr/local/Cellar/autojump/19/share/zsh/functions $fpath)
-alias j="autojump"
-if [ -f `brew --prefix`/etc/autojump.zsh ]; then
-  . `brew --prefix`/etc/autojump.zsh
-fi
+# rvm
+source $HOME/.rvm/scripts/rvm
+
+## z
+. `brew --prefix`/etc/profile.d/z.sh

@@ -2,7 +2,6 @@
 # name: forin
 # contributor: David Miller <david@deadpansincerity.com>
 # --
-for( ${1:var} in ${2:obj} )
-{
-    $0
+for (${1:var} in ${2:obj}) {
+  $0
 }

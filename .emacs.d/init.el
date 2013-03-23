@@ -43,3 +43,6 @@
 
 ;; start server
 (if window-system (server-start))
+
+;; delete unnecessary white spaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)

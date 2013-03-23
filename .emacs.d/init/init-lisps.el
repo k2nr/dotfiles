@@ -10,8 +10,7 @@
 
 (defun lisp-shared-hook ()
   (turn-on-paredit)
-  (custom-set-variables '(tab-width 2))
-  )
+  (custom-set-variables '(tab-width 2)))
 
 ;; common lisp
 (add-hook 'lisp-mode-hook 'lisp-shared-hook)
@@ -40,23 +39,42 @@
                         '(("(\\|)" . 'esk-paren-face)))
 
 ;; scheme
+(defun scheme-other-window ()
+  "Run scheme on other window"
+  (interactive)
+  (switch-to-buffer-other-window
+   (get-buffer-create "*scheme*"))
+  (run-scheme scheme-program-name))
+(require 'quack)
 (add-hook 'scheme-mode-hook 'lisp-shared-hook)
-;(add-hook 'scheme-mode-hook 'idle-highlight)
+(add-hook 'scheme-mode-hook (lambda ()
+                              (require 'cmuscheme)
+                              (setq scheme-program-name "gosh -i")
+                              (global-set-key (kbd "C-c C-s") 'scheme-other-window)))
+
 (font-lock-add-keywords 'scheme-mode
                         '(("(\\|)" . 'esk-paren-face)))
 
 ;; clojure
 (require 'clojure-mode)
 (add-hook 'clojure-mode-hook 'lisp-shared-hook)
-(add-hook 'clojure-mode-hook (lambda ()
-                               (local-set-key (kbd "C-c C-s") 'clojure-jack-in)
-                               ))
-
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'esk-paren-face)))
 
 ;; C-c C-z to switch nREPL buffer
 (add-to-list 'same-window-buffer-names "*nrepl*")
+;; turn on eldoc mode on the current buffer
+(add-hook 'nrepl-interaction-mode-hook
+  'nrepl-turn-on-eldoc-mode)
+
+;; if nil, Stop the error buffer from popping up while working in the REPL buffer
+(setq nrepl-popup-stacktraces t)
+(add-hook 'nrepl-mode-hook 'lisp-shared-hook)
+
+;; ritz-nrepl
+(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
+(defun my-nrepl-mode-setup ()
+  (require 'nrepl-ritz))
 
 ;; ac-nrepl
  (require 'ac-nrepl)
