@@ -40,6 +40,8 @@ alias gstc="git stash clear"
 alias gstp="git stash pop"
 alias gready="git rebase -i @{u}"
 
+alias gbr="git-browse-remote"
+
 # global aliases
 alias -g L="|less"
 alias -g G="|grep"

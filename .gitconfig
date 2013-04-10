@@ -1,0 +1,28 @@
+[color]
+  ui = auto
+[user]
+  name = Kazunori Kajihiro
+  email = likerichie@gmail.com
+[core]
+  excludesfile = ~/work/.gitignore
+  editor = mvim -v
+[include]
+  path = .gitconfig.local
+[credential]
+  helper = osxkeychain
+[pull]
+  rebase = true
+[push]
+  default = simple
+[diff]
+  tool = vimdiff
+[mergetool "vimdiff3"]
+  cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[merge]
+  tool = vimdiff3
+
+[browse-remote "github.com"]
+  top = https://{host}/{path}
+  ref = https://{host}/{path}/tree/{short_ref}
+  rev = https://{host}/{path}/commit/{commit}
+  file = "https://{host}/{path}/blob/{short_rev}/{file}{line && \"#L%d\" % line}"
