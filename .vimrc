@@ -89,14 +89,6 @@ NeoBundleLazy 'taichouchou2/vim-endwise.git', {'autoload': {'insert' : 1}}
 NeoBundleLazy 'Shougo/neocomplcache', {'autoload': {'insert' : 1}}
 NeoBundleLazy 'Shougo/neosnippet', {'autoload' : {'insert' : 1}}
 NeoBundle 'Shougo/unite.vim'
-NeoBundleLazy 'Shougo/neocomplcache-rsense', {
-      \ 'depends': 'Shougo/neocomplcache',
-      \ 'autoload': { 'filetypes': 'ruby' }}
-NeoBundleLazy 'taichouchou2/rsense-0.3', {
-      \ 'build' : {
-      \    'mac': 'ruby etc/config.rb > ~/.rsense',
-      \    'unix': 'ruby etc/config.rb > ~/.rsense',
-      \ } }
 NeoBundle 'tpope/vim-rails'
 NeoBundleLazy 'ujihisa/unite-rake', {'depends': 'Shougo/unite.vim'}
 NeoBundleLazy 'basyura/unite-rails', {'depends' : 'Shjkougo/unite.vim'}
@@ -117,8 +109,8 @@ NeoBundleLazy 'taichouchou2/unite-reek', {
 NeoBundleLazy 'skwp/vim-rspec', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
 NeoBundleLazy 'ruby-matchit', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundleLazy 'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
-NeoBundleLazy 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
+NeoBundle 'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
+NeoBundle 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
 "NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'altercation/vim-colors-solarized'
@@ -130,7 +122,6 @@ NeoBundleLazy 'mattn/zencoding-vim', {'autoload': {'filetypes': ['html', 'erb', 
 NeoBundle 'IndentAnything'
 NeoBundleLazy 'JavaScript-syntax', {'autoload': {'filetypes': 'javascript'}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': 'javascript'}}
-NeoBundle 'smartchr'
 
 NeoBundle 'gtags.vim'
 NeoBundle 'ack.vim'
@@ -138,8 +129,13 @@ NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['clojure', 'lisp']}}
 NeoBundleLazy 'https://bitbucket.org/kotarak/vimclojure', {
     \ 'rtp' : 'vim',
     \ 'autoload' : {'filetypes': 'clojure'}}
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kana/vim-smartinput'
+NeoBundle 'Lokaltog/vim-easymotion'
+" }}}
 
-let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake alpaca_complete'
+let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake'
 function! s:bundleLoadDepends(bundle_names) "{{{
   execute 'NeoBundleSource '.a:bundle_names
   au! RailsLazyPlugins
@@ -249,6 +245,8 @@ set wildignore+=*.o,*.obj,.git,*.pyc,*.jar,*.a,*.lib,*~
 let mapleader=","
 "let maplocalleader ="\\"
 
+nmap <C-\> <C-]>
+
 " use <Space> for plugin launcher prefix
 nnoremap <Space> <Nop>
 nnoremap <Space>s :shell<CR>
@@ -312,6 +310,7 @@ nnoremap @i4  :<C-u>set tabstop=4 shiftwidth=4<cr>
 nnoremap @i8  :<C-u>set tabstop=8 shiftwidth=8<cr>
 
 nnoremap <Space>e mmT(i<Space><ESC>h%i<Space><ESC>`ml
+nnoremap E viw
 
 call togglebg#map("@tbg")
 " }}}
@@ -423,9 +422,9 @@ let g:neocomplcache_enable_smart_case          = 1
 let g:neocomplcache_snippets_dir = '~/.vim/snippets'
 inoremap <expr><C-g> neocomplcache#undo_completion()
 imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"inoremap <expr><CR>  neocomplcache#smart_close_popup()."\<CR>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><CR>      neocomplcache#smart_close_popup() . "<CR>" . "<Plug>DiscretionaryEnd"
+imap <silent><expr><S-TAB> pumvisible() ? "\<C-P>" : "\<S-TAB>"
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
@@ -515,12 +514,71 @@ let g:slimv_leader=','
 let g:slimv_repl_split = 4 "vertical split right
 " }}}
 
-" smartchr {{{
-autocmd FileType javascript inoremap <buffer> <expr> \  smartchr#one_of('function(', '\')
-" }}}
-
 " endwise.vim {{{
 let g:endwise_no_mappings=1
 " }}}
+
+" Dash {{{
+nmap ,d <Plug>DashSearch
+let g:dash_map = {
+        \ 'ruby'       : 'rails',
+        \ 'python'     : 'python2',
+        \ 'javascript' : 'backbone'
+        \ }
 " }}}
 
+" surround.vim {{{
+let g:surround_custom_mapping = {}
+let g:surround_custom_mapping._ = {
+      \ 'p':  "<pre> \r </pre>",
+      \ 'w':  "%w(\r)",
+      \ }
+let g:surround_custom_mapping.help = {
+      \ 'p':  "> \r <",
+      \ }
+let g:surround_custom_mapping.ruby = {
+      \ '-':  "<% \r %>",
+      \ '=':  "<%= \r %>",
+      \ '9':  "(\r)",
+      \ '5':  "%(\r)",
+      \ '%':  "%(\r)",
+      \ 'w':  "%w(\r)",
+      \ '#':  "#{\r}",
+      \ '3':  "#{\r}",
+      \ 'e':  "begin \r end",
+      \ 'E':  "<<EOS \r EOS",
+      \ 'i':  "if \1if\1 \r end",
+      \ 'u':  "unless \1unless\1 \r end",
+      \ 'c':  "class \1class\1 \r end",
+      \ 'm':  "module \1module\1 \r end",
+      \ 'd':  "def \1def\1\2args\r..*\r(&)\2 \r end",
+      \ 'p':  "\1method\1 do \2args\r..*\r|&| \2\r end",
+      \ 'P':  "\1method\1 {\2args\r..*\r|&|\2 \r }",
+      \ }
+let g:surround_custom_mapping.javascript = {
+      \ 'f':  "function(){ \r }"
+      \ }
+let g:surround_custom_mapping.lua = {
+      \ 'f':  "function(){ \r }"
+      \ }
+let g:surround_custom_mapping.python = {
+      \ 'p':  "print( \r)",
+      \ '[':  "[\r]",
+      \ }
+let g:surround_custom_mapping.vim= {
+      \'f':  "function! \r endfunction"
+      \ }
+"}}}
+
+" smartinput {{{
+" }}}
+
+" vim-easymotion {{{
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+let g:EasyMotion_leader_key="f"
+let g:EasyMotion_grouping=1
+hi EasyMotionTarget ctermbg=none ctermfg=red
+hi EasyMotionShade  ctermbg=none ctermfg=blue
+
+" }}}
+"}}}

@@ -27,6 +27,19 @@ alias ack="ack --nogroup"
 alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
 
+#extend antigen git plugin
+alias g="git"
+alias gs="git status"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gdvc="gdv --cached"
+alias gl="git log --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'"
+alias gsts="git stash save"
+alias gstl="git stash list"
+alias gstc="git stash clear"
+alias gstp="git stash pop"
+alias gready="git rebase -i @{u}"
+
 # global aliases
 alias -g L="|less"
 alias -g G="|grep"
