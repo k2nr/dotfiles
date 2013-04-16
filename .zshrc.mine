@@ -42,6 +42,8 @@ alias gready="git rebase -i @{u}"
 
 alias gbr="git-browse-remote"
 
+alias be="bundle exec"
+
 # global aliases
 alias -g L="|less"
 alias -g G="|grep"
