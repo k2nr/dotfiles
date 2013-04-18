@@ -65,6 +65,9 @@ path=(. $HOME/bin $HOME/.cabal/bin /usr/local/share/npm/bin /usr/local/sbin /usr
 # ignore case for completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats \

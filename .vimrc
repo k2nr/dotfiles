@@ -124,7 +124,7 @@ NeoBundleLazy 'JavaScript-syntax', {'autoload': {'filetypes': 'javascript'}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': 'javascript'}}
 
 NeoBundle 'gtags.vim'
-NeoBundle 'ack.vim'
+NeoBundle 'rking/ag.vim'
 NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['clojure', 'lisp']}}
 NeoBundleLazy 'https://bitbucket.org/kotarak/vimclojure', {
     \ 'rtp' : 'vim',
