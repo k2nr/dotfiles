@@ -90,28 +90,10 @@ NeoBundleLazy 'Shougo/neocomplcache', {'autoload': {'insert' : 1}}
 NeoBundleLazy 'Shougo/neosnippet', {'autoload' : {'insert' : 1}}
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tpope/vim-rails'
-NeoBundleLazy 'ujihisa/unite-rake', {'depends': 'Shougo/unite.vim'}
-NeoBundleLazy 'basyura/unite-rails', {'depends' : 'Shjkougo/unite.vim'}
-NeoBundleLazy 'taichouchou2/unite-rails_best_practices', {
-      \ 'depends' : 'Shougo/unite.vim',
-      \ 'build' : {
-      \    'mac': 'gem install rails_best_practices',
-      \    'unix': 'gem install rails_best_practices',
-      \   }
-      \ }
-NeoBundleLazy 'taichouchou2/unite-reek', {
-      \ 'build' : {
-      \    'mac': 'gem install reek',
-      \    'unix': 'gem install reek',
-      \ },
-      \ 'autoload': { 'filetypes': ['ruby', 'eruby', 'haml'] },
-      \ 'depends' : 'Shougo/unite.vim' }
-NeoBundleLazy 'skwp/vim-rspec', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
 NeoBundleLazy 'ruby-matchit', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
 NeoBundle 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
-"NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
@@ -133,6 +115,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-smartinput'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'wincent/Command-T'
 " }}}
 
 let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake'

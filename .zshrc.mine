@@ -101,6 +101,8 @@ export NDK="/usr/local/Cellar/android-ndk/r6b/"
 
 # rvm
 source $HOME/.rvm/scripts/rvm
+cd;cd - > /dev/null
 
 ## z
 . `brew --prefix`/etc/profile.d/z.sh
+

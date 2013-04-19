@@ -4,12 +4,12 @@
   name = Kazunori Kajihiro
   email = likerichie@gmail.com
 [core]
-  excludesfile = ~/work/.gitignore
+  excludesfile = ~/.gitignore_global
   editor = mvim -v
 [include]
   path = .gitconfig.local
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
 [pull]
   rebase = true
 [push]
