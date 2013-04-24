@@ -104,3 +104,6 @@ cd;cd - > /dev/null
 
 ## zaw.zsh
 source $HOME/lib/zaw/zaw.zsh
+
+## tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
