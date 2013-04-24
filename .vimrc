@@ -97,7 +97,6 @@ NeoBundle 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
-NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kana/vim-fakeclip'
 NeoBundle 'scrooloose/syntastic'
 NeoBundleLazy 'mattn/zencoding-vim', {'autoload': {'filetypes': ['html', 'erb', 'haml']}}
@@ -105,17 +104,18 @@ NeoBundle 'IndentAnything'
 NeoBundleLazy 'JavaScript-syntax', {'autoload': {'filetypes': 'javascript'}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': 'javascript'}}
 
-NeoBundle 'gtags.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['clojure', 'lisp']}}
 NeoBundleLazy 'https://bitbucket.org/kotarak/vimclojure', {
     \ 'rtp' : 'vim',
     \ 'autoload' : {'filetypes': 'clojure'}}
-NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-smartinput'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'wincent/Command-T'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+NeoBundle 'Rip-Rip/clang_complete'
 " }}}
 
 let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake'
@@ -253,6 +253,7 @@ nnoremap <C-W><C-W> <C-w>c
 
 nnoremap < <C-W>4<
 nnoremap > <C-W>4>
+nnoremap <Space>a :Ag<Space>
 
 " same action as 'o' but keep normal mode
 nnoremap <C-o> :<C-u>call append(expand('.'), '')<Cr>j
@@ -417,6 +418,20 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 set completeopt-=preview
+if !exists('g:neocomplcache_force_omni_patterns')
+  let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache_force_omni_patterns.c =
+  \ '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.cpp =
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objc =
+  \ '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.objcpp =
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
 " }}}
 
 " Unite.vim {{{
@@ -486,7 +501,8 @@ let g:slime_target = "tmux"
 nnoremap <silent>t  :<C-u>CommandT<Return>
 nnoremap <silent>T  :<C-u>CommandTTag<Return>
 let g:CommandTCancelMap=['<ESC>','<C-c>']
-let g:CommandTMaxFiles=10000
+let g:CommandTMaxFiles=2000
+let g:CommandTMatchWindowReverse=1
 " }}}
 
 " slimv.vim {{{

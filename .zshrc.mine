@@ -4,10 +4,6 @@ source ~/antigen/antigen.zsh
 # Bundles from the default repo
 antigen-bundle dircycle
 antigen-bundle git
-antigen-bundle git-flow
-antigen-bundle lein
-antigen-bundle npm
-antigen-bundle nyan
 antigen-bundle osx
 
 ### aliases
@@ -106,3 +102,5 @@ cd;cd - > /dev/null
 ## z
 . `brew --prefix`/etc/profile.d/z.sh
 
+## zaw.zsh
+source $HOME/lib/zaw/zaw.zsh
