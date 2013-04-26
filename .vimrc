@@ -118,15 +118,6 @@ NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 NeoBundle 'Rip-Rip/clang_complete'
 " }}}
 
-let s:bundle_rails = 'unite-rails unite-rails_best_practices unite-rake'
-function! s:bundleLoadDepends(bundle_names) "{{{
-  execute 'NeoBundleSource '.a:bundle_names
-  au! RailsLazyPlugins
-endfunction"}}}
-aug RailsLazyPlugins
-  au User Rails call <SID>bundleLoadDepends(s:bundle_rails)
-aug END
-
 filetype on
 filetype plugin on
 filetype plugin indent on

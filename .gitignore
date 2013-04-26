@@ -1,15 +1,2 @@
-/*
-/.*
-
-!/.vimrc
-!/.gvimrc
-!/.vim
-!/.zshrc
-!/.zshrc.mine
-!/.tmux.conf
-!/.emacs.d
-!/.gitconfig
-!/.gitignore
-
-*~
-
+/.gitconfig.local
+/.zsh_history
