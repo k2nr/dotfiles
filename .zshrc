@@ -99,6 +99,7 @@ SAVEHIST=500000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 setopt inc_append_history
+setopt extended_history
 
 
 ## Completion configuration
@@ -129,7 +130,7 @@ alias where="command -v"
 
 case "${OSTYPE}" in
 freebsd*|darwin*)
-    alias ls="ls -G"
+    alias ls="ls -CFG"
     ;;
 linux*)
     alias ls="ls --color"

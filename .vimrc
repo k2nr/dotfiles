@@ -1,4 +1,4 @@
-"---------------------------------------------------------------------------
+"---------------------------------------------------------------------------"{{{
 " Encoding {{{
 "set enc=utf-8
 "set fenc=utf-8
@@ -76,8 +76,9 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
-au BufRead,BufNewFile,BufReadPre *.clj    set filetype=clojure
+au BufRead,BufNewFile,BufReadPre *.coffee setlocal filetype=coffee
+au BufRead,BufNewFile,BufReadPre *.clj    setlocal filetype=clojure
+au BufRead,BufNewFile,BufReadPre *.cljs   setlocal filetype=clojure
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -85,40 +86,41 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundleLazy 'taichouchou2/vim-endwise.git', {'autoload': {'insert' : 1}}
-NeoBundleLazy 'Shougo/neocomplcache', {'autoload': {'insert' : 1}}
+NeoBundle 'tpope/vim-endwise.git', {'autoload': {'insert' : 1}}
+NeoBundleLazy 'Shougo/neocomplete.vim', {'autoload': {'insert' : 1}}
 NeoBundleLazy 'Shougo/neosnippet', {'autoload' : {'insert' : 1}}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'tpope/vim-rails'
+NeoBundle     'Shougo/unite.vim'
+NeoBundle     'Shougo/vimshell.vim'
+NeoBundle     'tpope/vim-rails'
 NeoBundleLazy 'ruby-matchit', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
-NeoBundle 'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle     'tomtom/tcomment_vim'
+NeoBundle     'h1mesuke/unite-outline', {'depends': 'Shougo/unite.vim'}
+NeoBundle     'tsukkee/unite-tag', {'depends': 'Shougo/unite.vim'}
+NeoBundle     'tpope/vim-fugitive'
+NeoBundle     'altercation/vim-colors-solarized'
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
-NeoBundle 'kana/vim-fakeclip'
-NeoBundle 'scrooloose/syntastic'
+NeoBundle     'kana/vim-fakeclip'
+NeoBundle     'scrooloose/syntastic'
 NeoBundleLazy 'mattn/zencoding-vim', {'autoload': {'filetypes': ['html', 'erb', 'haml']}}
-NeoBundle 'IndentAnything'
+NeoBundle     'IndentAnything'
 NeoBundleLazy 'JavaScript-syntax', {'autoload': {'filetypes': 'javascript'}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload': {'filetypes': 'javascript'}}
-
-NeoBundle 'rking/ag.vim'
-NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['clojure', 'lisp']}}
-NeoBundleLazy 'https://bitbucket.org/kotarak/vimclojure', {
-    \ 'rtp' : 'vim',
-    \ 'autoload' : {'filetypes': 'clojure'}}
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'kana/vim-smartinput'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'wincent/Command-T'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle     'mileszs/ack.vim'
+NeoBundleLazy 'slimv.vim', {'autoload': {'filetypes': ['scheme', 'lisp']}}
+NeoBundleLazy 'tpope/vim-fireplace',     {'autoload': {'filetypes': ['clojure']}}
+NeoBundleLazy 'tpope/vim-classpath',     {'autoload': {'filetypes': ['clojure']}}
+NeoBundleLazy 'guns/vim-clojure-static', {'autoload': {'filetypes': ['clojure']}}
+NeoBundleLazy 'vim-scripts/paredit.vim', {'autoload': {'filetypes': ['clojure']}}
+NeoBundle     'tpope/vim-surround'
+"NeoBundle     'kana/vim-smartinput'
+NeoBundle     'wincent/Command-T'
+NeoBundle     'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+NeoBundle     'AndrewRadev/switch.vim'
+NeoBundle     'vim-scripts/Auto-Pairs'
 " }}}
 
 filetype on
+
 filetype plugin on
 filetype plugin indent on
 syntax on
@@ -171,7 +173,8 @@ set number
 set ruler
 " show TAB/CRLF
 set list
-set listchars=tab:>-,extends:<,trail:-,eol:<
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+"set listchars=tab:>-,extends:<,trail:-,eol:<
 
 set wrap
 " always display command line
@@ -192,6 +195,12 @@ set vb t_vb=
 " theme (solarized setting)
 set background=dark
 colorscheme solarized
+" }}}
+
+"---------------------------------------------------------------------------
+" Windows {{{
+set splitbelow
+set splitright
 " }}}
 
 "---------------------------------------------------------------------------
@@ -244,7 +253,7 @@ nnoremap <C-W><C-W> <C-w>c
 
 nnoremap < <C-W>4<
 nnoremap > <C-W>4>
-nnoremap <Space>a :Ag<Space>
+nnoremap <Space>a :Ack<Space>
 
 " same action as 'o' but keep normal mode
 nnoremap <C-o> :<C-u>call append(expand('.'), '')<Cr>j
@@ -319,12 +328,6 @@ nnoremap <Leader>gf :<C-u>Gtags -P
 nnoremap <Leader>gg :<C-u>Gtags -g 
 " }}}
 
-" TagBar {{{
-nnoremap <Space>t :<C-u>TagbarToggle<cr>
-let g:tagbar_sort      = 0
-let g:tagbar_foldlevel = 2
-" }}}
-
 " coffee-script-vim {{{
 au BufNewFile,BufReadPost *.coffee setl expandtab
 " }}}
@@ -342,13 +345,6 @@ augroup Binary
 augroup END
 " }}}
 
-" Haskell Mode {{{
-
-" use ghc functionality for haskell files
-au Bufenter *.hs compiler ghc
-let g:haddock_browser = "open"
-" }}}
-
 " Fugitive {{{
 nnoremap <Space>gd :Gdiff<CR>
 nnoremap <Space>gs :Gstatus<CR>
@@ -362,67 +358,57 @@ nnoremap <Space>gb :Gblame<CR>
 nnoremap <Space>gD :diffoff<CR><C-w>l<C-w>o
 " }}}
 
-" QFixGrep {{{
-if has('win32')
-  let Grep_Path       = 'C:\tools\gnu\bin\grep.exe'
-  let Fgrep_Path      = 'C:\tools\gnu\bin\fgrep.exe'
-  let Egrep_Path      = 'C:\tools\gnu\bin\egrep.exe'
-  let Grep_Find_Path  = 'C:\tools\gnu\bin\find.exe'
-  let Grep_Xargs_Path = 'C:\tools\gnu\bin\xargs.exe'
-endif
+" neocomplete {{{
+let g:neocomplete#enable_at_startup = 1
+let s:hooks = neobundle#get_hooks("neocomplete.vim")
+function! s:hooks.on_source(bundle)
+  let g:acp_enableAtStartup = 0
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 2
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" excluded files
-let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$'
-" pick the word on the cursor (Yes/No)
-let MyGrep_DefaultSearchWord   = 1"
-" use filetype highlighting for preview
-let QFix_PreviewFtypeHighlight = 1
-" grep command to use
-let mygrepprg            = 'grep'
-" encoding for grep command
-let MyGrep_ShellEncoding = 'utf8'
-" additional options
-let MyGrepcmd_useropt    = 'nH'
-" first key to launch Grep
-let MyGrep_Key  = 'g'
-" second key to launch Grep
-let MyGrep_KeyB = ','
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  inoremap <expr><C-g> neocomplete#undo_completion()
+  inoremap <expr><C-l> neocomplete#complete_common_string()
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplete#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplete#close_popup()
+  inoremap <expr><C-e>  neocomplete#cancel_popup()
+endfunction
 " }}}
 
-" neocomplcache {{{
-let g:neocomplcache_enable_at_startup          = 1
-"let g:neocomplcache_enable_auto_select         = 1
-let g:neocomplcache_enable_smart_case          = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_snippets_dir = '~/.vim/snippets'
-inoremap <expr><C-g> neocomplcache#undo_completion()
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><CR>      neocomplcache#smart_close_popup() . "<CR>" . "<Plug>DiscretionaryEnd"
-imap <silent><expr><S-TAB> pumvisible() ? "\<C-P>" : "\<S-TAB>"
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" neosnippet {{{
+"let s:hooks = neobundle#get_hooks("neosnippet.vim")
+"function! s:hooks.on_source(bundle)
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#snippets_directory = '~/.vim/vim-snippets/snippets'
 
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-set completeopt-=preview
-if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
-endif
-let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache_force_omni_patterns.c =
-  \ '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp =
-  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objc =
-  \ '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.objcpp =
-  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  nmap A $
+
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
+"endfunction
 " }}}
 
 " Unite.vim {{{
@@ -446,13 +432,13 @@ function! s:unite_my_settings()
   imap <buffer> <C-w>   <Plug>(unite_delete_backward_path)
 
   " shortcuts
-  call unite#set_substitute_pattern('file', '\$\w\+', '\=eval(submatch(0))', 200)
-  call unite#set_substitute_pattern('file', '^@@', '\=fnamemodify(expand("#"), ":p:h")."/"', 2)
-  call unite#set_substitute_pattern('file', '^@', '\=getcwd()."/*"', 1)
-  call unite#set_substitute_pattern('file', '^;r', '\=$VIMRUNTIME."/"')
-  call unite#set_substitute_pattern('file', '^\~', escape($HOME, '\'), -2)
-  call unite#set_substitute_pattern('file', '\\\@<! ', '\\ ', -20)
-  call unite#set_substitute_pattern('file', '\\ \@!', '/', -30)
+  call unite#custom#substitute('file', '\$\w\+', '\=eval(submatch(0))', 200)
+  call unite#custom#substitute('file', '^@@', '\=fnamemodify(expand("#"), ":p:h")."/"', 2)
+  call unite#custom#substitute('file', '^@', '\=getcwd()."/*"', 1)
+  call unite#custom#substitute('file', '^;r', '\=$VIMRUNTIME."/"')
+  call unite#custom#substitute('file', '^\~', escape($HOME, '\'), -2)
+  call unite#custom#substitute('file', '\\\@<! ', '\\ ', -20)
+  call unite#custom#substitute('file', '\\ \@!', '/', -30)
 endfunction
 
 let g:unite_source_file_mru_limit = 300
@@ -465,56 +451,31 @@ let g:unite_source_history_yank_enable=1
 let g:unite_source_history_yank_limit=1000
 " }}}
 
-" vim-quickrun {{{
-let g:quickrun_config = { '*': { 'split': '%{winwidth(0) * 2 < winheight(0) * 5 ? "rightbelow" : "vertical rightbelow"}' } }
-" }}}
-
-" VimClojure {{{
-
-let vimclojure#HighlightBuiltins=1
-"let vimclojure#DynamicHighlighting=1
-let vimclojure#ParenRainbow=1
-let vimclojure#FuzzyIndent=1
-let vimclojure#WantNailgun = 0
-let vimclojure#SetupKeyMap = 0
-"let vimclojure#NailgunClient = "ng"
-"let vimclojure#SplitSize = 10
-"let vimclojure#NailgunServer = "127.0.0.1"
-"let vimclojure#NailgunPort = "2113"
-
-" }}}
-
-" vim-slime {{{
-let g:slime_target = "tmux"
-" }}}
-
 " Command-T {{{
 nnoremap <silent>t  :<C-u>CommandT<Return>
 nnoremap <silent>T  :<C-u>CommandTTag<Return>
 let g:CommandTCancelMap=['<ESC>','<C-c>']
-let g:CommandTMaxFiles=2000
+let g:CommandTMaxFiles=10000
 let g:CommandTMatchWindowReverse=1
 " }}}
 
 " slimv.vim {{{
-let g:slimv_swank_cmd = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"sbcl --load ~/.vim/bundle/slimv.vim/slime/start-swank.lisp\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
-let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
+let s:hooks = neobundle#get_hooks("slimv.vim")
+function! s:hooks.on_source(bundle)
+  let g:slimv_swank_cmd = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"sbcl --load ~/.vim/bundle/slimv.vim/slime/start-swank.lisp\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
+  let g:slimv_leader=','
+  let g:slimv_repl_split = 4 "vertical split right
+  let g:paredit_mode = 1
+endfunction
 
-let g:slimv_leader=','
-let g:slimv_repl_split = 4 "vertical split right
+au BufRead *.scm call s:hook_buf_read_scm()
+function! s:hook_buf_read_scm()
+  nmap <buffer> <silent> cc mal[[v%:VimShellSendString<cr>`a
+endfunction
 " }}}
 
 " endwise.vim {{{
 let g:endwise_no_mappings=1
-" }}}
-
-" Dash {{{
-nmap ,d <Plug>DashSearch
-let g:dash_map = {
-        \ 'ruby'       : 'rails',
-        \ 'python'     : 'python2',
-        \ 'javascript' : 'backbone'
-        \ }
 " }}}
 
 " surround.vim {{{
@@ -563,12 +524,172 @@ let g:surround_custom_mapping.vim= {
 " smartinput {{{
 " }}}
 
-" vim-easymotion {{{
-let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
-let g:EasyMotion_leader_key="f"
-let g:EasyMotion_grouping=1
-hi EasyMotionTarget ctermbg=none ctermfg=red
-hi EasyMotionShade  ctermbg=none ctermfg=blue
-
+" acejump {{{
+" 
+"" https://gist.github.com/gfixler/3167301
+" ACEJUMP
+" Based on emacs' AceJump feature (http://www.emacswiki.org/emacs/AceJump).
+" AceJump based on these Vim plugins:
+"     EasyMotion (http://www.vim.org/scripts/script.php?script_id=3526)
+"     PreciseJump (http://www.vim.org/scripts/script.php?script_id=3437)
+" Type AJ mapping, followed by a lower or uppercase letter.
+" All words on the screen starting with that letter will have
+" their first letters replaced with a sequential character.
+" Type this character to jump to that word.
+ 
+highlight AceJumpGrey ctermfg=darkgrey guifg=lightgrey
+highlight AceJumpRed ctermfg=darkred guibg=NONE guifg=black gui=NONE
+ 
+function! AceJump ()
+    " store some current values for restoring later
+    let origPos = getpos('.')
+    let origSearch = @/
+ 
+    " prompt for and capture user's search character
+    echo "AceJump to words starting with letter: "
+    let letter = nr2char(getchar())
+    " return if invalid key, mouse press, etc.
+    if len(matchstr(letter, '\k')) != 1
+        echo ""
+        redraw
+        return
+    endif
+    " redraws here and there to get past 'more' prompts
+    redraw
+    " row/col positions of words beginning with user's chosen letter
+    let pos = []
+ 
+    " monotone all text in visible part of window (dark grey by default)
+    call matchadd('AceJumpGrey', '\%'.line('w0').'l\_.*\%'.line('w$').'l', 50)
+ 
+    " loop over every line on the screen (just the visible lines)
+    for row in range(line('w0'), line('w$'))
+        " find all columns on this line where a word begins with our letter
+        let col = 0
+    let matchCol = match(' '.getline(row), '.\<'.letter, col)
+    while matchCol != -1
+        " store any matching row/col positions
+        call add(pos, [row, matchCol])
+        let col = matchCol + 1
+        let matchCol = match(' '.getline(row), '.\<'.letter, col)
+    endwhile
+    endfor
+ 
+    if len(pos) > 1
+        " jump characters used to mark found words (user-editable)
+        let chars = 'hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+ 
+        if len(pos) > len(chars)
+            " TODO add groupings here if more pos matches than jump characters
+        endif
+ 
+        " trim found positions list; cannot be longer than jump markers list
+        let pos = pos[:len(chars)]
+ 
+        " jumps list to pair jump characters with found word positions
+        let jumps = {}
+        " change each found word's first letter to a jump character
+        for [r,c] in pos
+            " stop marking words if there are no more jump characters
+            if len(chars) == 0
+                break
+            endif
+            " 'pop' the next jump character from the list
+            let char = chars[0]
+            let chars = chars[1:]
+            " move cursor to the next found word
+            call setpos('.', [0,r,c+1,0])
+            " create jump character key to hold associated found word position
+            let jumps[char] = [0,r,c+1,0]
+            " replace first character in word with current jump character
+            exe 'norm r'.char
+            " change syntax on the jump character to make it highly visible
+            call matchadd('AceJumpRed', '\%'.r.'l\%'.(c+1).'c', 50)
+        endfor
+        call setpos('.', origPos)
+ 
+        " this redraw is critical to syntax highlighting
+        redraw
+ 
+        " prompt user again for the jump character to jump to
+        echo 'AceJump to words starting with "'.letter.'" '
+        let jumpChar = nr2char(getchar())
+ 
+        " restore previous search register value
+        let @/ = origSearch
+ 
+        " undo all the jump character letter replacement
+        norm u
+ 
+        " if the user input a proper jump character, jump to it
+        if has_key(jumps, jumpChar)
+            call setpos('.', jumps[jumpChar])
+        else
+            " if it didn't work out, restore original cursor position
+            call setpos('.', origPos)
+        endif
+    elseif len(pos) == 1
+        " if we only found one match, just jump to it without prompting
+        " set position to the one match
+        let [r,c] = pos[0]
+        call setpos('.', [0,r,c+1,0])
+    elseif len(pos) == 0
+        " no matches; set position back to start
+        call setpos('.', origPos)
+    endif
+    " turn off all search highlighting
+    call clearmatches()
+    redraw
+    " clean up the status line and return
+    echo ""
+    return
+endfunction
+ 
+nnoremap f :call AceJump()<CR>
 " }}}
-"}}}
+
+" ack.vim {{{
+let g:ackprg = 'ag --nogroup --nocolor --column -U'
+" }}}
+
+" switch.vim {{{
+nnoremap - :Switch<cr>
+let b:switch_custom_definitions = [
+      \   ["describe", "context", "specific", "example"],
+      \   ['before', 'after'],
+      \   ['be_true', 'be_false'],
+      \   ['get', 'post', 'put', 'delete'],
+      \   ['==', 'eql', 'equal'],
+      \   { '\.should_not': '\.should' },
+      \   ['\.to_not', '\.to'],
+      \   { '\([^. ]\+\)\.should\(_not\|\)': 'expect(\1)\.to\2' },
+      \   { 'expect(\([^. ]\+\))\.to\(_not\|\)': '\1.should\2' },
+      \ ]
+" }}}
+
+" vim-endwise {{{
+let g:endwise_no_mappings=1
+" }}}
+
+" vimshell {{{
+nmap ,ss :VimShellSendString<cr>
+vmap ,ss :VimShellSendString<cr>
+nmap ,si :VimShellInteractive<cr>
+" }}}
+
+" fireplace {{{
+let s:hooks = neobundle#get_hooks("vim-fireplace")
+function! s:hooks.on_source(bundle)
+  let g:paredit_mode = 1
+endfunction
+
+au BufRead *.clj  call s:hook_buf_read_clj()
+au BufRead *.cljs call s:hook_buf_read_clj()
+function! s:hook_buf_read_clj()
+  nnoremap <buffer> <silent> cr :Require<CR>
+  nnoremap <buffer> <silent> cc :Eval<CR>
+  vnoremap <buffer> <silent> cc :Eval<CR>
+endfunction
+" }}}
+
+"}}}"}}}

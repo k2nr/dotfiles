@@ -1,3 +1,6 @@
+alias git="noglob hub"
+alias rake="noglob rake"
+
 ## antigen
 source ~/antigen/antigen.zsh
 
@@ -6,43 +9,99 @@ antigen-bundle dircycle
 antigen-bundle git
 antigen-bundle osx
 
+chpwd() {
+    ls_abbrev
+}
+ls_abbrev() {
+    # -a : Do not ignore entries starting with ..
+    # -C : Force multi-column output.
+    # -F : Append indicator (one of */=>@|) to entries.
+    local cmd_ls='ls'
+    local -a opt_ls
+    opt_ls=('-aCF' '--color=always')
+    case "${OSTYPE}" in
+        freebsd*|darwin*)
+            if type gls > /dev/null 2>&1; then
+                cmd_ls='gls'
+            else
+                # -G : Enable colorized output.
+                opt_ls=('-aCFG')
+            fi
+            ;;
+    esac
+ 
+    local ls_result
+    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
+ 
+    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
+ 
+    if [ $ls_lines -gt 10 ]; then
+        echo "$ls_result" | head -n 5
+        echo '...'
+        echo "$ls_result" | tail -n 5
+        echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
+    else
+        echo "$ls_result"
+    fi
+}
+
 ### aliases
 alias lla="ls -la"
 alias emacs="emacsclient -n"
 alias e="emacs"
 alias o="open"
 alias rmr="rm -rf"
-alias vi="mvim -v"
+alias vim="mvim -v"
+alias vi="vim"
+alias v="vim"
 alias tmux="TERM=screen-256color-bce tmux"
-alias t="tmux"
-#alias vi="vim"
 alias viconf="vi ~/.vimrc"
 alias zshconf="vi ~/.zshrc.mine"
 alias less="less -N -M"
 alias ack="ack --nogroup"
+alias a="ack"
 alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
+alias vag="vagrant"
+alias ff="ffind"
 
-alias git="noglob git"
-alias rake="noglob rake"
-
-#extend antigen git plugin
+# extend antigen git plugin
 alias g="git"
 alias gs="git status"
 alias gd="git diff"
+alias gf="git fetch"
+alias gm="git merge"
+alias gr="git rebase"
+alias gp="git push -u"
+alias gpl="git pull"
 alias gdc="git diff --cached"
 alias gdvc="gdv --cached"
 alias gl="git log --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'"
-alias gsts="git stash save"
+alias gst="git stash save"
 alias gstl="git stash list"
 alias gstc="git stash clear"
 alias gstp="git stash pop"
 alias gready="git rebase -i @{u}"
+alias gn="git now"
+alias gnc="git now --compact"
+alias gnd="git now --diff"
+alias gnr="git now --rebase"
+alias gnf="git now --fixup"
 
-alias gbr="git-browse-remote"
+## hub aliases
+
+# merge pull-request with pull-request number
+# USAGE: gmpr 1
+gmpr() {
+  git merge `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
+}
+
+alias gpr="git pull-request"
+alias gbr="git browse"
 
 alias be="bundle exec"
-alias tigs="tig status"
+alias t="tig"
+alias ts="tig status"
 
 # global aliases
 alias -g L="|less"
@@ -60,7 +119,7 @@ export EDITOR="vi"
 # to use japanese on swank
 export JAVA_OPTS="-Dswank.encoding=utf-8-unix"
 
-path=(. $HOME/bin $HOME/.cabal/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools )
+path=(. $HOME/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin $HOME/bin/depot_tools )
 
 autoload -U select-word-style
 select-word-style bash

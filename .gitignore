@@ -1,2 +1,4 @@
 /.gitconfig.local
 /.zsh_history
+/.ssh
+/.tmuxinator
