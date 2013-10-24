@@ -1,49 +1,8 @@
+# zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 alias git="noglob hub"
 alias rake="noglob rake"
-
-## antigen
-source ~/antigen/antigen.zsh
-
-# Bundles from the default repo
-antigen-bundle dircycle
-antigen-bundle git
-antigen-bundle osx
-
-chpwd() {
-    ls_abbrev
-}
-ls_abbrev() {
-    # -a : Do not ignore entries starting with ..
-    # -C : Force multi-column output.
-    # -F : Append indicator (one of */=>@|) to entries.
-    local cmd_ls='ls'
-    local -a opt_ls
-    opt_ls=('-aCF' '--color=always')
-    case "${OSTYPE}" in
-        freebsd*|darwin*)
-            if type gls > /dev/null 2>&1; then
-                cmd_ls='gls'
-            else
-                # -G : Enable colorized output.
-                opt_ls=('-aCFG')
-            fi
-            ;;
-    esac
- 
-    local ls_result
-    ls_result=$(CLICOLOR_FORCE=1 COLUMNS=$COLUMNS command $cmd_ls ${opt_ls[@]} | sed $'/^\e\[[0-9;]*m$/d')
- 
-    local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
- 
-    if [ $ls_lines -gt 10 ]; then
-        echo "$ls_result" | head -n 5
-        echo '...'
-        echo "$ls_result" | tail -n 5
-        echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
-    else
-        echo "$ls_result"
-    fi
-}
 
 ### aliases
 alias lla="ls -la"
@@ -64,14 +23,18 @@ alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
-
-# extend antigen git plugin
+#
+## git aliases
 alias g="git"
+alias gb="git branch"
 alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch"
 alias gm="git merge"
 alias gr="git rebase"
+alias git-current-branch="git symbolic-ref --short HEAD | tr -d '\r\n'"
+alias gc="git commit"
+alias gcb="git-current-branch"
 alias gp="git push -u"
 alias gpl="git pull"
 alias gdc="git diff --cached"
@@ -82,11 +45,17 @@ alias gstl="git stash list"
 alias gstc="git stash clear"
 alias gstp="git stash pop"
 alias gready="git rebase -i @{u}"
+alias gsync="gst && gpl && gstp"
 alias gn="git now"
 alias gnc="git now --compact"
 alias gnd="git now --diff"
 alias gnr="git now --rebase"
 alias gnf="git now --fixup"
+
+alias gco="git checkout"
+alias gcm="git checkout master"
+alias grhh="git reset --hard HEAD"
+compdef _git gco=_git-checkout
 
 ## hub aliases
 
@@ -96,12 +65,18 @@ gmpr() {
   git merge `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
 }
 
+gbrp() {
+  open `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
+}
+
 alias gpr="git pull-request"
 alias gbr="git browse"
 
 alias be="bundle exec"
 alias t="tig"
 alias ts="tig status"
+
+alias r="rake"
 
 # global aliases
 alias -g L="|less"
@@ -125,10 +100,7 @@ autoload -U select-word-style
 select-word-style bash
 
 # ignore case for completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-# zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # prompt
 autoload -Uz vcs_info
@@ -162,7 +134,8 @@ export NDK="/usr/local/Cellar/android-ndk/r6b/"
 #eval "$(rbenv init -)"
 
 # rvm
-source $HOME/.rvm/scripts/rvm
+PATH="$HOME"/.rvm/bin:"$PATH" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 cd;cd - > /dev/null
 
 ## z

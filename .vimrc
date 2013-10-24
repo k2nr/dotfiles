@@ -1,4 +1,3 @@
-"---------------------------------------------------------------------------"{{{
 " Encoding {{{
 "set enc=utf-8
 "set fenc=utf-8
@@ -117,6 +116,7 @@ NeoBundle     'wincent/Command-T'
 NeoBundle     'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 NeoBundle     'AndrewRadev/switch.vim'
 NeoBundle     'vim-scripts/Auto-Pairs'
+NeoBundle     'airblade/vim-gitgutter'
 " }}}
 
 filetype on
@@ -124,7 +124,6 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 syntax on
-"}}}
 
 "---------------------------------------------------------------------------
 " Search {{{
@@ -166,6 +165,20 @@ set matchpairs=(:),{:},[:]
 
 :let java_highlight_functions=1
 " }}}
+
+"" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "---------------------------------------------------------------------------
 " Visual {{{
@@ -303,7 +316,7 @@ call togglebg#map("@tbg")
 " omnifunc {{{
 
 " Enable omni completion.
-"autocmd FileType ada setlocal omnifunc=adacomplete#Complete
+autocmd FileType ada setlocal omnifunc=adacomplete#Complete
 autocmd FileType c setlocal omnifunc=ccomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -321,11 +334,11 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "---------------------------------------------------------------------------
 
 " GNU GLOBAL (gtags.vim) {{{
-nnoremap <Leader>gd :<C-u>Gtags 
+nnoremap <Leader>gd :<C-u>Gtags
 nnoremap <Leader>gc :<C-u>GtagsCursor<CR>
-nnoremap <Leader>gr :<C-u>Gtags -r 
-nnoremap <Leader>gf :<C-u>Gtags -P 
-nnoremap <Leader>gg :<C-u>Gtags -g 
+nnoremap <Leader>gr :<C-u>Gtags -r
+nnoremap <Leader>gf :<C-u>Gtags -P
+nnoremap <Leader>gg :<C-u>Gtags -g
 " }}}
 
 " coffee-script-vim {{{
@@ -364,8 +377,10 @@ let s:hooks = neobundle#get_hooks("neocomplete.vim")
 function! s:hooks.on_source(bundle)
   let g:acp_enableAtStartup = 0
   let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 2
+  let g:neocomplete#enable_fuzzy_completion = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplete#force_overwrite_completefunc = 1
 
   " Define dictionary.
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -388,10 +403,10 @@ function! s:hooks.on_source(bundle)
     " For no inserting <CR> key.
     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
   endfunction
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-y>  neocomplete#close_popup()
-  inoremap <expr><C-e>  neocomplete#cancel_popup()
+  inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
+  inoremap <expr><BS>  neocomplete#smart_close_popup() . "\<C-h>"
+  inoremap <expr><C-y> neocomplete#close_popup()
+  inoremap <expr><C-e> neocomplete#cancel_popup()
 endfunction
 " }}}
 
@@ -422,6 +437,7 @@ nnoremap <silent>;l :<C-u>Unite line<CR>
 nnoremap <silent>;t :<C-u>UniteWithCursorWord -buffer-name=tag tag<CR>
 nnoremap <silent>;; :<C-u>Unite file_rec/async<CR>
 nnoremap <silent>;y :<C-u>Unite history/yank<CR>
+nnoremap <silent>;s :<C-u>Unite snippet<CR>
 
 " Overwrite settings.
 au FileType unite call s:unite_my_settings()
@@ -525,7 +541,7 @@ let g:surround_custom_mapping.vim= {
 " }}}
 
 " acejump {{{
-" 
+"
 "" https://gist.github.com/gfixler/3167301
 " ACEJUMP
 " Based on emacs' AceJump feature (http://www.emacswiki.org/emacs/AceJump).
@@ -536,15 +552,15 @@ let g:surround_custom_mapping.vim= {
 " All words on the screen starting with that letter will have
 " their first letters replaced with a sequential character.
 " Type this character to jump to that word.
- 
+
 highlight AceJumpGrey ctermfg=darkgrey guifg=lightgrey
 highlight AceJumpRed ctermfg=darkred guibg=NONE guifg=black gui=NONE
- 
+
 function! AceJump ()
     " store some current values for restoring later
     let origPos = getpos('.')
     let origSearch = @/
- 
+
     " prompt for and capture user's search character
     echo "AceJump to words starting with letter: "
     let letter = nr2char(getchar())
@@ -558,10 +574,10 @@ function! AceJump ()
     redraw
     " row/col positions of words beginning with user's chosen letter
     let pos = []
- 
+
     " monotone all text in visible part of window (dark grey by default)
     call matchadd('AceJumpGrey', '\%'.line('w0').'l\_.*\%'.line('w$').'l', 50)
- 
+
     " loop over every line on the screen (just the visible lines)
     for row in range(line('w0'), line('w$'))
         " find all columns on this line where a word begins with our letter
@@ -574,18 +590,18 @@ function! AceJump ()
         let matchCol = match(' '.getline(row), '.\<'.letter, col)
     endwhile
     endfor
- 
+
     if len(pos) > 1
         " jump characters used to mark found words (user-editable)
         let chars = 'hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
- 
+
         if len(pos) > len(chars)
             " TODO add groupings here if more pos matches than jump characters
         endif
- 
+
         " trim found positions list; cannot be longer than jump markers list
         let pos = pos[:len(chars)]
- 
+
         " jumps list to pair jump characters with found word positions
         let jumps = {}
         " change each found word's first letter to a jump character
@@ -607,20 +623,20 @@ function! AceJump ()
             call matchadd('AceJumpRed', '\%'.r.'l\%'.(c+1).'c', 50)
         endfor
         call setpos('.', origPos)
- 
+
         " this redraw is critical to syntax highlighting
         redraw
- 
+
         " prompt user again for the jump character to jump to
         echo 'AceJump to words starting with "'.letter.'" '
         let jumpChar = nr2char(getchar())
- 
+
         " restore previous search register value
         let @/ = origSearch
- 
+
         " undo all the jump character letter replacement
         norm u
- 
+
         " if the user input a proper jump character, jump to it
         if has_key(jumps, jumpChar)
             call setpos('.', jumps[jumpChar])
@@ -644,7 +660,7 @@ function! AceJump ()
     echo ""
     return
 endfunction
- 
+
 nnoremap f :call AceJump()<CR>
 " }}}
 
