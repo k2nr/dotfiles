@@ -36,13 +36,13 @@
                               'my-isearch-yank-word-or-char-from-beginning
                               isearch-mode-map)))
 
-(global-set-key "\C-a" 'beginning-of-indented-line)
-(global-set-key "\M-g" 'goto-line)
-(global-set-key "\C-h" 'delete-backward-char)
+(global-set-key (kbd "C-a") 'beginning-of-indented-line)
+(global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "H-<") 'beginning-of-buffer)
 (global-set-key (kbd "H->") 'end-of-buffer)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key "\C-t" 'other-window)
+(global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 (global-set-key (kbd "C-=") 'indent-region)
 (global-set-key (kbd "C-o") 'new-line-below)
@@ -54,10 +54,10 @@
 (global-set-key (kbd "s-d") 'duplicate-current-line-or-region)
 (global-set-key (kbd "C-, o") 'open-with-buffer-file)
 (global-set-key (kbd "C-, l") 'toggle-truncate-lines)
-(global-set-key (kbd "C-, f") 'ns-toggle-fullscreen)
 (global-set-key (kbd "C-, d") 'dired-at-point)
-(global-set-key (kbd "C-, t") 'twit)
 (global-set-key (kbd "C-, g") 'projectile-grep)
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 ;; multi-term
 (global-set-key (kbd "C-, z") 'multi-term)
 
@@ -72,7 +72,6 @@
 (global-set-key (kbd "C-; C-i") 'helm-imenu)
 (global-set-key (kbd "C-; C-s") 'helm-c-yas-complete)
 (global-set-key (kbd "C-; C-y") 'helm-show-kill-ring)
-(define-key helm-map (kbd "C-w") 'backward-kill-word)
 
 ;; expand-region
 (global-set-key (kbd "C-'") 'er/expand-region)
@@ -87,10 +86,7 @@
 (global-set-key (kbd "C-0") 'ace-jump-line-mode)
 ;; Move windows, even in org-mode
 
-;; use shift + arrow keys to switch between visible buffers
-(require 'windmove)
-(windmove-default-keybindings)
-(when (eq system-type 'darwin)
+(when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
   (setq ns-command-modifier (quote meta))
   (setq ns-alternate-modifier (quote super))
@@ -100,5 +96,3 @@
   (setq mac-pass-command-to-system nil)
   (setq mac-pass-option-to-system nil)
   )
-
-(provide 'global-keys)

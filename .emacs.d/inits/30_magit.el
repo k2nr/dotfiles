@@ -1,0 +1,2 @@
+;; magit
+(require 'magit)

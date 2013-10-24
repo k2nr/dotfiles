@@ -57,30 +57,27 @@
 
 ;; clojure
 (require 'clojure-mode)
+(require 'cider)
 (add-hook 'clojure-mode-hook 'lisp-shared-hook)
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'esk-paren-face)))
 
-;; C-c C-z to switch nREPL buffer
-(add-to-list 'same-window-buffer-names "*nrepl*")
 ;; turn on eldoc mode on the current buffer
-(add-hook 'nrepl-interaction-mode-hook
-  'nrepl-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook
+  'cider-turn-on-eldoc-mode)
 
-;; if nil, Stop the error buffer from popping up while working in the REPL buffer
-(setq nrepl-popup-stacktraces t)
-(add-hook 'nrepl-mode-hook 'lisp-shared-hook)
-
-;; ritz-nrepl
-(add-hook 'nrepl-interaction-mode-hook 'my-nrepl-mode-setup)
-(defun my-nrepl-mode-setup ()
-  (require 'nrepl-ritz))
+(add-hook 'cider-mode-hook 'lisp-shared-hook)
 
 ;; ac-nrepl
  (require 'ac-nrepl)
- (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
- (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+ (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+ (add-hook 'cider-mode-hook 'ac-nrepl-setup)
  (eval-after-load "auto-complete"
-   '(add-to-list 'ac-modes 'nrepl-mode))
+   '(add-to-list 'ac-modes 'cider-repl-mode))
 
-(provide 'init-lisps)
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
