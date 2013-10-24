@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: describe "$0" do ... end
+# key: desc
+# --
+describe "${1:spec description}" do
+  $2
+end
