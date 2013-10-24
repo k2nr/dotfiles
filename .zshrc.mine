@@ -26,6 +26,7 @@ alias ff="ffind"
 #
 ## git aliases
 alias g="git"
+alias ga="git add"
 alias gb="git branch"
 alias gs="git status"
 alias gd="git diff"
