@@ -13,5 +13,5 @@
 ;(set-face-background 'hl-line "oldlace")
 
 ;; Theme
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 ;(load-theme 'zenburn t)
