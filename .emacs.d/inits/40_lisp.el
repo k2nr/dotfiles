@@ -10,7 +10,10 @@
 
 (defun lisp-shared-hook ()
   (turn-on-paredit)
-  (custom-set-variables '(tab-width 2)))
+  (evil-paredit-mode)
+  (custom-set-variables '(tab-width 2))
+  (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
+  (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly))
 
 ;; common lisp
 (add-hook 'lisp-mode-hook 'lisp-shared-hook)

@@ -39,7 +39,7 @@
 (add-hook 'lisp-mode-hook       'evil-paredit-mode)
 
 ;; plugins
-(require 'evil-rails)
+;(require 'evil-rails)
 
 (require 'surround)
 (global-surround-mode 1)

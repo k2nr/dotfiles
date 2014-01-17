@@ -1,3 +1,2 @@
 ;; CUI Settings
-(when (not window-system)
-  (menu-bar-mode 0))
+(menu-bar-mode 0)

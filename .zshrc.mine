@@ -23,11 +23,12 @@ alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
-#
+
 ## git aliases
 alias g="git"
 alias ga="git add"
 alias gb="git branch"
+alias gba="git branch -a"
 alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch"
@@ -90,18 +91,18 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
-export EDITOR="vi"
+export EDITOR="mvim -v"
 
 # to use japanese on swank
 export JAVA_OPTS="-Dswank.encoding=utf-8-unix"
 
-path=(. $HOME/bin /usr/local/share/npm/bin $HOME/.cask/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
+path=(. $HOME/bin $HOME/.cask/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
 
 autoload -U select-word-style
 select-word-style bash
 
 # ignore case for completion
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # prompt
 autoload -Uz vcs_info

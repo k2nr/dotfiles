@@ -1,9 +1,10 @@
-(define-key evil-motion-state-map (kbd "gh") 'beginning-of-line)
-(define-key evil-motion-state-map (kbd "gl") 'end-of-line)
-(evil-define-key 'normal global-map (kbd "gp") (kbd"o <escape> p"))
-(evil-define-key 'normal global-map (kbd "Y") (kbd"y$"))
+(evil-define-key 'normal global-map (kbd "gh") (kbd "^"))
+(evil-define-key 'normal global-map (kbd "gl") (kbd "$"))
+(evil-define-key 'normal global-map (kbd "gp") (kbd "o <escape> p"))
 
-(define-key evil-normal-state-map (kbd ", z") 'multi-term)
+(evil-define-key 'normal global-map (kbd "t") 'projectile-find-file)
+(evil-define-key 'normal global-map (kbd ", z") 'multi-term)
+(evil-define-key 'normal global-map (kbd ", g") 'magit-status)
 
 
 ;; helm
