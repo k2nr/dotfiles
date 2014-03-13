@@ -5,28 +5,18 @@
 (require 'rvm)
 (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
 
-(require 'flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
-
-(require 'robe)
-(add-hook 'ruby-mode-hook (lambda
-                            (robe-mode)))
-
-;(push 'company-robe company-backends)
-(push 'ac-source-robe ac-sources)
-
 ;; enh-ruby-mode
 (require 'enh-ruby-mode)
 (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 
-(dolist (spec '(("\\.rb$" . enh-ruby-mode)
+(dolist (spec '(("\\.rb$"          . enh-ruby-mode)
                 ("[vV]agrantfile$" . enh-ruby-mode)
-                ("[gG]emfile$" . enh-ruby-mode)
-                ("\\.rake$" . enh-ruby-mode)
-                ("\\.rabl$" . enh-ruby-mode)
-                ("[cC]apfile$" . enh-ruby-mode)
-                ("\\.gemspec$" . enh-ruby-mode)
-                ("\\.builder$" . enh-ruby-mode)))
+                ("[gG]emfile$"     . enh-ruby-mode)
+                ("\\.rake$"        . enh-ruby-mode)
+                ("\\.rabl$"        . enh-ruby-mode)
+                ("[cC]apfile$"     . enh-ruby-mode)
+                ("\\.gemspec$"     . enh-ruby-mode)
+                ("\\.builder$"     . enh-ruby-mode)))
   (add-to-list 'auto-mode-alist spec))
 
 ;(setq enh-ruby-use-encoding-map nil)
@@ -43,3 +33,10 @@
   )
 
 (add-hook 'enh-ruby-mode-hook 'enh-ruby-mode-faces)
+
+;; robe
+(require 'robe)
+(add-hook 'enh-ruby-mode-hook (lambda (robe-mode)))
+
+;(push 'company-robe company-backends)
+(push 'ac-source-robe ac-sources)

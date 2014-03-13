@@ -96,7 +96,7 @@ export EDITOR="mvim -v"
 # to use japanese on swank
 export JAVA_OPTS="-Dswank.encoding=utf-8-unix"
 
-path=(. $HOME/bin $HOME/.cask/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
+path=(. $HOME/bin $HOME/.cask/bin $HOME/Library/Haskell/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
 
 autoload -U select-word-style
 select-word-style bash
@@ -127,9 +127,6 @@ update_prompt() {
 #RPROMPT="${pro_vcs}"
 
 precmd_functions=($precmd_functions update_prompt)
-
-# android
-export NDK="/usr/local/Cellar/android-ndk/r6b/"
 
 # rbenv
 #export PATH="$HOME/.rbenv/bin:$PATH"
