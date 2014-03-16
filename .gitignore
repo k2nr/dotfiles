@@ -2,3 +2,5 @@
 /.zsh_history
 /.ssh
 /.tmuxinator
+/.lein/repl-history
+/.lein/self-installs
