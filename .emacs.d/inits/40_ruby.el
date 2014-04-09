@@ -34,9 +34,18 @@
 
 (add-hook 'enh-ruby-mode-hook 'enh-ruby-mode-faces)
 
+;; 保存時にmagic commentを追加しないようにする
+(defadvice enh-ruby-mode-set-encoding (around stop-enh-ruby-mode-set-encoding)
+  "If enh-ruby-not-insert-magic-comment is true, stops enh-ruby-mode-set-encoding."
+  (if (and (boundp 'enh-ruby-not-insert-magic-comment)
+           (not enh-ruby-not-insert-magic-comment))
+      ad-do-it))
+(ad-activate 'enh-ruby-mode-set-encoding)
+(setq-default enh-ruby-not-insert-magic-comment t)
+
 ;; robe
 (require 'robe)
 (add-hook 'enh-ruby-mode-hook (lambda (robe-mode)))
 
-;(push 'company-robe company-backends)
-(push 'ac-source-robe ac-sources)
+;; auto-complete
+(add-to-list 'ac-modes 'enh-ruby-mode)

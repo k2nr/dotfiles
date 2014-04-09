@@ -56,8 +56,19 @@
 (global-set-key (kbd "C-, l") 'toggle-truncate-lines)
 (global-set-key (kbd "C-, d") 'dired-at-point)
 (global-set-key (kbd "C-, g") 'projectile-grep)
+(global-set-key (kbd "C-, f") 'toggle-frame-fullscreen)
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
+
+(global-set-key [left]  'windmove-left)
+(global-set-key [right] 'windmove-right)
+(global-set-key [up]    'windmove-up)
+(global-set-key [down]  'windmove-down)
+(define-key evil-normal-state-map [left] 'windmove-left)
+(define-key evil-normal-state-map [right] 'windmove-right)
+(define-key evil-normal-state-map [up] 'windmove-up)
+(define-key evil-normal-state-map [down] 'windmove-down)
+
 ;; multi-term
 (global-set-key (kbd "C-, z") 'multi-term)
 
@@ -84,7 +95,33 @@
 
 ;; ace-jump-mode
 (global-set-key (kbd "C-0") 'ace-jump-line-mode)
-;; Move windows, even in org-mode
+
+;;; evil
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+;(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+(evil-define-key 'normal global-map (kbd "gh") (kbd "^"))
+(evil-define-key 'normal global-map (kbd "gl") (kbd "$"))
+(evil-define-key 'normal global-map (kbd "gp") (kbd "o <escape> p"))
+(evil-define-key 'normal global-map (kbd "t") 'projectile-find-file)
+(evil-define-key 'normal global-map (kbd ", z") 'multi-term)
+(evil-define-key 'normal global-map (kbd ", g") 'magit-status)
+(define-key evil-normal-state-map (kbd "\"") 'er/expand-region)
+
+;; helm for evil
+(define-key evil-normal-state-map (kbd "; ;") 'helm-mini)
+(define-key evil-normal-state-map (kbd "; f") 'helm-find-files)
+(define-key evil-normal-state-map (kbd "; b") 'helm-buffers-list)
+(define-key evil-normal-state-map (kbd "; p") 'helm-projectile)
+(define-key evil-normal-state-map (kbd "; o") 'helm-occur)
+(define-key evil-normal-state-map (kbd "; l") 'helm-locate)
+(define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
+(define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
 
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key

@@ -11,7 +11,3 @@
 ;; Set background color of current line.
 (global-hl-line-mode 1)
 ;(set-face-background 'hl-line "oldlace")
-
-;; Theme
-(load-theme 'solarized-dark t)
-;(load-theme 'zenburn t)

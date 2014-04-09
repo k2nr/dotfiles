@@ -11,3 +11,7 @@
   (set-frame-size (selected-frame) 120 50)
   (tool-bar-mode 0)
   (scroll-bar-mode 0))
+
+;; Theme
+(load-theme 'solarized-dark t)
+;(load-theme 'zenburn t)
