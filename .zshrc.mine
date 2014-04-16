@@ -97,6 +97,8 @@ export EDITOR="mvim -v"
 # to use japanese on swank
 export JAVA_OPTS="-Dswank.encoding=utf-8-unix"
 
+export GOPATH="$HOME/.go"
+
 path=(. $HOME/bin $HOME/.cask/bin $HOME/Library/Haskell/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
 
 autoload -U select-word-style
