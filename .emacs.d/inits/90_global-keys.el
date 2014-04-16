@@ -123,6 +123,9 @@
 (define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
 
+(require 'surround)
+(global-surround-mode 1)
+
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
   (setq ns-command-modifier (quote meta))

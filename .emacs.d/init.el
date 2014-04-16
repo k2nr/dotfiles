@@ -7,7 +7,7 @@
 
 ;; cask
 (require 'cask "~/.cask/cask.el")
-(cask-initialize)
+(defconst cask-bundle (cask-initialize))
 
 ;; start server
 (if window-system (server-start))

@@ -12,6 +12,9 @@
   (turn-on-paredit)
   (evil-paredit-mode)
   (custom-set-variables '(tab-width 2))
+  (modify-syntax-entry ?- "w" lisp-mode-syntax-table)
+  (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
+
   (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
   (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly))
 
