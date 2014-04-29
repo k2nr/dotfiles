@@ -23,4 +23,7 @@
 (require 'inf-ruby)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 
+;; indent
+(setq ruby-deep-indent-paren-style nil)
+
 (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)

@@ -145,3 +145,6 @@ cd;cd - > /dev/null
 
 ## tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+# boot2docker
+export DOCKER_HOST=tcp://localhost:4243
