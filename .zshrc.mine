@@ -84,6 +84,8 @@ alias r="rake"
 # global aliases
 alias -g L="|less"
 alias -g G="|grep"
+alias -g H="|head"
+alias -g T="|tail"
 alias -g XG="|xargs grep -Hn"
 alias -g XG0="|xargs -0 grep -Hn"
 alias -g C="|pbcopy"
@@ -91,6 +93,8 @@ alias -g P="pbpaste|"
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
+alias -g ......='../../../../..'
+alias -g .......='../../../../../..'
 
 export EDITOR="mvim -v"
 
@@ -104,8 +108,7 @@ path=(. $HOME/bin $HOME/.cask/bin $HOME/Library/Haskell/bin /usr/local/share/npm
 autoload -U select-word-style
 select-word-style bash
 
-# ignore case for completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+export GREP_OPTIONS="--color=auto --binary-files=without-match"
 
 # prompt
 autoload -Uz vcs_info

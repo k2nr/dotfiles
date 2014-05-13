@@ -29,7 +29,7 @@ case ${UID} in
     PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
     PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
     SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
+    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
 esac
@@ -107,18 +107,13 @@ setopt extended_history
 fpath=(${HOME}/.zsh/functions/Completion ${fpath})
 autoload -U compinit
 compinit
+zstyle ':completion:*' format '%B%d%b'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
+zstyle ':completion:*' completer \
+    _oldlist _complete _match _history _ignored _approximate _prefix
 
-
-## zsh editor
-#
-autoload zed
-
-
-## Prediction configuration
-#
-#autoload predict-on
-#predict-off
-
+setopt complete_in_word
 
 ## Alias configuration
 #
@@ -196,6 +191,3 @@ esac
 ## load user .zshrc configuration file
 #
 [ -f ${HOME}/.zshrc.mine ] && source ${HOME}/.zshrc.mine
-
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
