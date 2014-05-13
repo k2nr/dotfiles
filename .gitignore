@@ -1,5 +1,6 @@
 /.gitconfig.local
 /.zsh_history
+/.zsh.d/history
 /.ssh
 /.tmuxinator
 /.lein/repl-history
