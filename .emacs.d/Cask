@@ -42,7 +42,7 @@
 ;(depends-on "helm-c-moccur")
 (depends-on "helm-projectile")
 (depends-on "inf-ruby")
-;(depends-on "js2-mode")
+(depends-on "js2-mode")
 (depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "melpa")
