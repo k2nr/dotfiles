@@ -64,7 +64,6 @@
 ;; clojure
 (require 'clojure-mode)
 (require 'cider)
-(add-hook 'clojure-mode-hook 'lisp-shared-hook)
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'esk-paren-face)))
 
@@ -73,17 +72,11 @@
   'cider-turn-on-eldoc-mode)
 
 (add-hook 'cider-mode-hook 'lisp-shared-hook)
+(add-hook 'cider-repl-mode-hook 'lisp-shared-hook)
 
 ;; ac-nrepl
- (require 'ac-nrepl)
- (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
- (add-hook 'cider-mode-hook 'ac-nrepl-setup)
- (eval-after-load "auto-complete"
-   '(add-to-list 'ac-modes 'cider-repl-mode))
-
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
-(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(require 'ac-nrepl)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook      'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
