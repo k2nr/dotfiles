@@ -12,8 +12,6 @@
   (turn-on-paredit)
   (evil-paredit-mode)
   (custom-set-variables '(tab-width 2))
-  (modify-syntax-entry ?- "w" lisp-mode-syntax-table)
-  (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
 
   (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
   (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly))
@@ -51,7 +49,7 @@
   (switch-to-buffer-other-window
    (get-buffer-create "*scheme*"))
   (run-scheme scheme-program-name))
-(require 'quack)
+;(require 'quack)
 (add-hook 'scheme-mode-hook 'lisp-shared-hook)
 (add-hook 'scheme-mode-hook (lambda ()
                               (require 'cmuscheme)
@@ -67,16 +65,19 @@
 (font-lock-add-keywords 'clojure-mode
                         '(("(\\|)" . 'esk-paren-face)))
 
-;; turn on eldoc mode on the current buffer
-(add-hook 'cider-mode-hook
-  'cider-turn-on-eldoc-mode)
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook (lambda ()
+                               (lisp-shared-hook)
+                               (clj-refactor-mode 1)
+                               ;; insert keybinding setup here
+                               ))
 
-(add-hook 'cider-mode-hook 'lisp-shared-hook)
-(add-hook 'cider-repl-mode-hook 'lisp-shared-hook)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 ;; ac-nrepl
-(require 'ac-nrepl)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook      'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
+;(require 'ac-nrepl)
+;(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+;(add-hook 'cider-mode-hook      'ac-nrepl-setup)
+;(eval-after-load "auto-complete"
+;  '(add-to-list 'ac-modes 'cider-repl-mode))
