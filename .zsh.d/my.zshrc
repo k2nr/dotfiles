@@ -9,17 +9,9 @@ path=(. $HOME/bin $HOME/.cask/bin $HOME/Library/Haskell/bin /usr/local/share/npm
 autoload -U select-word-style
 select-word-style bash
 
-# rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-
-# rvm
-PATH="$HOME"/.rvm/bin:"$PATH" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-cd;cd - > /dev/null
-
-## z
-. `brew --prefix`/etc/profile.d/z.sh
-
-## tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+for f in $HOME/.zsh.d/init/*
+do
+  if [[ -f $f ]]; then
+    source $f
+  fi
+done
