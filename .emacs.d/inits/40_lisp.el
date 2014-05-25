@@ -69,6 +69,7 @@
 (add-hook 'clojure-mode-hook (lambda ()
                                (lisp-shared-hook)
                                (clj-refactor-mode 1)
+                               (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
                                ;; insert keybinding setup here
                                ))
 

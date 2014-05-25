@@ -83,6 +83,7 @@
 (global-set-key (kbd "C-; C-i") 'helm-imenu)
 (global-set-key (kbd "C-; C-s") 'helm-c-yas-complete)
 (global-set-key (kbd "C-; C-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-; C-a") 'helm-ag)
 
 ;; expand-region
 (global-set-key (kbd "C-'") 'er/expand-region)
@@ -122,6 +123,7 @@
 (define-key evil-normal-state-map (kbd "; l") 'helm-locate)
 (define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
+(define-key evil-normal-state-map (kbd "; a") 'helm-ag)
 
 (require 'surround)
 (global-surround-mode 1)
@@ -129,7 +131,7 @@
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
   (setq ns-command-modifier (quote meta))
-  (setq ns-alternate-modifier (quote super))
+;  (setq ns-alternate-modifier (quote super))
   (setq ns-right-command-modifier (quote hyper))
   ;; prevent passing keys to system
   (setq mac-pass-control-to-system nil)
