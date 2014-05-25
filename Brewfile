@@ -4,7 +4,6 @@ tap homebrew/binary
 tap phinze/homebrew-cask
 tap homebrew/dupes
 
-install ack
 install apple-gcc42
 install asciidoc
 install atk
@@ -19,7 +18,7 @@ install closure-compiler
 install cmake
 install ctags
 install docker
-install drip
+install dotenv
 install emacs --cocoa
 install ffind
 install fontconfig
