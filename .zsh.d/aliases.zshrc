@@ -22,6 +22,10 @@ alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
 
+mcd() {
+  mkdir -p $1 && cd $1
+}
+
 ## git aliases
 alias g="git"
 alias ga="git add"
@@ -38,7 +42,6 @@ alias gcb="git-current-branch"
 alias gp="git push -u"
 alias gpl="git pull"
 alias gdc="git diff --cached"
-alias gdvc="gdv --cached"
 alias gl="git log --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'"
 alias gst="git stash save"
 alias gstl="git stash list"
