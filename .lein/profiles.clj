@@ -4,5 +4,6 @@
                   [lein-midje "3.1.3"]
                   [cider/cider-nrepl "0.6.0"]
                   ]
-        }
+        :injections [(require '[clojure.pprint :refer :all])
+                     (require '[clojure.repl :refer :all])]}
  }
