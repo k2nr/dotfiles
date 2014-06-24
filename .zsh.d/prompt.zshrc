@@ -15,7 +15,7 @@ update_prompt() {
         pro_vcs=""
     fi
 
-    PROMPT="${pro_cur_dir}${pro_user} ${pro_time} ${pro_vcs}"$'\n'"%{%f%}%# "
+    PROMPT="${pro_cur_dir}${pro_user} ${pro_time} ${pro_vcs}"$'\n'"%{%f%}🍣  "
 }
 #RPROMPT="${pro_vcs}"
 
