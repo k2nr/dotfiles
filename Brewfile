@@ -13,13 +13,11 @@ install bdw-gc
 install bison
 install boot2docker
 install brew-cask
-install clojure
 install closure-compiler
 install cmake
 install ctags
 install docker
 install dotenv
-install emacs --cocoa
 install ffind
 install fontconfig
 install fontforge
@@ -78,17 +76,13 @@ install zsh-completions
 cask install appcleaner
 cask install dropbox
 cask install firefox
-cask install flash
 cask install google-chrome
 cask install google-drive
 cask install grandperspective
 cask install handbrake
 cask install keyremap4macbook
-cask install libreoffice
 cask install limechat
-cask install lyn
 cask install quicksilver
-cask install silverlight
 cask install skype
 cask install vagrant
 cask install virtualbox
