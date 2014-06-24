@@ -21,6 +21,7 @@ alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
+alias psg="ps auxw | grep"
 
 mcd() {
   mkdir -p $1 && cd $1
