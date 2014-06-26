@@ -56,7 +56,15 @@ alias gnd="git now --diff"
 alias gnr="git now --rebase"
 alias gnf="git now --fixup"
 
-alias gco="git checkout"
+#alias gco="git checkout"
+gco() {
+  if [[ -z $1 ]]; then
+    peco_git_checkout
+  else
+    git checkout $1
+  fi
+}
+
 alias gcm="git checkout master"
 alias grhh="git reset --hard HEAD"
 compdef _git gco=_git-checkout
