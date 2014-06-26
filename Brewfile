@@ -3,6 +3,7 @@ update
 tap homebrew/binary
 tap phinze/homebrew-cask
 tap homebrew/dupes
+tap peco/peco
 
 install apple-gcc42
 install autoconf
@@ -40,6 +41,7 @@ install nkf
 install node
 install objective-caml
 install openssl
+install peco
 install postgresql
 install readline
 install reattach-to-user-namespace
