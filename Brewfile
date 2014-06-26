@@ -5,19 +5,17 @@ tap phinze/homebrew-cask
 tap homebrew/dupes
 
 install apple-gcc42
-install asciidoc
-install atk
 install autoconf
 install automake
-install bdw-gc
 install bison
 install boot2docker
 install brew-cask
+install cask
 install closure-compiler
 install cmake
 install ctags
 install docker
-install dotenv
+install direnv
 install ffind
 install fontconfig
 install fontforge
@@ -30,31 +28,18 @@ install global
 install gnupg
 install go
 install grep
-install gtk+
 install hub
 install imagemagick
 install jq
 install leiningen
-install libevent
-install libffi
-install libgpg-error
-install libksba
-install libpng
-install libtiff
-install libtool
-install libxml2
-install libxslt
-install libyaml
 install lua
 install mercurial
 install mongodb
 install mysql
 install nkf
-install nmap
 install node
 install objective-caml
 install openssl
-install ossp-uuid
 install postgresql
 install readline
 install reattach-to-user-namespace
@@ -80,6 +65,7 @@ cask install google-chrome
 cask install google-drive
 cask install grandperspective
 cask install handbrake
+cask install hipchat
 cask install keyremap4macbook
 cask install limechat
 cask install quicksilver
