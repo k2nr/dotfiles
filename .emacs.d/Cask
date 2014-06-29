@@ -23,7 +23,7 @@
 (depends-on "emmet-mode")
 (depends-on "evil")
 (depends-on "evil-paredit")
-(depends-on "surround") ; evil-surround
+(depends-on "evil-surround")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "flycheck")

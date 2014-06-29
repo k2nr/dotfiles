@@ -125,7 +125,7 @@
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
 (define-key evil-normal-state-map (kbd "; a") 'helm-ag)
 
-(require 'surround)
+(require 'evil-surround)
 (global-surround-mode 1)
 
 (when (eq window-system 'ns)
