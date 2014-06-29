@@ -11,7 +11,6 @@ install automake
 install bison
 install boot2docker
 install brew-cask
-install cask
 install closure-compiler
 install cmake
 install ctags
