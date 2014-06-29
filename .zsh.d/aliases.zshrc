@@ -3,7 +3,8 @@ alias rake="noglob rake"
 
 ### aliases
 alias lla="ls -la"
-alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10.9/emacsclient"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs-x86_64-10.9"
 alias e="emacsclient -n"
 alias enw="emacsclient -nw"
 alias o="open"
