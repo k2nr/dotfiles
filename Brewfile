@@ -64,15 +64,17 @@ cask install dropbox
 cask install firefox
 cask install google-chrome
 cask install google-drive
+cask install google-japanese-ime
 cask install grandperspective
 cask install handbrake
 cask install hipchat
 cask install keyremap4macbook
-cask install limechat
+cask install onepassword
 cask install quicksilver
 cask install skype
 cask install vagrant
 cask install virtualbox
 cask install vlc
+cask install yorufukurou
 
 linkapps
