@@ -125,10 +125,10 @@ alias where="command -v"
 
 case "${OSTYPE}" in
 freebsd*|darwin*)
-    alias ls="ls -CFG"
+    alias ls="ls -CFG -h"
     ;;
 linux*)
-    alias ls="ls --color"
+    alias ls="ls --color -h"
     ;;
 esac
 
