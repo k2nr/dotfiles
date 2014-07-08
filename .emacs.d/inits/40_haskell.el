@@ -13,12 +13,5 @@
     (symbol . "s")
     (cache)))
 
-(defun my-haskell-ac-init ()
-  (when (member (file-name-extension buffer-file-name) '("hs" "lhs"))
-    (auto-complete-mode t)
-    (setq ac-sources '(ac-source-words-in-same-mode-buffers ac-source-dictionary ac-source-ghc-mod))))
-
-(add-hook 'find-file-hook 'my-haskell-ac-init)
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
