@@ -3,8 +3,8 @@ alias rake="noglob rake"
 
 ### aliases
 alias lla="ls -la"
-alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10.9/emacsclient"
-alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs-x86_64-10.9"
+alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+alias emacs="open /Applications/Emacs.app"
 alias e="emacsclient -n"
 alias enw="emacsclient -nw"
 alias o="open"
@@ -62,7 +62,7 @@ gco() {
   if [[ -z $1 ]]; then
     peco_git_checkout
   else
-    git checkout $1
+    git checkout $@
   fi
 }
 
