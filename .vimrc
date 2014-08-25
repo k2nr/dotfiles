@@ -22,13 +22,13 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 NeoBundleLazy 'Shougo/neocomplete.vim', {'autoload': {'insert' : 1}}
 NeoBundle     'Shougo/unite.vim'
+NeoBundle     'Shougo/neomru.vim'
 NeoBundleLazy 'ruby-matchit', {'autoload': {'filetypes': ['ruby', 'eruby', 'haml']}}
 NeoBundle     'altercation/vim-colors-solarized'
 NeoBundle     'kana/vim-fakeclip'
 NeoBundle     'scrooloose/syntastic'
 NeoBundle     'tpope/vim-surround'
 NeoBundle     'wincent/Command-T'
-NeoBundle     'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " }}}
 
 filetype on
