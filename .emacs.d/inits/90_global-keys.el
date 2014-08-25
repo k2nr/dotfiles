@@ -68,6 +68,7 @@
 (define-key evil-normal-state-map [right] 'windmove-right)
 (define-key evil-normal-state-map [up] 'windmove-up)
 (define-key evil-normal-state-map [down] 'windmove-down)
+(define-key evil-normal-state-map (kbd "M-.") nil)
 
 ;; multi-term
 (global-set-key (kbd "C-, z") 'multi-term)
@@ -126,7 +127,7 @@
 (define-key evil-normal-state-map (kbd "; a") 'helm-ag)
 
 (require 'evil-surround)
-(global-surround-mode 1)
+(global-evil-surround-mode 1)
 
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
