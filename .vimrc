@@ -10,10 +10,6 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-au BufRead,BufNewFile,BufReadPre *.coffee setlocal filetype=coffee
-au BufRead,BufNewFile,BufReadPre *.clj    setlocal filetype=clojure
-au BufRead,BufNewFile,BufReadPre *.cljs   setlocal filetype=clojure
-
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
