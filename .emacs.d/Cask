@@ -58,6 +58,7 @@
 (depends-on "rust-mode")
 (depends-on "rvm")
 (depends-on "sass-mode")
+(depends-on "slamhound")
 (depends-on "smart-mode-line")
 (depends-on "smartparens")
 (depends-on "smex")
