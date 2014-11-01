@@ -26,5 +26,9 @@
   ref = https://{host}/{path}/tree/{short_ref}
   rev = https://{host}/{path}/commit/{commit}
   file = "https://{host}/{path}/blob/{short_rev}/{file}{line && \"#L%d\" % line}"
+
 [hub]
 	protocol = https
+
+[alias]
+	fetch-pulls = fetch origin +refs/pull/*:refs/remotes/pull/*
