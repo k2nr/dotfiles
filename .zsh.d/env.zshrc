@@ -12,4 +12,4 @@ export GOPATH="$HOME/.go"
 PATH="$GOPATH"/bin:"$PATH"
 
 # docker for OSX
-export DOCKER_HOST=tcp://192.168.59.103:2375
+eval "$(boot2docker shellinit 2> /dev/null)"
