@@ -25,7 +25,7 @@ alias ff="ffind"
 alias psg="ps auxw | grep"
 alias b2d="boot2docker"
 alias d="docker"
-
+|
 mcd() {
   mkdir -p $1 && cd $1
 }
@@ -84,6 +84,18 @@ gbrp() {
   open `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
 }
 
+hub-merge-am() {
+  hub am -3 "https://github.com/$1/pull/$2"
+  NEWLINE=$'\n'
+  git commit --amend -m "$(git log -1 --pretty=%B)${NEWLINE}${NEWLINE}Closes #$2"
+}
+
+hub-sync-master() {
+  git fetch $1 -p && git checkout master && git merge $1/master --ff-only
+}
+
+alias ha="hub-merge-am"
+
 alias gpr="git pull-request"
 alias gbr="git browse"
 
@@ -92,6 +104,7 @@ alias t="tig"
 alias ts="tig status"
 
 alias r="rake"
+alias re="rbenv"
 
 # global aliases
 alias -g L="|less"
