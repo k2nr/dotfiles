@@ -1,13 +1,5 @@
 (require 'shared-funs)
 
-(defface esk-paren-face
-  '((((class color) (background dark))
-     (:foreground "grey50"))
-    (((class color) (background light))
-     (:foreground "grey55")))
-  "Face used to dim parentheses."
-  :group 'starter-kit-faces)
-
 (defun lisp-shared-hook ()
   (turn-on-paredit)
   (evil-paredit-mode)
@@ -60,26 +52,22 @@
                         '(("(\\|)" . 'esk-paren-face)))
 
 ;; clojure
-(require 'clojure-mode)
-(require 'cider)
-(font-lock-add-keywords 'clojure-mode
-                        '(("(\\|)" . 'esk-paren-face)))
+(defun clojure-shared-hook ()
+  (lisp-shared-hook)
+  (clj-refactor-mode 1)
+  (modify-syntax-entry ?- "w" clojure-mode-syntax-table))
 
-(require 'clj-refactor)
-(add-hook 'clojure-mode-hook (lambda ()
-                               (lisp-shared-hook)
-                               (clj-refactor-mode 1)
-                               (modify-syntax-entry ?- "w" clojure-mode-syntax-table)
-                               ;; insert keybinding setup here
-                               ))
+(defun cider-shared-hook ()
+  (cider-turn-on-eldoc-mode)
+  (ac-flyspell-workaround)
+  (ac-cider-setup)
+  ;; insert keybinding setup here
+  )
 
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook    'clojure-shared-hook)
+(add-hook 'cider-mode-hook      'cider-shared-hook)
+(add-hook 'cider-repl-mode-hook 'cider-shared-hook)
 
-(require 'ac-cider)
-(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-(add-hook 'cider-mode-hook 'ac-cider-setup)
-(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 (eval-after-load "auto-complete" '(progn
                                     (add-to-list 'ac-modes 'cider-mode)
                                     (add-to-list 'ac-modes 'cider-repl-mode)))

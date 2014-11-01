@@ -49,7 +49,6 @@
 (global-set-key (kbd "M-o") 'new-line-above)
 (global-set-key (kbd "C-M-k") 'kill-and-retry-line)
 (global-set-key (kbd "M-w") 'save-region-or-current-line)
-(global-set-key (kbd "C-w") 'kill-region-or-backward-kill-word)
 (global-set-key (kbd "M-d") 'kill-word-or-delete-horizontal-space)
 (global-set-key (kbd "s-d") 'duplicate-current-line-or-region)
 (global-set-key (kbd "C-, o") 'open-with-buffer-file)
@@ -70,9 +69,6 @@
 (define-key evil-normal-state-map [down] 'windmove-down)
 (define-key evil-normal-state-map (kbd "M-.") nil)
 
-;; multi-term
-(global-set-key (kbd "C-, z") 'multi-term)
-
 ;; helm
 (global-set-key (kbd "C-; C-;") 'helm-mini)
 (global-set-key (kbd "C-; C-o") 'helm-occur)
@@ -80,7 +76,7 @@
 (global-set-key (kbd "C-; C-x") 'helm-M-x)
 (global-set-key (kbd "C-; C-l") 'helm-locate)
 (global-set-key (kbd "C-; C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-; C-p") 'helm-projectile)
+(global-set-key (kbd "C-; C-p") 'helm-projectile-ag)
 (global-set-key (kbd "C-; C-i") 'helm-imenu)
 (global-set-key (kbd "C-; C-s") 'helm-c-yas-complete)
 (global-set-key (kbd "C-; C-y") 'helm-show-kill-ring)
@@ -97,6 +93,8 @@
 
 ;; ace-jump-mode
 (global-set-key (kbd "C-0") 'ace-jump-line-mode)
+;; ace-window
+(define-key evil-normal-state-map (kbd "C-w C-w") 'ace-window)
 
 ;;; evil
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
@@ -110,9 +108,7 @@
 (evil-define-key 'normal global-map (kbd "gh") (kbd "^"))
 (evil-define-key 'normal global-map (kbd "gl") (kbd "$"))
 (evil-define-key 'normal global-map (kbd "gp") (kbd "o <escape> p"))
-(evil-define-key 'normal global-map (kbd "t") 'projectile-find-file)
-(evil-define-key 'normal global-map (kbd ", z") 'multi-term)
-(evil-define-key 'normal global-map (kbd ", g") 'magit-status)
+;(evil-define-key 'normal global-map (kbd "t") 'projectile-find-file)
 (define-key evil-normal-state-map (kbd "\"") 'er/expand-region)
 
 ;; helm for evil
@@ -120,6 +116,7 @@
 (define-key evil-normal-state-map (kbd "; f") 'helm-find-files)
 (define-key evil-normal-state-map (kbd "; b") 'helm-buffers-list)
 (define-key evil-normal-state-map (kbd "; p") 'helm-projectile)
+(evil-define-key 'normal global-map (kbd "t") 'helm-projectile-find-file)
 (define-key evil-normal-state-map (kbd "; o") 'helm-occur)
 (define-key evil-normal-state-map (kbd "; l") 'helm-locate)
 (define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
