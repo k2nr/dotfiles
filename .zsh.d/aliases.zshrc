@@ -25,7 +25,7 @@ alias ff="ffind"
 alias psg="ps auxw | grep"
 alias b2d="boot2docker"
 alias d="docker"
-|
+
 mcd() {
   mkdir -p $1 && cd $1
 }
