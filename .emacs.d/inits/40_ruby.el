@@ -18,6 +18,7 @@
 
 ;; inf-ruby
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+(setq inf-ruby-default-implementation "pry")
 
 ;; rinari
 (defvar my-rinari-map
