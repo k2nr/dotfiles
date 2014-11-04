@@ -76,11 +76,10 @@
 (global-set-key (kbd "C-; C-x") 'helm-M-x)
 (global-set-key (kbd "C-; C-l") 'helm-locate)
 (global-set-key (kbd "C-; C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-; C-p") 'helm-projectile-ag)
+(global-set-key (kbd "C-; C-a") 'helm-projectile-ag)
 (global-set-key (kbd "C-; C-i") 'helm-imenu)
 (global-set-key (kbd "C-; C-s") 'helm-c-yas-complete)
 (global-set-key (kbd "C-; C-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-; C-a") 'helm-ag)
 
 ;; expand-region
 (global-set-key (kbd "C-'") 'er/expand-region)
@@ -121,7 +120,7 @@
 (define-key evil-normal-state-map (kbd "; l") 'helm-locate)
 (define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
-(define-key evil-normal-state-map (kbd "; a") 'helm-ag)
+(define-key evil-normal-state-map (kbd "; a") 'helm-projectile-ag)
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
