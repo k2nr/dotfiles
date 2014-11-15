@@ -39,9 +39,11 @@ install mysql
 install nkf
 install node
 install objective-caml
+install opam
 install openssl
 install peco
 install postgresql
+install rbenv-default-gems
 install readline
 install reattach-to-user-namespace
 install repl
@@ -52,6 +54,7 @@ install sl
 install sqlite
 install the_silver_searcher
 install tig
+install tmux
 install tree
 install w3m
 install wget
@@ -60,6 +63,7 @@ install zsh
 install zsh-completions
 
 cask install appcleaner
+cask install bettertouchtool
 cask install dropbox
 cask install firefox
 cask install google-chrome
@@ -68,7 +72,8 @@ cask install google-japanese-ime
 cask install grandperspective
 cask install handbrake
 cask install hipchat
-cask install keyremap4macbook
+cask install istat-menus
+cask install karabiner
 cask install onepassword
 cask install quicksilver
 cask install skype
