@@ -22,7 +22,6 @@ alias src="source ~/.zshrc"
 alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
-alias psg="ps auxw | grep"
 alias b2d="boot2docker"
 alias d="docker"
 
@@ -51,8 +50,6 @@ alias gst="git stash save"
 alias gstl="git stash list"
 alias gstc="git stash clear"
 alias gstp="git stash pop"
-alias gready="git rebase -i @{u}"
-alias gsync="gst && gpl && gstp"
 alias gn="git now"
 alias gnc="git now --compact"
 alias gnd="git now --diff"
@@ -70,7 +67,6 @@ gco() {
 
 alias gcm="git checkout master"
 alias grhh="git reset --hard HEAD"
-compdef _git gco=_git-checkout
 
 ## hub aliases
 
