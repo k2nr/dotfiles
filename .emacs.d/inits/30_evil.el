@@ -1,4 +1,3 @@
-(require 'evil)
 (evil-mode 1)
 
 (setq evil-auto-indent t
@@ -13,7 +12,6 @@
   (define-key evil-insert-state-map (kbd key) nil))
 
 (defadvice evil-paste-pop (around evil-paste-or-move-line activate)
-  ;; evil-paste-popできなかったらprevious-lineする
   "If there is no just-yanked stretch of killed text, just move to previous line."
   (condition-case err
       ad-do-it
@@ -22,7 +20,6 @@
              (signal (car err) (cdr err))))))
 
 (defadvice evil-paste-pop-next (around evil-paste-or-move-line activate)
-  ;; evil-paste-pop-nextできなかったらnext-lineする
   "If there is no just-yanked stretch of killed text, just move to next line."
   (condition-case err
       ad-do-it
@@ -30,11 +27,9 @@
                (call-interactively 'next-line)
              (signal (car err) (cdr err))))))
 
-(require 'evil-paredit)
 (add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
 (add-hook 'clojure-mode-hook    'evil-paredit-mode)
 (add-hook 'scheme-mode-hook     'evil-paredit-mode)
 (add-hook 'lisp-mode-hook       'evil-paredit-mode)
 
-;; plugins
-;(require 'evil-rails)
+(global-evil-surround-mode 1)

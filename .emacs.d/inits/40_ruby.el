@@ -14,7 +14,7 @@
 
 ;; robe
 (add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'robe-mode-hook 'ac-robe-setup)
+;(add-hook 'robe-mode-hook 'ac-robe-setup)
 
 ;; inf-ruby
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -35,5 +35,6 @@
 (global-rinari-mode +1)
 
 (setq ruby-deep-indent-paren-style nil)
+(setq ruby-insert-encoding-magic-comment nil)
 
 (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)

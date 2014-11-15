@@ -39,34 +39,20 @@
 (global-set-key (kbd "C-a") 'beginning-of-indented-line)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-h") 'delete-backward-char)
-(global-set-key (kbd "H-<") 'beginning-of-buffer)
-(global-set-key (kbd "H->") 'end-of-buffer)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-t") 'other-window)
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
-(global-set-key (kbd "C-=") 'indent-region)
 (global-set-key (kbd "C-o") 'new-line-below)
 (global-set-key (kbd "M-o") 'new-line-above)
 (global-set-key (kbd "C-M-k") 'kill-and-retry-line)
 (global-set-key (kbd "M-w") 'save-region-or-current-line)
 (global-set-key (kbd "M-d") 'kill-word-or-delete-horizontal-space)
-(global-set-key (kbd "s-d") 'duplicate-current-line-or-region)
 (global-set-key (kbd "C-, o") 'open-with-buffer-file)
 (global-set-key (kbd "C-, l") 'toggle-truncate-lines)
 (global-set-key (kbd "C-, d") 'dired-at-point)
-(global-set-key (kbd "C-, g") 'projectile-grep)
 (global-set-key (kbd "C-, f") 'toggle-frame-fullscreen)
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-(global-set-key [left]  'windmove-left)
-(global-set-key [right] 'windmove-right)
-(global-set-key [up]    'windmove-up)
-(global-set-key [down]  'windmove-down)
-(define-key evil-normal-state-map [left] 'windmove-left)
-(define-key evil-normal-state-map [right] 'windmove-right)
-(define-key evil-normal-state-map [up] 'windmove-up)
-(define-key evil-normal-state-map [down] 'windmove-down)
 (define-key evil-normal-state-map (kbd "M-.") nil)
 
 ;; helm
@@ -107,7 +93,6 @@
 (evil-define-key 'normal global-map (kbd "gh") (kbd "^"))
 (evil-define-key 'normal global-map (kbd "gl") (kbd "$"))
 (evil-define-key 'normal global-map (kbd "gp") (kbd "o <escape> p"))
-;(evil-define-key 'normal global-map (kbd "t") 'projectile-find-file)
 (define-key evil-normal-state-map (kbd "\"") 'er/expand-region)
 
 ;; helm for evil
@@ -122,8 +107,13 @@
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
 (define-key evil-normal-state-map (kbd "; a") 'helm-projectile-ag)
 
-(require 'evil-surround)
-(global-evil-surround-mode 1)
+;; magit
+(define-key evil-normal-state-map (kbd ", m s") 'magit-status)
+(define-key evil-normal-state-map (kbd ", m b") 'magit-key-mode-popup-branching)
+(define-key evil-normal-state-map (kbd ", m l") 'magit-key-mode-popup-logging)
+(define-key evil-normal-state-map (kbd ", m c") 'magit-checkout)
+(define-key evil-normal-state-map (kbd ", m t") 'magit-key-mode-popup-stashing)
+(define-key evil-normal-state-map (kbd ", m m") 'magit-key-mode-popup-submodule)
 
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
