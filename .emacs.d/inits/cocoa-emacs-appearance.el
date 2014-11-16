@@ -1,17 +1,17 @@
-;; Font
-(when (eq window-system 'ns)
-  (create-fontset-from-ascii-font "Inconsolata-14:weight=normal:slant=normal" nil "ricty")
-  (set-fontset-font "fontset-ricty"
-                    'unicode
-                    (font-spec :family "Ricty" :size 14)
-                    nil
-                    'append)
-  (add-to-list 'default-frame-alist '(font . "fontset-ricty"))
-                                        ;(set-frame-parameter (selected-frame) 'alpha '(0.95))
-  (set-frame-size (selected-frame) 120 50)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0))
+(set-face-attribute 'default nil :family "Ricty" :height 140)
+
+;; 日本語
+(let ((jp-font-spec (font-spec :family "Hiragino Kaku Gothic ProN")))
+  (set-fontset-font nil 'japanese-jisx0208 jp-font-spec)
+  (set-fontset-font nil 'japanese-jisx0212 jp-font-spec)
+  (set-fontset-font nil 'japanese-jisx0213-1 jp-font-spec)
+  (set-fontset-font nil 'japanese-jisx0213-2 jp-font-spec))
+
+;(setq face-font-rescale-alist '((".*Hiragino_Kaku_Gothic_ProN.*" . 1.2)))
+
+(set-frame-size (selected-frame) 120 50)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; Theme
 (load-theme 'solarized-dark t)
-;(load-theme 'zenburn t)
