@@ -48,6 +48,7 @@
 (depends-on "merlin")
 (depends-on "mic-paren")
 (depends-on "multiple-cursors")
+(depends-on "multi-term")
 (depends-on "org")
 (depends-on "org-plus-contrib")
 (depends-on "paredit")
