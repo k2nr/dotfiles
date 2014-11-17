@@ -101,7 +101,7 @@
 (define-key evil-normal-state-map (kbd "; b") 'helm-buffers-list)
 (define-key evil-normal-state-map (kbd "; p") 'helm-projectile)
 (evil-define-key 'normal global-map (kbd "t") 'helm-projectile-find-file)
-(define-key evil-normal-state-map (kbd "; o") 'helm-occur)
+(define-key evil-normal-state-map (kbd "; o") 'helm-swoop)
 (define-key evil-normal-state-map (kbd "; l") 'helm-locate)
 (define-key evil-normal-state-map (kbd "; i") 'helm-imenu)
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
@@ -114,6 +114,9 @@
 (define-key evil-normal-state-map (kbd ", m c") 'magit-checkout)
 (define-key evil-normal-state-map (kbd ", m t") 'magit-key-mode-popup-stashing)
 (define-key evil-normal-state-map (kbd ", m m") 'magit-key-mode-popup-submodule)
+
+;; git-messenger
+(define-key evil-normal-state-map (kbd "MM") 'git-messenger:popup-message)
 
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key
