@@ -55,6 +55,7 @@
 (depends-on "org-plus-contrib")
 (depends-on "paredit")
 (depends-on "projectile")
+(depends-on "python-mode")
 (depends-on "rbenv")
 (depends-on "rinari")
 (depends-on "robe")
