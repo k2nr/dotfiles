@@ -1,2 +1,15 @@
 (when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-copy-envs '("PATH"
+                                    "VIRTUAL_ENV"
+                                    "GOROOT"
+                                    "GOPATH"
+                                    "DOCKER_HOST"
+                                    "DOCKER_CERT_PATH"
+                                    "DOCKER_TLS_VERIFY"
+                                    "CAML_LD_LIBRARY_PATH"
+                                    "PERL5LIB"
+                                    "OPAMUTF8MSGS"
+                                    "OCAML_TOPLEVEL_PATH"
+                                    "LC_MESSAGES"
+                                    "LANG"
+                                    "TMPDIR")))
