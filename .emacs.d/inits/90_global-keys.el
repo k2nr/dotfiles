@@ -56,6 +56,8 @@
 (define-key evil-normal-state-map (kbd "M-.") nil)
 
 ;; helm
+(define-key helm-map (kbd "C-h") 'delete-backward-char)
+(define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "C-; C-;") 'helm-mini)
 (global-set-key (kbd "C-; C-o") 'helm-occur)
 (global-set-key (kbd "C-; C-f") 'helm-find-files)
@@ -114,6 +116,9 @@
 (define-key evil-normal-state-map (kbd ", m c") 'magit-checkout)
 (define-key evil-normal-state-map (kbd ", m t") 'magit-key-mode-popup-stashing)
 (define-key evil-normal-state-map (kbd ", m m") 'magit-key-mode-popup-submodule)
+
+;; eshell
+(define-key evil-normal-state-map (kbd ", s") 'my/eshell-here)
 
 ;; git-messenger
 (define-key evil-normal-state-map (kbd "MM") 'git-messenger:popup-message)
