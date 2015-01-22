@@ -14,4 +14,5 @@
 (scroll-bar-mode 0)
 
 ;; Theme
-(load-theme 'solarized-dark t)
+(load-theme 'solarized t)
+(color-theme-solarized-dark)
