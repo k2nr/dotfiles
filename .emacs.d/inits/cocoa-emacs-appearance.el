@@ -13,6 +13,5 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-;; Theme
+(set-frame-parameter nil 'background-mode 'dark)
 (load-theme 'solarized t)
-(color-theme-solarized-dark)
