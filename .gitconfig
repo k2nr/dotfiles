@@ -5,7 +5,7 @@
   email = likerichie@gmail.com
 [core]
   excludesfile = ~/.gitignore_global
-  editor = mvim -v
+  editor = vim
 [include]
   path = .gitconfig.local
 [credential]
