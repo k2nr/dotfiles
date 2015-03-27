@@ -94,8 +94,8 @@ set number
 set ruler
 " show TAB/CRLF
 set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-"set listchars=tab:>-,extends:<,trail:-,eol:<
+"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set listchars=tab:>-,extends:<,trail:-,eol:<
 
 set wrap
 " always display command line
