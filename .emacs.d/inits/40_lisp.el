@@ -59,7 +59,7 @@
 
 (defun cider-shared-hook ()
   (cider-turn-on-eldoc-mode)
-  (ac-flyspell-workaround)
+;  (ac-flyspell-workaround)
   (ac-cider-setup)
   ;; insert keybinding setup here
   )
