@@ -1,15 +1,21 @@
 alias git="noglob hub"
 alias rake="noglob rake"
+alias grep="grep --color=auto --binary-files=without-match"
 
 ### aliases
 alias lla="ls -la"
-alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-alias emacs="open /Applications/Emacs.app"
+
+if [[ $OSTYPE == darwin* ]]; then
+  alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+  alias emacs="open /Applications/Emacs.app"
+  alias vim="mvim -v"
+  alias bu="brew update && brew upgrade"
+  alias o="open"
+fi
+
 alias e="emacsclient -n"
 alias enw="emacsclient -nw"
-alias o="open"
 alias rmr="rm -rf"
-alias vim="mvim -v"
 alias vi="vim"
 alias v="vim"
 alias tmux="TERM=screen-256color-bce tmux"
@@ -19,7 +25,6 @@ alias less="less -N -M"
 alias ack="ack --nogroup"
 alias ag="ag --nogroup"
 alias src="source ~/.zshrc"
-alias bu="brew update && brew upgrade"
 alias vag="vagrant"
 alias ff="ffind"
 alias b2d="boot2docker"
