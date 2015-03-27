@@ -116,6 +116,7 @@
 (define-key evil-normal-state-map (kbd ", m c") 'magit-checkout)
 (define-key evil-normal-state-map (kbd ", m t") 'magit-key-mode-popup-stashing)
 (define-key evil-normal-state-map (kbd ", m m") 'magit-key-mode-popup-submodule)
+(define-key evil-normal-state-map (kbd ", m B") 'magit-blame-mode)
 
 ;; eshell
 (define-key evil-normal-state-map (kbd ", s") 'my/eshell-here)
