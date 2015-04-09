@@ -16,6 +16,7 @@ install cmake
 install ctags
 install docker
 install direnv
+install --with-cocoa emacs
 install ffind
 install fontconfig
 install fontforge
@@ -48,7 +49,6 @@ install readline
 install reattach-to-user-namespace
 install repl
 install rlwrap
-install s3cmd
 install sbcl
 install sl
 install sqlite
