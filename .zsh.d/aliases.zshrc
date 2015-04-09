@@ -6,7 +6,6 @@ alias grep="grep --color=auto --binary-files=without-match"
 alias lla="ls -la"
 
 if [[ $OSTYPE == darwin* ]]; then
-  alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
   alias emacs="open /Applications/Emacs.app"
   alias vim="mvim -v"
   alias bu="brew update && brew upgrade"
@@ -14,7 +13,7 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 alias e="emacsclient -n"
-alias enw="emacsclient -nw"
+alias ee="emacsclient -t"
 alias rmr="rm -rf"
 alias vi="vim"
 alias v="vim"
