@@ -1,4 +1,4 @@
-export EDITOR="vim"
+export EDITOR="emacsclient -t"
 
 # golang
 export GOPATH="$HOME/.go"
