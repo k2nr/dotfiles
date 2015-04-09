@@ -1,4 +1,5 @@
-(set-face-attribute 'default nil :family "Ricty" :height 100)
+(set-face-attribute 'default nil :family "Ricty" :height (if (eq window-system 'ns)
+                                                             140 100))
 
 ;; 日本語
 ;; (let ((jp-font-spec (font-spec :family "Hiragino Kaku Gothic ProN")))
