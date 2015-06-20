@@ -1,7 +1,7 @@
 # zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-path=(. $HOME/bin $HOME/.cask/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
+path=(. $HOME/.nimble/bin $HOME/bin $HOME/.cask/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
 
 if [[ $OSTYPE == darwin* ]]; then
   PATH=$HOME/Library/Haskell/bin:$PATH

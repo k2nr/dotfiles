@@ -7,7 +7,11 @@ alias lla="ls -la"
 
 if [[ $OSTYPE == darwin* ]]; then
   alias emacs="open /Applications/Emacs.app"
-  alias vim="mvim -v"
+#  alias vim="mvim -v"
+  alias bi="brew install"
+  alias bs="brew search"
+  alias bci="brew cask install"
+  alias bcs="brew cask search"
   alias bu="brew update && brew upgrade"
   alias o="open"
 fi
