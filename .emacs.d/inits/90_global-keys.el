@@ -110,19 +110,20 @@
 (define-key evil-normal-state-map (kbd "; a") 'helm-projectile-ag)
 
 ;; magit
-(define-key evil-normal-state-map (kbd ", m s") 'magit-status)
-(define-key evil-normal-state-map (kbd ", m b") 'magit-key-mode-popup-branching)
-(define-key evil-normal-state-map (kbd ", m l") 'magit-key-mode-popup-logging)
-(define-key evil-normal-state-map (kbd ", m c") 'magit-checkout)
-(define-key evil-normal-state-map (kbd ", m t") 'magit-key-mode-popup-stashing)
-(define-key evil-normal-state-map (kbd ", m m") 'magit-key-mode-popup-submodule)
-(define-key evil-normal-state-map (kbd ", m B") 'magit-blame-mode)
+(key-chord-mode 1)
+(key-chord-define-global "ms" 'magit-status)
+(key-chord-define-global "mb" 'magit-blame)
+(key-chord-define-global "ml" 'magit-log-current)
+
+;; elscreen
+(key-chord-define-global "sh" 'elscreen-previous)
+(key-chord-define-global "sl" 'elscreen-next)
+(key-chord-define-global "sk" 'elscreen-kill)
+(key-chord-define-global "sn" 'elscreen-create)
+
 
 ;; eshell
 (define-key evil-normal-state-map (kbd ", s") 'my/eshell-here)
-
-;; git-messenger
-(define-key evil-normal-state-map (kbd "MM") 'git-messenger:popup-message)
 
 (when (eq window-system 'ns)
   ;; Alternate Mac's command key and Alt key

@@ -38,3 +38,7 @@
 (setq ruby-insert-encoding-magic-comment nil)
 
 (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)
+
+;; rspec-mode
+(setq rspec-use-rake-when-possible nil)
+(setq rspec-spec-command "spring rspec")
