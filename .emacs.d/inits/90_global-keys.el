@@ -116,10 +116,10 @@
 (key-chord-define-global "ml" 'magit-log-current)
 
 ;; elscreen
-(key-chord-define-global "sh" 'elscreen-previous)
-(key-chord-define-global "sl" 'elscreen-next)
-(key-chord-define-global "sk" 'elscreen-kill)
-(key-chord-define-global "sn" 'elscreen-create)
+(key-chord-define-global "zh" 'elscreen-previous)
+(key-chord-define-global "zl" 'elscreen-next)
+(key-chord-define-global "zk" 'elscreen-kill)
+(key-chord-define-global "zn" 'elscreen-create)
 
 
 ;; eshell

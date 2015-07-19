@@ -8,7 +8,10 @@
 (advice-add 'magit-status :around 'magit-fullscreen-advice)
 (advice-add 'magit-log-current :around 'magit-fullscreen-advice)
 
-(advice-add 'magit-mode-bury-buffer :after 'elscreen-kill)
+(defun my/magit-quit ()
+  (interactive)
+  (magit-mode-bury-buffer)
+  (elscreen-kill))
 
 (defun magit-toggle-whitespace ()
   (interactive)
@@ -122,3 +125,6 @@
 
 (evil-define-key 'emacs magit-log-mode-map
   "Y" 'magit-rebase-interactive)
+
+(evil-define-key 'emacs magit-mode-map
+  "Q" 'my/magit-quit)
