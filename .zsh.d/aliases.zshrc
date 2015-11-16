@@ -110,6 +110,8 @@ alias ts="tig status"
 alias r="rake"
 alias re="rbenv"
 
+alias ne='PATH=node_modules/.bin:$PATH'
+
 # global aliases
 alias -g L="|less"
 alias -g G="|grep"
