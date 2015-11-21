@@ -5,3 +5,4 @@
 /.tmuxinator
 /.lein/repl-history
 /.lein/self-installs
+/.tmux/plugins
