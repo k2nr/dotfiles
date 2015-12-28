@@ -2,7 +2,6 @@ export EDITOR="emacsclient -t"
 
 # golang
 export GOPATH="$HOME/.go"
-
 PATH="$GOPATH"/bin:"$PATH"
 
 # init boot2docker
