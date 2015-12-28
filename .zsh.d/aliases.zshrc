@@ -30,8 +30,8 @@ alias ag="ag --nogroup"
 alias src="source ~/.zshrc"
 alias vag="vagrant"
 alias ff="ffind"
-alias b2d="boot2docker"
 alias d="docker"
+alias dc="docker-compose"
 
 mcd() {
   mkdir -p $1 && cd $1
@@ -109,6 +109,7 @@ alias ts="tig status"
 
 alias r="rake"
 alias re="rbenv"
+alias ree="rbenv exec"
 
 alias ne='PATH=node_modules/.bin:$PATH'
 
