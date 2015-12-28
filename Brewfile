@@ -1,5 +1,7 @@
 tap 'homebrew/binary'
 tap 'homebrew/dupes'
+tap 'railwaycat/emacsmacport'
+tap 'caskroom/fonts'
 
 brew 'apple-gcc42'
 brew 'autoconf'
@@ -82,4 +84,4 @@ cask 'toggldesktop'
 cask 'vagrant'
 cask 'virtualbox'
 cask 'vlc'
-
+cask 'font-source-code-pro'
