@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: ufun
-# key: ufun
-# binding: direct-keybinding
-# --
-function(${1:}) {
-    ${2:}
-}${3:}

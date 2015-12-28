@@ -1,39 +1,32 @@
-;; Load Path
-(let ((default-directory (expand-file-name "~/.emacs.d/site-lisp")))
-  (add-to-list 'load-path default-directory)
+;;; init.el --- Spacemacs Initialization File
+;;
+;; Copyright (c) 2012-2014 Sylvain Benner
+;; Copyright (c) 2014-2015 Sylvain Benner & Contributors
+;;
+;; Author: Sylvain Benner <sylvain.benner@gmail.com>
+;; URL: https://github.com/syl20bnr/spacemacs
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; License: GPLv3
 
-  (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-      (normal-top-level-add-subdirs-to-load-path)))
+;; Without this comment emacs25 adds (package-initialize) here
+;; (package-initialize)
 
-;; cask
-(require 'cask (cond
-                 ((file-exists-p "~/.cask/cask.el")
-                  "~/.cask/cask.el")
-                 ((file-exists-p "/usr/local/share/emacs/site-lisp/cask.el")
-                  "/usr/local/share/emacs/site-lisp/cask.el")
-                 ((file-exists-p "/usr/share/emacs/site-lisp/cask.el")
-                  "/usr/share/emacs/site-lisp/cask.el")))
-(defconst cask-bundle (cask-initialize))
+(setq gc-cons-threshold 100000000)
+(defconst spacemacs-version          "0.105.0" "Spacemacs version.")
+(defconst spacemacs-emacs-min-version   "24.3" "Minimal version of Emacs.")
 
-;; start server
-(if window-system (server-start))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
- '(helm-ff-auto-update-initial-value nil)
- '(tab-width 2))
-
-(setq init-loader-show-log-after-init nil)
-(init-loader-load "~/.emacs.d/inits")
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(if (not (version<= spacemacs-emacs-min-version emacs-version))
+    (message (concat "Your version of Emacs (%s) is too old. "
+                     "Spacemacs requires Emacs version %d or above.")
+             emacs-version spacemacs-emacs-min-version)
+  (load-file (concat user-emacs-directory "core/core-load-paths.el"))
+  (when init-file-debug (require 'core-debug))
+  (require 'core-spacemacs)
+  (spacemacs/init)
+  (spacemacs/maybe-install-dotfile)
+  (configuration-layer/sync)
+  (spacemacs/setup-startup-hook)
+  (require 'server)
+  (unless (server-running-p) (server-start)))

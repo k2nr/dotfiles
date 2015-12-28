@@ -1,8 +1,0 @@
-# -*- coding: utf-8; mode: snippet -*-
-# key: f
-# name: f
-# contributor: David Miller <david@deadpansincerity.com>
-# --
-function (${3:args}) {
-  $0
-}
