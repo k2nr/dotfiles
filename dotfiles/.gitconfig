@@ -13,13 +13,5 @@
   rebase = true
 [push]
   default = simple
-[diff]
-  tool = vimdiff
-[mergetool "vimdiff3"]
-  cmd = vi -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-[merge]
-  tool = vimdiff3
-[hub]
-	protocol = https
 [alias]
-	fetch-pulls = "!f() { git fetch ${1-origin} +refs/pull/*:refs/remotes/pull/*; }; f"
+  fetch-pulls = "!f() { git fetch ${1-origin} +refs/pull/*:refs/remotes/pull/*; }; f"
