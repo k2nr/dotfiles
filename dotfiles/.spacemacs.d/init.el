@@ -27,7 +27,9 @@ values."
      dockerfile
      (git :variables
           git-magit-status-fullscreen t)
+     evil-commentary
      github
+     gtags
      org
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
@@ -37,10 +39,13 @@ values."
      c-c++
      clojure
      emacs-lisp
-     go
+     (go :variables
+         gofmt-command "goimports")
      javascript
      markdown
+     html
      nim
+     nixos
      python
      (ruby :variables
            ruby-version-manager 'rbenv
@@ -217,8 +222,6 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  (setq-default helm-ag-insert-at-point 'symbol)
-
   ;; save buffer even if the buffer is unchanged
   (defadvice save-buffer (before save-buffer-always activate)
     "always save buffer"
@@ -226,16 +229,28 @@ layers configuration. You are free to put any user code."
 
   ; ruby
   (setq rspec-use-rake-when-possible nil)
-  (setq rspec-use-bundler-when-possible nil)
-  (setq rspec-use-spring-when-possible nil)
+  (setq rspec-use-bundler-when-possible t)
+  (setq rspec-use-spring-when-possible t)
   (setq rspec-use-zeus-when-possible nil)
-  (setq rspec-spec-command "bundle exec spring rspec")
+  (setq rspec-spec-command "rspec")
   (setq ruby-deep-indent-paren-style nil)
+
+  (custom-set-variables
+   '(ruby-insert-encoding-magic-comment nil))
+
+  (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)
+
+  ; rust
+  (setq-default rust-enable-racer t)
 
   ; javascript
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
   (setq-default js2-strict-missing-semi-warning nil)
+
+  (add-hook 'company-mode-hook
+            (lambda ()
+              (define-key company-active-map (kbd "C-h") 'backward-delete-char)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

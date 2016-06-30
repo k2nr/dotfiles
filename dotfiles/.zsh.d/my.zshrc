@@ -1,11 +1,12 @@
-# zsh-completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-
-path=(. $HOME/.nimble/bin $HOME/bin $HOME/.cask/bin /usr/local/share/npm/bin /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin )
 
 if [[ $OSTYPE == darwin* ]]; then
-  PATH=$HOME/Library/Haskell/bin:$PATH
+  # zsh-completions
+  fpath=(/usr/local/share/zsh-completions $fpath)
+
+  path=(. $HOME/bin /usr/local/bin /usr/sbin /usr/bin /sbin /bin )
 fi
+
+$(type "npm" &> /dev/null) && export PATH="`npm prefix -g`/bin:$PATH"
 
 [ -f ${HOME}/.zsh.d/aliases.zshrc ] && source ${HOME}/.zsh.d/aliases.zshrc
 [ -f ${HOME}/.zsh.d/prompt.zshrc ] && source ${HOME}/.zsh.d/prompt.zshrc
@@ -20,3 +21,10 @@ do
     source $f
   fi
 done
+
+zshaddhistory() {
+    local line=${1%%$'\n'}
+    local cmd=${line%% *}
+
+    [[ ${#line} -ge 5 ]]
+}

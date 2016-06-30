@@ -5,7 +5,7 @@ else
 fi
 
 function peco_select_history() {
-    BUFFER=$(fc -l -n 1 | eval $reverse_command | peco --query "$LBUFFER")
+    BUFFER=$(fc -l -n 1 | eval $reverse_command | peco)
     CURSOR=$#BUFFER             # move cursor
     zle -R -c                   # refresh
 }

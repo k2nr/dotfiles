@@ -1,9 +1,8 @@
-/.gitconfig.local
-/.zsh_history
-/.zsh.d/history
-/.ssh
-/.tmuxinator
-/.lein/repl-history
-/.lein/self-installs
-/.tmux/plugins
-/.emacs.d
+dotfiles/.gitconfig.local
+dotfiles/.zsh_history
+dotfiles/.zsh.d/history
+dotfiles/.ssh
+dotfiles/.lein/repl-history
+dotfiles/.lein/self-installs
+dotfiles/.tmux/plugins
+dotfiles/.emacs.d

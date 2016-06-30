@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
-for f in .*
+for f in ./dotfiles/.*
 do
-  if test $f != "." && test $f != ".." && test $f != ".DS_Store"; then
-    echo replacing $f
-    rm -rf $HOME/$f
-    ln -s "`pwd`/$f" $HOME/$f
+  filename=`basename $f`
+  if test $filename != "." && test $filename != ".." && test $filename != ".DS_Store"; then
+    echo replacing $filename
+    rm -rf $HOME/$filename
+    ln -s "`pwd`/$f" $HOME/$filename
   fi
 done

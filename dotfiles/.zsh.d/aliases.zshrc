@@ -1,4 +1,3 @@
-alias git="noglob hub"
 alias rake="noglob rake"
 alias grep="grep --color=auto --binary-files=without-match"
 
@@ -32,6 +31,7 @@ alias vag="vagrant"
 alias ff="ffind"
 alias d="docker"
 alias dc="docker-compose"
+alias dm="docker-machine"
 
 mcd() {
   mkdir -p $1 && cd $1
@@ -77,31 +77,12 @@ alias gcm="git checkout master"
 alias grhh="git reset --hard HEAD"
 
 ## hub aliases
+if $(type "hub" &> /dev/null); then
+  alias git="noglob hub"
 
-# merge pull-request with pull-request number
-# USAGE: gmpr 1
-gmpr() {
-  git merge `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
-}
-
-gbrp() {
-  open `git config --get remote.origin.url | sed -e 's/\.git//'`/pull/$1
-}
-
-hub-merge-am() {
-  hub am -3 "https://github.com/$1/pull/$2"
-  NEWLINE=$'\n'
-  git commit --amend -m "$(git log -1 --pretty=%B)${NEWLINE}${NEWLINE}Closes #$2"
-}
-
-hub-sync-master() {
-  git fetch $1 -p && git checkout master && git merge $1/master --ff-only
-}
-
-alias ha="hub-merge-am"
-
-alias gpr="git pull-request"
-alias gbr="git browse"
+  alias gpr="git pull-request"
+  alias gbr="git browse"
+fi
 
 alias be="bundle exec"
 alias t="tig"
@@ -120,8 +101,12 @@ alias -g H="|head"
 alias -g T="|tail"
 alias -g XG="|xargs grep -Hn"
 alias -g XG0="|xargs -0 grep -Hn"
-alias -g C="|pbcopy"
-alias -g P="pbpaste|"
+
+if [[ $OSTYPE == darwin* ]]; then
+  alias -g C="|pbcopy"
+  alias -g P="pbpaste|"
+fi
+
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'

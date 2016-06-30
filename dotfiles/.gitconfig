@@ -2,13 +2,13 @@
   ui = auto
 [user]
   name = Kazunori Kajihiro
-  email = likerichie@gmail.com
+  email = kazunori.kajihiro@gmail.com
 [core]
   excludesfile = ~/.gitignore_global
 [include]
   path = .gitconfig.local
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [pull]
   rebase = true
 [push]
@@ -19,15 +19,7 @@
   cmd = vi -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [merge]
   tool = vimdiff3
-
-[browse-remote "github.com"]
-  top = https://{host}/{path}
-  ref = https://{host}/{path}/tree/{short_ref}
-  rev = https://{host}/{path}/commit/{commit}
-  file = "https://{host}/{path}/blob/{short_rev}/{file}{line && \"#L%d\" % line}"
-
 [hub]
 	protocol = https
-
 [alias]
 	fetch-pulls = "!f() { git fetch ${1-origin} +refs/pull/*:refs/remotes/pull/*; }; f"
