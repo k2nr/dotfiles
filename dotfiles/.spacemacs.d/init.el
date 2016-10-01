@@ -215,6 +215,10 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  (if (eq system-type 'gnu/linux)
+      (setq-default exec-path-from-shell-variables '("GOPATH"
+                                                     "GOBIN"
+                                                     )))
   )
 
 (defun dotspacemacs/user-config ()
@@ -242,6 +246,8 @@ layers configuration. You are free to put any user code."
 
   ; rust
   (setq-default rust-enable-racer t)
+  (unless (getenv "RUST_SRC_PATH")
+    (setenv "RUST_SRC_PATH" (expand-file-name "~/repos/src/github.com/rust-lang/rust")))
 
   ; javascript
   (setq-default js2-basic-offset 2)
