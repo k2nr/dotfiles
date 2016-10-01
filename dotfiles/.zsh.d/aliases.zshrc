@@ -6,7 +6,6 @@ alias lla="ls -la"
 
 if [[ $OSTYPE == darwin* ]]; then
   alias emacs="open /Applications/Emacs.app"
-#  alias vim="mvim -v"
   alias bi="brew install"
   alias bs="brew search"
   alias bci="brew cask install"
@@ -16,22 +15,16 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 alias e="emacsclient -n"
-alias ee="emacsclient -t"
 alias rmr="rm -rf"
 alias vi="vim"
 alias v="vim"
 alias tmux="TERM=screen-256color-bce tmux"
-alias viconf="vi ~/.vimrc"
-alias zshconf="vi ~/.zsh.d/my.zshrc"
 alias less="less -N -M"
-alias ack="ack --nogroup"
 alias ag="ag --nogroup"
 alias src="source ~/.zshrc"
-alias vag="vagrant"
-alias ff="ffind"
+
 alias d="docker"
 alias dc="docker-compose"
-alias dm="docker-machine"
 
 mcd() {
   mkdir -p $1 && cd $1
@@ -58,13 +51,7 @@ alias gst="git stash save"
 alias gstl="git stash list"
 alias gstc="git stash clear"
 alias gstp="git stash pop"
-alias gn="git now"
-alias gnc="git now --compact"
-alias gnd="git now --diff"
-alias gnr="git now --rebase"
-alias gnf="git now --fixup"
 
-#alias gco="git checkout"
 gco() {
   if [[ -z $1 ]]; then
     peco_git_checkout
@@ -87,10 +74,6 @@ fi
 alias be="bundle exec"
 alias t="tig"
 alias ts="tig status"
-
-alias r="rake"
-alias re="rbenv"
-alias ree="rbenv exec"
 
 alias ne='PATH=node_modules/.bin:$PATH'
 

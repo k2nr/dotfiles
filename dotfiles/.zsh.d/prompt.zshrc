@@ -15,7 +15,11 @@ update_prompt() {
         pro_vcs=""
     fi
 
-    PROMPT="${pro_cur_dir}${pro_user} ${pro_time} ${pro_vcs}"$'\n'"%{%f%}$ "
+    second_line="$"
+    if [ -n "$IN_NIX_SHELL" ]; then
+        second_line="[nix-shell]${second_line}"
+    fi
+    PROMPT="${pro_cur_dir}${pro_user} ${pro_time} ${pro_vcs}"$'\n'"%{%f%}${second_line} "
 }
 RPROMPT=""
 
