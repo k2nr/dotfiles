@@ -1,15 +1,12 @@
-
 if [[ $OSTYPE == darwin* ]]; then
   # zsh-completions
   fpath=(/usr/local/share/zsh-completions $fpath)
 
-  path=(. $HOME/bin /usr/local/bin /usr/sbin /usr/bin /sbin /bin )
+  path=(/usr/local/bin /usr/sbin /usr/bin /sbin /bin )
 fi
 
 $(type "npm" &> /dev/null) && export PATH="`npm prefix -g`/bin:$PATH"
 
-[ -f ${HOME}/.zsh.d/aliases.zshrc ] && source ${HOME}/.zsh.d/aliases.zshrc
-[ -f ${HOME}/.zsh.d/prompt.zshrc ] && source ${HOME}/.zsh.d/prompt.zshrc
 [ -f ${HOME}/.zsh.d/env.zshrc ] && source ${HOME}/.zsh.d/env.zshrc
 
 autoload -U select-word-style
@@ -21,6 +18,11 @@ do
     source $f
   fi
 done
+
+[ -f ${HOME}/.zsh.d/aliases.zshrc ] && source ${HOME}/.zsh.d/aliases.zshrc
+[ -f ${HOME}/.zsh.d/prompt.zshrc ] && source ${HOME}/.zsh.d/prompt.zshrc
+
+export PATH=$HOME/bin:$HOME/opt/bin:$PATH
 
 zshaddhistory() {
     local line=${1%%$'\n'}

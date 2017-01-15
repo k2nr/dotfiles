@@ -24,7 +24,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     dockerfile
      (git :variables
           git-magit-status-fullscreen t)
      evil-commentary
@@ -112,8 +111,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Inconsolata"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -215,10 +214,7 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (if (eq system-type 'gnu/linux)
-      (setq-default exec-path-from-shell-variables '("GOPATH"
-                                                     "GOBIN"
-                                                     )))
+  (setq exec-path-from-shell-check-startup-files nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -230,6 +226,14 @@ layers configuration. You are free to put any user code."
   (defadvice save-buffer (before save-buffer-always activate)
     "always save buffer"
     (set-buffer-modified-p t))
+
+  (if (eq system-type 'gnu/linux)
+      (progn
+        (require 'mozc)
+        (set-language-environment "Japanese")
+        (setq default-input-method "japanese-mozc")
+        (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN"))
+        ))
 
   ; ruby
   (setq rspec-use-rake-when-possible nil)
@@ -243,11 +247,6 @@ layers configuration. You are free to put any user code."
    '(ruby-insert-encoding-magic-comment nil))
 
   (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)
-
-  ; rust
-  (setq-default rust-enable-racer t)
-  (unless (getenv "RUST_SRC_PATH")
-    (setenv "RUST_SRC_PATH" (expand-file-name "~/repos/src/github.com/rust-lang/rust")))
 
   ; javascript
   (setq-default js2-basic-offset 2)

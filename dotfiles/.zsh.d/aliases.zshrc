@@ -65,7 +65,6 @@ alias grhh="git reset --hard HEAD"
 ## hub aliases
 if $(type "hub" &> /dev/null); then
   alias git="noglob hub"
-
   alias gpr="git pull-request"
   alias gbr="git browse"
 fi
@@ -75,6 +74,15 @@ alias t="tig"
 alias ts="tig status"
 
 alias ne='PATH=node_modules/.bin:$PATH'
+
+## apt aliases
+
+if $(type "apt-get" &> /dev/null); then
+  alias apg="apt-get"
+  alias apgi="sudo apt-get install"
+  alias apc="apt-cache"
+  alias apcs="apc search"
+fi
 
 # global aliases
 alias -g L="|less"
