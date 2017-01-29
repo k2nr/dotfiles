@@ -77,11 +77,10 @@ alias ne='PATH=node_modules/.bin:$PATH'
 
 ## apt aliases
 
-if $(type "apt-get" &> /dev/null); then
-  alias apg="apt-get"
-  alias apgi="sudo apt-get install"
-  alias apc="apt-cache"
-  alias apcs="apc search"
+if $(type "apt" &> /dev/null); then
+  alias a="a"
+  alias ai="sudo apt install"
+  alias as="apt search"
 fi
 
 # global aliases

@@ -30,7 +30,7 @@ if has('mouse')
   set mouse=a
 endif
 
-set clipboard+=unnamed
+set clipboard=unnamedplus
 set matchpairs=(:),{:},[:]
 
 "" Strip trailing whitespace

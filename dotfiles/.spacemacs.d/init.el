@@ -111,7 +111,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Inconsolata"
+   dotspacemacs-default-font '("Inconsolata Medium"
                                :size 16
                                :weight normal
                                :width normal
@@ -237,10 +237,14 @@ layers configuration. You are free to put any user code."
 
   ; ruby
   (setq rspec-use-rake-when-possible nil)
-  (setq rspec-use-bundler-when-possible t)
-  (setq rspec-use-spring-when-possible t)
+  (setq rspec-use-bundler-when-possible nil)
+  (setq rspec-use-spring-when-possible nil)
+  (setq rspec-use-docker-when-possible t)
+  (setq rspec-docker-container "spring")
+  (setq rspec-docker-command "docker-compose exec")
+  (setq rspec-docker-cwd "./")
+  (setq rspec-spec-command "spring rspec")
   (setq rspec-use-zeus-when-possible nil)
-  (setq rspec-spec-command "rspec")
   (setq ruby-deep-indent-paren-style nil)
 
   (custom-set-variables
