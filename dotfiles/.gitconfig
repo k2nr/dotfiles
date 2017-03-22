@@ -7,8 +7,6 @@
   excludesfile = ~/.gitignore_global
 [include]
   path = .gitconfig.local
-[credential]
-  helper = osxkeychain
 [pull]
   rebase = true
 [push]
