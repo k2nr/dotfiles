@@ -23,13 +23,19 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-enable-help-tooltip t)
      (git :variables
           git-magit-status-fullscreen t)
      evil-commentary
      github
      gtags
+     deft
      org
+     (org :variables
+          org-enable-github-support t)
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil)
      version-control
@@ -222,6 +228,17 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
+  ;; utf8
+  (set-language-environment 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+
+  ;; mozc
+  (setq mozc-candidate-style 'echo-area)
+
   ;; save buffer even if the buffer is unchanged
   (defadvice save-buffer (before save-buffer-always activate)
     "always save buffer"
@@ -260,6 +277,15 @@ layers configuration. You are free to put any user code."
   (add-hook 'company-mode-hook
             (lambda ()
               (define-key company-active-map (kbd "C-h") 'backward-delete-char)))
+
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/org/todo.org" "Tasks")
+           "* TODO %?\n %i\n %a\n %T")
+          ("b" "Blog" entry (file+datetree "~/org/blog.org" "Blog")
+           "* %?\n %a\n %T")
+          ("n" "Note" entry (file+headline "~/org/notes.org" "Notes")
+           "* %?\n %a\n %T")
+          ))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
