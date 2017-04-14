@@ -231,13 +231,13 @@ layers configuration. You are free to put any user code."
   ;; utf8
   (set-language-environment 'utf-8)
   (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-buffer-file-coding-system 'utf-8)
   (setq locale-coding-system 'utf-8)
   (set-default-coding-systems 'utf-8)
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
 
-  ;; mozc
-  (setq mozc-candidate-style 'echo-area)
 
   ;; save buffer even if the buffer is unchanged
   (defadvice save-buffer (before save-buffer-always activate)
@@ -247,6 +247,9 @@ layers configuration. You are free to put any user code."
   (if (eq system-type 'gnu/linux)
       (progn
         (require 'mozc)
+        (setq mozc-candidate-style 'echo-area)
+        (global-set-key (kbd "C-SPC") 'toggle-input-method)
+
         (set-language-environment "Japanese")
         (setq default-input-method "japanese-mozc")
         (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN"))
