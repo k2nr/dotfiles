@@ -12,6 +12,8 @@ if [[ $OSTYPE == darwin* ]]; then
   alias bcs="brew cask search"
   alias bu="brew update && brew upgrade"
   alias o="open"
+elif [[ $OSTYPE == linux* ]]; then
+  alias o="xdg-open"
 fi
 
 alias e="emacsclient -n"
@@ -74,14 +76,6 @@ alias t="tig"
 alias ts="tig status"
 
 alias ne='PATH=node_modules/.bin:$PATH'
-
-## apt aliases
-
-if $(type "apt" &> /dev/null); then
-  alias a="a"
-  alias ai="sudo apt install"
-  alias as="apt search"
-fi
 
 # global aliases
 alias -g L="|less"
