@@ -5,8 +5,6 @@ if [[ $OSTYPE == darwin* ]]; then
   path=(/usr/local/bin /usr/sbin /usr/bin /sbin /bin )
 fi
 
-$(type "npm" &> /dev/null) && export PATH="`npm prefix -g`/bin:$PATH"
-
 [ -f ${HOME}/.zsh.d/env.zshrc ] && source ${HOME}/.zsh.d/env.zshrc
 
 autoload -U select-word-style

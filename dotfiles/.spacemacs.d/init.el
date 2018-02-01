@@ -50,7 +50,7 @@ values."
      markdown
      html
      nim
-     nixos
+     parinfer
      python
      (ruby :variables
            ruby-version-manager 'rbenv
@@ -58,9 +58,9 @@ values."
      ruby-on-rails
      rust
      (shell :variables
-             shell-default-position 'bottom
-             shell-default-height 30
-             shell-default-shell 'eshell)
+            shell-default-position 'bottom
+            shell-default-height 30
+            shell-default-shell 'eshell)
      shell-scripts
      sql
      yaml
@@ -220,8 +220,8 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (setq exec-path-from-shell-check-startup-files nil)
-  )
+  (setq exec-path-from-shell-check-startup-files nil))
+  
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -252,8 +252,11 @@ layers configuration. You are free to put any user code."
 
         (set-language-environment "Japanese")
         (setq default-input-method "japanese-mozc")
-        (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN"))
-        ))
+        (exec-path-from-shell-copy-envs '("GOPATH" "GOBIN"))))
+
+  ;; Parinfer tweak
+  (add-hook 'emacs-lisp-mode-hook #'turn-off-smartparens-mode)
+  (add-hook 'clojure-mode-hook #'turn-off-smartparens-mode)
 
   ; ruby
   (setq rspec-use-rake-when-possible nil)
@@ -287,9 +290,9 @@ layers configuration. You are free to put any user code."
           ("b" "Blog" entry (file+datetree "~/org/blog.org" "Blog")
            "* %?\n %a\n %T")
           ("n" "Note" entry (file+headline "~/org/notes.org" "Notes")
-           "* %?\n %a\n %T")
-          ))
-)
+           "* %?\n %a\n %T"))))
+          
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.

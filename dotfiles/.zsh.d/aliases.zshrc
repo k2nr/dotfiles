@@ -23,6 +23,8 @@ alias v="vim"
 alias less="less -N -M"
 alias ag="ag --nogroup"
 alias src="source ~/.zshrc"
+alias ci="xclip -selection clipboard -i"
+alias co="xclip -selection clipboard -o"
 
 alias d="docker"
 alias dc="docker-compose"
