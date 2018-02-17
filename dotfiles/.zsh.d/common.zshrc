@@ -25,7 +25,7 @@ setopt nolistbeep
 setopt nobeep
 
 ## Command history configuration
-#
+
 HISTFILE=${HOME}/.zsh.d/history
 HISTSIZE=500000
 SAVEHIST=500000
@@ -37,7 +37,7 @@ setopt inc_append_history
 setopt extended_history
 
 
-## Completion configuration
+# Completion configuration
 autoload -U compinit
 compinit
 
