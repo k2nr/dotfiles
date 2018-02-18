@@ -65,6 +65,7 @@ lein
 rails
 # custom
 zsh-autosuggestions
+zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -101,3 +102,5 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ${HOME}/.zsh.d/common.zshrc ] && source ${HOME}/.zsh.d/common.zshrc
 [ -f ${HOME}/.zsh.d/my.zshrc ] && source ${HOME}/.zsh.d/my.zshrc
+
+bindkey '^j' autosuggest-execute
