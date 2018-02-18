@@ -20,7 +20,7 @@ done
 [ -f ${HOME}/.zsh.d/aliases.zshrc ] && source ${HOME}/.zsh.d/aliases.zshrc
 [ -f ${HOME}/.zsh.d/prompt.zshrc ] && source ${HOME}/.zsh.d/prompt.zshrc
 
-export PATH=$HOME/bin:$HOME/opt/bin:$PATH
+export PATH=$HOME/bin:$HOME/opt/bin:$HOME/.local/bin:$PATH
 
 zshaddhistory() {
     local line=${1%%$'\n'}
