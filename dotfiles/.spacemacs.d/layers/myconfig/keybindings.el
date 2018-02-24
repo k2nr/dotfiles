@@ -14,3 +14,4 @@
 (define-key evil-normal-state-map (kbd "; x") 'helm-M-x)
 (define-key evil-normal-state-map (kbd "; a") 'helm-projectile-ag)
 ;(define-key helm-map (kbd "C-h") 'delete-backward-char)
+(evil-define-key 'normal global-map (kbd "f") 'avy-goto-word-or-subword-1)
