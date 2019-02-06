@@ -74,6 +74,7 @@ if $(type "hub" &> /dev/null); then
 fi
 
 alias be="bundle exec"
+alias ds="docker-compose exec spring"
 alias t="tig"
 alias ts="tig status"
 

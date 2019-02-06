@@ -1,5 +1,10 @@
 
 (global-set-key (kbd "C-h") 'delete-backward-char)
+(add-hook
+  'term-mode-hook
+  '(lambda ()
+     (define-key term-raw-map "\C-h" 'term-send-backspace)))
+
 (evil-define-key 'normal global-map (kbd "gh") (kbd "^"))
 (evil-define-key 'normal global-map (kbd "gl") (kbd "$"))
 (evil-define-key 'normal global-map (kbd "gp") (kbd "o <escape> p"))
