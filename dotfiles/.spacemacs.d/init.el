@@ -46,6 +46,8 @@ values."
      clojure
      emacs-lisp
      (go :variables
+         go-backend 'lsp
+         go-format-before-save t
          gofmt-command "goimports")
      javascript
      lsp
