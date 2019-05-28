@@ -57,6 +57,7 @@ values."
      parinfer
      python
      (ruby :variables
+           ruby-backend         'lsp
            ruby-version-manager 'rbenv
            ruby-test-runner     'rspec)
      ruby-on-rails
